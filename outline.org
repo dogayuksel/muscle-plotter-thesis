@@ -1,0 +1,123 @@
+:SETUP_PARAMS:
+#+TITLE: Muscle Plotter
+#+author:Doğa Yüksel
+#+OPTIONS: toc:2 date:nil
+#+LATEX_CLASS: koma-article
+#+LATEX_CLASS_OPTIONS: [a4paper, 12pt]
+#+LATEX_HEADER: \usepackage{mathptmx}
+#+LATEX_HEADER: \usepackage[scaled=.90]{helvet}
+#+LATEX_HEADER: \usepackage{courier}
+#+LATEX_HEADER: \setkomafont{disposition}{\sffamily}
+#+LATEX_HEADER: \setkomafont{subtitle}{\sffamily\Large}
+#+LaTeX_HEADER: \usepackage[backend=bibtex,sorting=none]{biblatex}
+#+LaTeX_HEADER: \addbibresource{/Users/doga/.org/bibtex/file-1.bib}
+:END:
+
+* Introduction
+** An EMS and Anoto Pen based output system
+*** Allows users to a computer solely with pen and paper.
+*** An approach that blends the computer and the user
+
+** Motivation
+*** A pen based interface is intuitive
+*** Interations without screens is the future
+*** Interface without an interface is the future
+
+** Constribution
+*** Combining pen paper interactions with EMS is novel
+
+** Thesis overview
+*** Bigger abstract
+
+
+* Fundamentals and Related Work
+** Fundamentals
+*** Pen And Paper interactions
+**** Pen and paper is an important cognitive tool
+**** Acts as an extended memory
+**** New technology still mimics the spatial qualities of paper
+*** Interactive system are getting smaller
+**** Trend is mobile but, we can see further integration
+**** EMS is promising in miniturazation
+
+
+** Related Work
+*** State of the art of interactive EMS Systems
+    EMS has been around for over half a century. It is mainly used for medical applications. Over several years HCI community has grown interest. Following are several implementations related, worth mentioning.
+**** Affordance++
+**** Possesed Hand
+
+*** Pen and paper interactions from Research Domain
+    Interactive systems based on pen and paper has existed since the dawn of HCI. Muscle-plotter, uses the traces left by the pen held by the user as an output medium. Following are the applications that enhance the pen and paper interactions from the HCI domain.
+**** Magnetic table
+**** Exosceletons
+
+
+* Muscle Plotter / Applications
+** Overview
+   In the simplest case applications for muscle-plotter are initiated by the user. To acomplish a succesful interaction user takes turns with the computer, describes a domain and gets the answers later by applying the required motion. We have implemented several applications in this manner, within several domains and will futher describe them as walkthroughs in the following section.
+
+** Wind tunnel as a simulation / advanced widgets on paper
+*** Preparing the workspace / input with pen and recognition
+
+** Math function plots
+
+** Function Plotters in other contexts
+*** RC Filter
+*** Multiple choise menus
+*** Calculating integrals
+
+
+* Implementation
+** Overview
+   In the current implementation of muscle-plotter input consists of a windows machine relaying the tracking data to the python backend running on a MacOS. The output to the user is ordered by the python backen are communicated over a USB to a activate 4 channels on a medical grade EMS machine.
+
+   [system overview figure]
+
+   Following chapter will futher describe each hardware module in detail. Futher in the chapter we will describe key aspects of the software. Software will be analyzed in 
+
+
+** Hardware
+*** EMS Machine
+    Medical grade EMS Machine connected to the arm of the user
+*** Tracking System
+    Anoto Pen acts as a precise tracker. In our implementation, there is a windows machine running the drives provided by the anoto company. This part of the project in confined by a Non disclosure agreement.
+*** Backend System
+    A back-end manages the connection to the EMS machine and the anoto pen.
+
+
+** Software
+*** Calibration Program
+*** Control Loop
+     Fuzzy logic based on strategies orchestrating multiple channels at once.
+**** Model of the Human Arm and Travel Strategy
+     A low fidelity model describing the human arm as stick held by strings is the basis of the control loop of the muscle-plotter. At a given point flexors and extensors are both exited for a tighter control, which enables muscle-plotter to achive the accuracy it needs.
+**** Braking strategy
+****** Braking and Keeping on a target
+****** Ending an interaction
+
+*** Higher level API for Flow Control
+**** canvas elements
+**** function definitions
+*** Recognition System
+    Image recognition -> OpenCV for sketches
+    Text recognition -> Tessarect - OCR
+
+
+* User Study
+** Study design
+** Verify accuracy of the actuation method
+** Sample Curves chosen to understand the limitation
+
+
+* Discussion
+** Consider user study
+** Current implementation lacks control that allows actual drawing
+** Can't consider as 2D drawing
+** Our implementation is a steering action
+
+
+* Conclusion
+** Future Work
+*** Evaluate applications 
+*** Improve recognition
