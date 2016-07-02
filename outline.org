@@ -13,6 +13,11 @@
 #+LaTeX_HEADER: \addbibresource{/Users/doga/.org/bibtex/file-1.bib}
 :END:
 
+* Abstract
+This thesis explores creating an interactive pen and paper application using Electrical Muscle Situmulation. The user can input and get meaningful expressive output from a computer system in a mobile context. Using pen and paper allows the user to engage in cognitavely demanding tasks, such as solving math problems. In the simplest case user inputs the a math function and later muscle-plotter uses user's hand to plot the function. This example is futher expanded into fitting lines through points, finding points of interests etc. These core components are demonstrated in six different applications from different domains.
+Muscle-plotter is the first EMS system that produces spacial output, hence is more expresive then earlier systems proposed. In our user study, participants drew random plots within 4mm accuracy and preserved accuracy upto 3 cycles per cm.
+
+
 * Introduction
 ** An EMS and Anoto Pen based output system
 *** Allows users to a computer solely with pen and paper.
@@ -27,7 +32,7 @@
 *** Combining pen paper interactions with EMS is novel
 
 ** Thesis overview
-*** Bigger abstract
+   This thesis will continue by detailing the Related work in the next chapter. It will then further investigate walkthroughs of the applications developed. In the following chapter, essential components of the implementation of muscle-plotter described. Then finally the thesis is concluded with a discussion.
 
 
 * Fundamentals and Related Work
