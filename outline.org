@@ -150,7 +150,42 @@ The connection from Anoto Window API and the python backend is done via Open Sou
 ****** Ending an interaction
 
 *** Higher level API for Flow Control
-**** canvas elements
+
+   Canvas elements enable the user to control the flow and structure of muscle-plotter's output. We have designed several widgets for different data structures. Scalar values are represented on a line, they consist of a single axis. Functions are represented in a two dimensional area, as they exist on two axes. These widgets on paper, what ever the underlying data structure is, have some characteristics in common. All the canvas elements define an actual space on the paper with designated areas for interaction. These elements have essentials to be initialized, as well as optional modifications to shape and control the output. These widgets determine where electronic muscle stimulation is going to active, which in return serves as starting point for the plots. In the following chapter, we introduce the widgets based on their underlying data structure, describing the methods of initiation and use. All elements are drawn onto the paper, it is important to remind that they persist in an inactive state even when the user is working on an other part of the paper. They can be reused with appropriate commands.
+
+**** Single axis elements
+
+    These widgets are designed to output scalar values that are projected onto a line. Resulting value is represented in spacial reference to the domain of the axis draw for the widget. These can be used for the output of a single class as well as to compare different classes in the same domain. Output domain can range between Boolean to real numbers. Limitations imposed by muscle-plotter determines the sense making possibilities and the fidelity of the output. We have some design principles that allows the user to modify the axis to achieve reasonable outputs.
+
+
+    To initiate a single axis element, after writing the designated command to initiate, user draws a line in any orientation on the paper. By default, south-west facing edge of the line is assigned to the minimum value, while north-east facing edge is assigned to the maximum value. If the minimum and maximum values are not defined in the next optional step, default values for the specific domain is used. For example 0 to 1 in drag coefficient comparison, or the x value of the maximum of a plot would be projected on to the domain represented by the plot itself in maximum analysis of a function. The axis can be scaled by the user simply by annotating the maximum and/or the minimum value.
+
+
+    After all the essentials are placed on the paper, the scale component is ready to use. It starts of by user placing the tip of the pen at the beginning of the scale. If the pen lands in the accepted proximity of the origin, ems channels on both sides (left and right presented earlier) of the arm are activated at a tactile feedback level that doesn't actuate the user. This output only signifies that an output interaction is taking place. At this point, user starts dragging the pen keeping the tip on the paper to the end of the axis line. The back-end system, tracks user's motion and triggers a quick nudge followed by a pulse on the upper channel. This gesture leaves a visible trace behind on the axis, where desired value is projected on the the axis on the paper. The user can observe and annotate the value, as the widget is not active after a successful output procedure.
+
+**** Double axis elements - Parametric values / functions
+
+    Double axis elements have a major and a minor axis. The user drags the pen along the major axis, while the system takes the tip of the pen to the value corresponding on the minor axis with respect to the specific location on the major axis.
+
+
+    As we have presented on the walk-through, our main contribution comes from the spatial expressivity of plotting one-to-functions, such as streamlines of the wind-tunnel or the speed values for a defined cross-section. For both use cases the space defined on the paper is same in nature, while the tools to define are domain dependent. In the wind-tunnel case, there exists a line for every point on the vertical start axis as stream lines result from a single solution of a vector field. On the other hand for the speed values line example, there exists one unique line, that the user can plot.
+
+
+    In order to initiate a multiple axis plot, the user has to define a space on the paper. This is done by drawing two perpendicular lines representing the axes or crop-marks that encompasses the area. In case of a function plot, after defining axis lines user can optionally update the domain. Otherwise, defaults for the specific example is used just as defined in single axis examples.
+
+   
+    In a similar fashion to scales, the user should start at a specific position to instantiate the plotting procedure. In a generic plot, the output can be located in different quadrants. We have defined a method for the user to locate it to start plotting. Following interactions to find plot starting points are similar in nature to the scalar interactions described above. In the first case, where there is a zero crossing on the negative side of the major axis, user places the tip of the pen to the far left (negative, west) of the horizontal, major, dragging axis. The paper should have been rotated to a comfortable angle for a convenient plot. Then the user follows the axis, when zero crossing is reached, muscle-plotter takes over the control of the arm to output the rest of the plot. If necessary, the user can rotate the paper 180 degrees and plot the negative side of the desired line.
+
+
+    In the case of in the case of no zero crossing before the origin, muscle-plotter signals a pen-up before first scanning starts. At this point the user knows that there isn't a zero crossing between 3rd and 4th quadrants. The step  user should do is to scan the y axis, to find any y-crossings. Ideally user starts from the minimum point of the minor axis and drags the tip of the pen to the maximum point of the axis. If there is a y-crossing of the plot, muscle-plotter assigns a pen-down on the target location. From this point on the user follows parallel to the major axis to continue as a normal plot. The negative side of the function can be plotted by rotating the paper in a similar manner to the first case.
+
+
+    In the last case, when there is no zero crossing between 3rd and 4h quadrants and there is no y-axis intersection, the second axis find attempt of the user is interrupted by a pen-up as the tip of the pen is place on the minor-axis, (y-axis). The users follows over the major axis to find the crossing there. Muscle-plotter takes over control as the crossing is reached. The plot can be completed in a similar manner by rotating it as described in previous cases.
+
+
+***** (did we ever talk about cases where there is no crossing at all? i.e. (1/x))
+
+
 **** function definitions
 
 *** Recognition System
@@ -176,6 +211,22 @@ The connection from Anoto Window API and the python backend is done via Open Sou
 ** Current implementation lacks control that allows actual drawing
 ** Can't consider as 2D drawing
 ** Our implementation is a steering action
+
+** Design Considerations for Muscle-Plotter
+*** Discoverability
+    Muscle-plotter provides an interactive environment using user initiated components on paper. This approach differs from previous interactive systems as the user is expected to have a prior knowledge of the provided language. In many cases our interactions start with an empty sheet of paper. On the other hand screen based interactive systems provide discoverability as the system itself has a wider channel for output, such applications can start with a tutorial expecting the user to have zero prior knowledge. Designing applications for muscle-plotter should consider this to provide an engaging experience. According to the domain of the application, command keywords could be flexible and adaptive, moreover similar to a natural language.
+
+
+*** User Feedback
+    Usabilty theory for interactive systems inform the user about the state of the world. Muscle-plotter is able to provide positive and negative feedback in a non intrusive way with distinct gestures. Interactions with muscle-plotter should make use of feedback messages, in order to provide the user with an awareness of the state of system. As the interactions happen on a piece of paper, certain locations marked by the user, should behave in a consistent way. The user can approach a plot for several actions, such as actual plotting, zooming into a certain section, re-labeling the axis or selecting a region for further analysis.
+
+
+*** Widget size and expected error
+    Muscle-plotter has a limited accuracy due to the limitations of EMS. Interactive elements on paper should be scaled at a size greater that leaves the expected error insignificant. For example, a continuous scale described previously should verify that the output will provide a significant answer.
+
+
+*** Output Persistence and clutter on paper
+    The output of muscle plotter is persistent on paper. When the user draws a certain plot on a given axis, the output stays on the paper way longer then the length of the interaction. In an example of function plotting if the outputs were made and their essential characteristics are not different enough, the answers can be mixed up. As a solution, the user has the flexibility to annotate the output. This would allow the number of distinct traces that can be recalled later on. However, after a certain number of plots, the intelligibility would diminish. This is an inherent problem with writing on the paper, where the user would extend to the empty space below or to the next page. Muscle plotter widgets are reusable, however they are also easy to initiate.
 
 
 * Conclusion
