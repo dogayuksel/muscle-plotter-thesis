@@ -14,7 +14,9 @@
 :END:
 
 * Abstract
-This thesis explores creating an interactive pen and paper application using Electrical Muscle Situmulation. The user can input and get meaningful expressive output from a computer system in a mobile context. Using pen and paper allows the user to engage in cognitavely demanding tasks, such as solving math problems. In the simplest case user inputs the a math function and later muscle-plotter uses user's hand to plot the function. This example is futher expanded into fitting lines through points, finding points of interests etc. These core components are demonstrated in six different applications from different domains.
+This thesis explores creating an interactive pen and paper application using Electrical Muscle Situmulation. Using this application users can input and get meaningful expressive output from a computer system in a mobile context. Using pen and paper allows the user to engage in cognitavely demanding tasks, such as solving math problems. In the simplest case user inputs the a math function and later muscle-plotter uses user's hand to plot the function. This example is futher expanded into fitting lines through points, finding points of interests etc. These core components are demonstrated in six different applications from different domains.
+
+
 Muscle-plotter is the first EMS system that produces spacial output, hence is more expresive then earlier systems proposed. In our user study, participants drew random plots within 4mm accuracy and preserved accuracy upto 3 cycles per cm.
 
 
@@ -75,38 +77,52 @@ Muscle-plotter is the first EMS system that produces spacial output, hence is mo
 
 * Implementation
 ** Overview
-   In the current implementation of muscle-plotter input consists of a windows machine relaying the tracking data to the python backend running on a MacOS. The output to the user is ordered by the python backen are communicated over a USB to a activate 4 channels on a medical grade EMS machine.
+   Current implementation of muscle-plotter uses an Anoto Digitizer Pen & Paper for input and a medically compliant 8-channel portable EMS simulator (from HASOMED) for output. Tracking data from the anoto pen is relayed through a windows machine to the python backend running on a MacOS. Communication between the EMS machine and the python backend takes place throught the custom serial protocol via USB. Current implementation only uses 4 channels of the EMS device. This setup can be miniturized with a hardware similar to the one proposed in Proprioceptive Interaction [cite].
+
 
    [system overview figure]
 
-   Following chapter will futher describe each hardware module in detail. Futher in the chapter we will describe key aspects of the software. Software will be analyzed in 
 
+   Following chapter will futher describe the implementation in detail. 
 
-** Hardware
-*** EMS Machine
-    Medical grade EMS Machine connected to the arm of the user
 *** Tracking System
-    Anoto Pen acts as a precise tracker. In our implementation, there is a windows machine running the drives provided by the anoto company. This part of the project in confined by a Non disclosure agreement.
+    Input to the system is the Anoto Digitizer Pen & Paper that acts as a precise tracker. The paper has patented dot pattern that encodes the location data for each point. The accuracy of the location is quite high where each millimeter has 30 unique points. The camera on the pen scans and returns as long as the pen is pushing to the paper. The angle of the pen influences the quality of tracking. The users are advised to hold the pen at an upright angle. It is important to mention that there is constant delay as the pen captures and analyses this image. This delay has a detrimental effect on the performance of the control loop. It will be futher discussed later in this chapter. In our current implementation, there is a Windows server running the drives provided by the anoto company relaying data to the backend server. The details of these drivers is confined by a Non disclosure agreement.
+
+
+[figure: EMS machine]
+
+
+*** EMS Machine and Pad Placement
+    EMS machine by HASOMED is capable of generating a situmulation upto 400Hz. In our implementation at a given time two channels are active at most, as a result, each muscle shared the capacity where is situmuated with 200Hz. Futhermore the machine allows to control the amplitude and duty cycle of the signal. The system uses amplitudes ranging from 6mA to 16mA based on calibration results. Duty cycle can range between 20\micro{}s to 500\micro{}s, which provides a very large dynamic range of modulation. Muscle-plotter mainly controls duty cycles to achieve its accuracy. The amplitude is temporarily raised to boost actuation in certain conditions that will be described in the control loop section. 
+
+
+[figure: hasomed device]
+
+
+    Medical grade EMS Machine produced by HASOMED is used to sitimulate the arm of the user. In the current implementation 4 channels of the machine is connected to the arm of the user. Each channel is responsible for a different axis of motion. For a right handed setup; flexor carpi radialis moves the pen left, extensor carpi radialis brevis and partially flexor digitorum moves the pen right. Flexor carpi ulnaris is used to push the pen onto the paper, which in return helps to reduce oscilations and slow down. Finally extensor carpi radialis longus lifts the pen up from the paper.
+
+
+[figure: pads placements left]
+[figure: pads placements right]
+
 *** Backend System
     A back-end manages the connection to the EMS machine and the anoto pen.
 
+**** Calibration Program
+**** Control Loop
+      Fuzzy logic based on strategies orchestrating multiple channels at once.
+***** Model of the Human Arm and Travel Strategy
+      A low fidelity model describing the human arm as stick held by strings is the basis of the control loop of the muscle-plotter. At a given point flexors and extensors are both exited for a tighter control, which enables muscle-plotter to achive the accuracy it needs.
+***** Braking strategy
+******* Braking and Keeping on a target
+******* Ending an interaction
 
-** Software
-*** Calibration Program
-*** Control Loop
-     Fuzzy logic based on strategies orchestrating multiple channels at once.
-**** Model of the Human Arm and Travel Strategy
-     A low fidelity model describing the human arm as stick held by strings is the basis of the control loop of the muscle-plotter. At a given point flexors and extensors are both exited for a tighter control, which enables muscle-plotter to achive the accuracy it needs.
-**** Braking strategy
-****** Braking and Keeping on a target
-****** Ending an interaction
-
-*** Higher level API for Flow Control
-**** canvas elements
-**** function definitions
-*** Recognition System
-    Image recognition -> OpenCV for sketches
-    Text recognition -> Tessarect - OCR
+**** Higher level API for Flow Control
+***** canvas elements
+***** function definitions
+**** Recognition System
+     Image recognition -> OpenCV for sketches
+     Text recognition -> Tessarect - OCR
 
 
 * User Study
