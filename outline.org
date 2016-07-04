@@ -14,10 +14,10 @@
 :END:
 
 * Abstract
-This thesis explores creating an interactive pen and paper application using Electrical Muscle Situmulation. Using this application users can input and get meaningful expressive output from a computer system in a mobile context. Using pen and paper allows the user to engage in cognitavely demanding tasks, such as solving math problems. In the simplest case user inputs the a math function and later muscle-plotter uses user's hand to plot the function. This example is futher expanded into fitting lines through points, finding points of interests etc. These core components are demonstrated in six different applications from different domains.
+This thesis explores creating an interactive pen and paper application using Electrical Muscle Stimulation. Using this application users can input and get meaningful expressive output from a computer system in a mobile context. Using pen and paper allows the user to engage in cognitively demanding tasks, such as solving math problems. In the simplest case user inputs the a math function and later muscle-plotter uses user's hand to plot the function. This example is further expanded into fitting lines through points, finding points of interests etc. These core components are demonstrated in six different applications from different domains.
 
 
-Muscle-plotter is the first EMS system that produces spacial output, hence is more expresive then earlier systems proposed. In our user study, participants drew random plots within 4mm accuracy and preserved accuracy upto 3 cycles per cm.
+Muscle-plotter is the first EMS system that produces spacial output, hence is more expressive then earlier systems proposed. In our user study, participants drew random plots within 4mm accuracy and preserved accuracy up to 3 cycles per cm.
 
 
 * Introduction
@@ -27,10 +27,10 @@ Muscle-plotter is the first EMS system that produces spacial output, hence is mo
 
 ** Motivation
 *** A pen based interface is intuitive
-*** Interations without screens is the future
+*** Interactions without screens is the future
 *** Interface without an interface is the future
 
-** Constribution
+** Contribution
 *** Combining pen paper interactions with EMS is novel
 
 ** Thesis overview
@@ -45,7 +45,7 @@ Muscle-plotter is the first EMS system that produces spacial output, hence is mo
 **** New technology still mimics the spatial qualities of paper
 *** Interactive system are getting smaller
 **** Trend is mobile but, we can see further integration
-**** EMS is promising in miniturazation
+**** EMS is promising in miniaturization
 
 
 ** Related Work
@@ -57,12 +57,12 @@ Muscle-plotter is the first EMS system that produces spacial output, hence is mo
 *** Pen and paper interactions from Research Domain
     Interactive systems based on pen and paper has existed since the dawn of HCI. Muscle-plotter, uses the traces left by the pen held by the user as an output medium. Following are the applications that enhance the pen and paper interactions from the HCI domain.
 **** Magnetic table
-**** Exosceletons
+**** Exoskeletons
 
 
 * Muscle Plotter / Applications
 ** Overview
-   In the simplest case applications for muscle-plotter are initiated by the user. To acomplish a succesful interaction user takes turns with the computer, describes a domain and gets the answers later by applying the required motion. We have implemented several applications in this manner, within several domains and will futher describe them as walkthroughs in the following section.
+   In the simplest case applications for muscle-plotter are initiated by the user. To accomplish a successful interaction user takes turns with the computer, describes a domain and gets the answers later by applying the required motion. We have implemented several applications in this manner, within several domains and will further describe them as walkthroughs in the following section.
 
 ** Wind tunnel as a simulation / advanced widgets on paper
 *** Preparing the workspace / input with pen and recognition
@@ -71,58 +71,98 @@ Muscle-plotter is the first EMS system that produces spacial output, hence is mo
 
 ** Function Plotters in other contexts
 *** RC Filter
-*** Multiple choise menus
+*** Multiple choice menus
 *** Calculating integrals
 
 
 * Implementation
 ** Overview
-   Current implementation of muscle-plotter uses an Anoto Digitizer Pen & Paper for input and a medically compliant 8-channel portable EMS simulator (from HASOMED) for output. Tracking data from the anoto pen is relayed through a windows machine to the python backend running on a MacOS. Communication between the EMS machine and the python backend takes place throught the custom serial protocol via USB. Current implementation only uses 4 channels of the EMS device. This setup can be miniturized with a hardware similar to the one proposed in Proprioceptive Interaction [cite].
+   Current implementation of muscle-plotter uses an Anoto Digitizer Pen & Paper for input and a medically compliant 8-channel portable EMS simulator (from HASOMED) for output. Tracking data from the Anoto pen is relayed through a windows machine to the python back-end running on a Mac OS. Communication between the EMS machine and the python back end takes place through the custom serial protocol via USB. Current implementation only uses 4 channels of the EMS device. This setup can be miniaturized with a hardware similar to the one proposed in Proprioceptive Interaction [cite].
 
 
    [system overview figure]
 
 
-   Following chapter will futher describe the implementation in detail. 
+   Following chapter will further describe the implementation in detail. First, the input module is going to be described, later output of the system will be detailed. Finally the back-end that orchestrates two will be extensively analyzed.
 
-*** Tracking System
-    Input to the system is the Anoto Digitizer Pen & Paper that acts as a precise tracker. The paper has patented dot pattern that encodes the location data for each point. The accuracy of the location is quite high where each millimeter has 30 unique points. The camera on the pen scans and returns as long as the pen is pushing to the paper. The angle of the pen influences the quality of tracking. The users are advised to hold the pen at an upright angle. It is important to mention that there is constant delay as the pen captures and analyses this image. This delay has a detrimental effect on the performance of the control loop. It will be futher discussed later in this chapter. In our current implementation, there is a Windows server running the drives provided by the anoto company relaying data to the backend server. The details of these drivers is confined by a Non disclosure agreement.
-
-
-[figure: EMS machine]
+** Tracking System
+    Input to the system is handled by the Anoto Digitizer Pen & Paper that acts as a precise tracker. the Anoto paper has a patented dot pattern that encodes the location data for each point. The accuracy of the location is quite high where each millimeter has 30 unique points. The camera on the pen scans and returns as long as the pen is pushing to the paper. The angle of the pen influences the quality of tracking. The users are advised to hold the pen at an upright angle. It is important to mention that there is constant delay as the pen captures and analyses this image. This delay has a detrimental effect on the performance of the control loop. It will be further discussed later in this chapter. In our current implementation, there is a Windows server running the drives provided by the Anoto company relaying data to the back-end server. The details of these drivers (from the vendor we’inspire) is confined by a Non disclosure agreement.
 
 
-*** EMS Machine and Pad Placement
-    EMS machine by HASOMED is capable of generating a situmulation upto 400Hz. In our implementation at a given time two channels are active at most, as a result, each muscle shared the capacity where is situmuated with 200Hz. Futhermore the machine allows to control the amplitude and duty cycle of the signal. The system uses amplitudes ranging from 6mA to 16mA based on calibration results. Duty cycle can range between 20\micro{}s to 500\micro{}s, which provides a very large dynamic range of modulation. Muscle-plotter mainly controls duty cycles to achieve its accuracy. The amplitude is temporarily raised to boost actuation in certain conditions that will be described in the control loop section. 
+[figure: Anoto Pen and Paper]
 
 
-[figure: hasomed device]
+The connection from Anoto Window API and the python backend is done via Open Sound Control (OSC). Each observation of the Anoto Pen is packaged and contains a location, nature of the observation ( pen up, pen down and drag) and a timestamp. Time stamp receieved is used for speed calculations. OSC packets are relayed to the python server through Ethernet.
 
 
-    Medical grade EMS Machine produced by HASOMED is used to sitimulate the arm of the user. In the current implementation 4 channels of the machine is connected to the arm of the user. Each channel is responsible for a different axis of motion. For a right handed setup; flexor carpi radialis moves the pen left, extensor carpi radialis brevis and partially flexor digitorum moves the pen right. Flexor carpi ulnaris is used to push the pen onto the paper, which in return helps to reduce oscilations and slow down. Finally extensor carpi radialis longus lifts the pen up from the paper.
+** EMS Machine and Pad Placement
+    EMS machine by HASOMED is capable of generating a stimulation up to 400Hz. In our implementation at a given time two channels are active at most, as a result, each muscle shares the capacity where each is stimulated with 200Hz. Furthermore the machine allows to control the amplitude and duty cycle of the signal. The system uses amplitudes ranging from 6mA to 16mA based on calibration results. Duty cycle can range between 20\micro{}s to 500\micro{}s, which provides a very large dynamic range of modulation. Muscle-plotter mainly controls duty cycles to achieve its accuracy. The amplitude is temporarily raised to boost actuation in certain conditions that will be described in the control loop section. 
+
+
+[figure: HASOMED device]
+
+
+    Medical grade EMS Machine produced by HASOMED is used to stimulate the arm of the user. In the current implementation 4 channels of the machine is connected to the arm of the user. Each channel is responsible for a different axis of motion. For a right handed setup; flexor carpi radialis moves the pen left, extensor carpi radialis brevis and partially flexor digitorum moves the pen right. Flexor carpi ulnaris is used to push the pen onto the paper, which in return helps to reduce oscillations and slow down. Finally extensor carpi radialis longus lifts the pen up from the paper.
 
 
 [figure: pads placements left]
+
 [figure: pads placements right]
 
-*** Backend System
-    A back-end manages the connection to the EMS machine and the anoto pen.
+** Back-end System
+   A back-end manages the connection to the EMS machine and the Anoto pen.
 
-**** Calibration Program
-**** Control Loop
-      Fuzzy logic based on strategies orchestrating multiple channels at once.
-***** Model of the Human Arm and Travel Strategy
-      A low fidelity model describing the human arm as stick held by strings is the basis of the control loop of the muscle-plotter. At a given point flexors and extensors are both exited for a tighter control, which enables muscle-plotter to achive the accuracy it needs.
-***** Braking strategy
-******* Braking and Keeping on a target
-******* Ending an interaction
+*** Calibration Procedure
+    Calibration is an important aspect current EMS applications. Muscle-plotter requires meticulus calibration to be suitable for the user. Calibration generally takes place in three step, base on the comfort levels of the user.
 
-**** Higher level API for Flow Control
-***** canvas elements
-***** function definitions
-**** Recognition System
-     Image recognition -> OpenCV for sketches
-     Text recognition -> Tessarect - OCR
+
+**** 1) Comfortable actuation current
+     As mentioned in above, the throughput of the EMS as motion dramatically changes based on the anathomy of the users arm. Several factors, such as muscle size, skin thickness and hair density causes this variation. The implemantation includes a script that step by step sweeps up the intensity of the milliamps aplied to each side (left and right). The experimenter observes the minimum current that starts the motion and a the maximum current that results in a significant motion but still is not painfull. These values determine the range of vallues that can be used on the next step.
+
+**** 2) Slope gradients
+     After the comfortable EMS range for the user is determined, user is asked to draw straight lines along the paper in the posture required to use muscle-plotter. At this calibration step, calibration script actuates user's arm with random pairs of currents on each side. The script records the resulting angle after actuation. After desired number of trial pairs final result is observed on a two dimentional plot. To conclude this step, three pairs that result in maximum variation between resulting slopes are chosen for each side. EMS is efficient in creating jerky motions, however slow controlled motions are harder to generate. Actuation both sides, using bith opposing muscles, allows muscle-plotter to increase control on the wrist. Following figure shows the visualisation of these slopes.
+
+
+[figure: visualisation of slopes]
+
+**** 3) Brake Calibration
+     Muscle plotter has two modes for brakes.
+
+
+*** Control Loop
+    Control loop of muscle-plotter uses a series of strategies based on the state of the user's hand motions and the target position. Possible situations and associated strategies are futher illustrated in the following parts. Key principles are highlighted in the in the following figure.
+
+
+[rotoscope: pen and control loop]
+
+
+**** Model of the Human Wrist
+     Muscle-plotter uses a simple model of the human arm to manage motion of the wirst. The wrist is assumed to be a level attached to two strings. Muscles can be modelled as strings as any given time there is a tension on it. Sitimulation through nerves results in contraction. In order to move, desired side  contracts more then the opposing side. As a result a similar motion can be achieved with different configurations of contractions on opposing muscles. Any given static position of the wrist is an equilibrium of tension caused by opposing muscles. Muscle-plotter relies on these principles to achieve the accuracy it needs as both muscles on opposing sides are sequentially situmulated.
+
+
+[figure from the book]
+
+
+**** Targeting and travel
+
+**** Braking strategy
+****** Braking and Keeping on a target
+****** Ending an interaction
+
+*** Higher level API for Flow Control
+**** canvas elements
+**** function definitions
+
+*** Recognition System
+    Image recognition -> OpenCV for sketches
+    Text recognition -> Tessarect - OCR
+
+*** Application Specific Implementations
+**** Mathematical Applications
+**** RC Filter Response
+**** Statistic Applications
+**** Optical Ray Casting
+**** Wind-tunnel Simulation
 
 
 * User Study
