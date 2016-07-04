@@ -1,9 +1,7 @@
-:SETUP_PARAMS:
-#+TITLE: Muscle Plotter
-#+author:Doğa Yüksel
-#+OPTIONS: toc:2 date:nil
+:SETUP:
+#+OPTIONS: toc:nil date:nil
 #+LATEX_CLASS: koma-article
-#+LATEX_CLASS_OPTIONS: [a4paper, 12pt]
+#+LATEX_CLASS_OPTIONS: [a4paper, 11pt]
 #+LATEX_HEADER: \usepackage{mathptmx}
 #+LATEX_HEADER: \usepackage[scaled=.90]{helvet}
 #+LATEX_HEADER: \usepackage{courier}
@@ -13,12 +11,22 @@
 #+LaTeX_HEADER: \addbibresource{/Users/doga/.org/bibtex/file-1.bib}
 :END:
 
-* Abstract
-This thesis explores creating an interactive pen and paper application using Electrical Muscle Stimulation. Using this application users can input and get meaningful expressive output from a computer system in a mobile context. Using pen and paper allows the user to engage in cognitively demanding tasks, such as solving math problems. In the simplest case user inputs the a math function and later muscle-plotter uses user's hand to plot the function. This example is further expanded into fitting lines through points, finding points of interests etc. These core components are demonstrated in six different applications from different domains.
+:INTRO:
+#+TITLE: Muscle Plotter
+#+author:Doğa Yüksel
+#+LATEX: \thispagestyle{empty}
+#+LATEX: \newpage{}
+#+LATEX: \begin{abstract}
 
+  This thesis explores creating an interactive pen and paper application using Electrical Muscle Stimulation. Using this application users can input and get meaningful expressive output from a computer system in a mobile context. Using pen and paper allows the user to engage in cognitively demanding tasks, such as solving math problems. In the simplest case user inputs the a math function and later muscle-plotter uses user's hand to plot the function. This example is further expanded into fitting lines through points, finding points of interests etc. These core components are demonstrated in six different applications from different domains.
 
-Muscle-plotter is the first EMS system that produces spacial output, hence is more expressive then earlier systems proposed. In our user study, participants drew random plots within 4mm accuracy and preserved accuracy up to 3 cycles per cm.
+  Muscle-plotter is the first EMS system that produces spacial output, hence is more expressive then earlier systems proposed. In our user study, participants drew random plots within 4mm accuracy and preserved accuracy up to 3 cycles per cm.
 
+#+LATEX: \end{abstract}
+#+LATEX: \newpage{}
+#+TOC: headlines 2
+#+LATEX: \newpage{}
+:END:
 
 * Introduction
 ** An EMS and Anoto Pen based output system
@@ -35,6 +43,8 @@ Muscle-plotter is the first EMS system that produces spacial output, hence is mo
 
 ** Thesis overview
    This thesis will continue by detailing the Related work in the next chapter. It will then further investigate walkthroughs of the applications developed. In the following chapter, essential components of the implementation of muscle-plotter described. Then finally the thesis is concluded with a discussion.
+
+\newpage{}
 
 
 * Fundamentals and Related Work
