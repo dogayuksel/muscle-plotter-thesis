@@ -109,17 +109,11 @@
     Input to the system is handled by the Anoto Digitizer Pen & Paper that acts as a precise tracker. the Anoto paper has a patented dot pattern that encodes the location data for each point. The accuracy of the location is quite high where each millimeter has 30 unique points. The camera on the pen scans and returns as long as the pen is pushing to the paper. The angle of the pen influences the quality of tracking. The users are advised to hold the pen at an upright angle. It is important to mention that there is constant delay as the pen captures and analyses this image. This delay has a detrimental effect on the performance of the control loop. It will be further discussed later in this chapter. In our current implementation, there is a Windows server running the drives provided by the Anoto company relaying data to the back-end server. The details of these drivers (from the vendor we’inspire) is confined by a Non disclosure agreement.
 
 
-[figure: Anoto Pen and Paper]
-
-
 The connection from Anoto Window API and the python backend is done via Open Sound Control (OSC). Each observation of the Anoto Pen is packaged and contains a location, nature of the observation ( pen up, pen down and drag) and a timestamp. Time stamp receieved is used for speed calculations. OSC packets are relayed to the python server through Ethernet.
 
 
 ** EMS Machine and Pad Placement
-    EMS machine by HASOMED is capable of generating a stimulation up to 400Hz. In our implementation at a given time two channels are active at most, as a result, each muscle shares the capacity where each is stimulated with 200Hz. Furthermore the machine allows to control the amplitude and duty cycle of the signal. The system uses amplitudes ranging from 6mA to 16mA based on calibration results. Duty cycle can range between 20\micro{}s to 500\micro{}s, which provides a very large dynamic range of modulation. Muscle-plotter mainly controls duty cycles to achieve its accuracy. The amplitude is temporarily raised to boost actuation in certain conditions that will be described in the control loop section. 
-
-
-[figure: HASOMED device]
+    EMS machine by HASOMED is capable of generating a stimulation up to 400Hz. In our implementation at a given time two channels are active at most, as a result, each muscle shares the capacity where each is stimulated with 200Hz. Furthermore the machine allows to control the amplitude and duty cycle of the signal. The system uses amplitudes ranging from 6mA to 16mA based on calibration results. Duty cycle can range between 20\micro{}s to 500\micro{}s, which provides a very large dynamic range of modulation. Muscle-plotter mainly controls duty cycles to achieve its accuracy. The amplitude is temporarily raised to boost actuation in certain conditions that will be described in the control loop section.
 
 
     Medical grade EMS Machine produced by HASOMED is used to stimulate the arm of the user. In the current implementation 4 channels of the machine is connected to the arm of the user. Each channel is responsible for a different axis of motion. For a right handed setup; flexor carpi radialis moves the pen left, extensor carpi radialis brevis and partially flexor digitorum moves the pen right. Flexor carpi ulnaris is used to push the pen onto the paper, which in return helps to reduce oscillations and slow down. Finally extensor carpi radialis longus lifts the pen up from the paper.
@@ -160,7 +154,10 @@ The connection from Anoto Window API and the python backend is done via Open Sou
     Control loop of muscle-plotter uses a series of strategies based on the state of the user's hand motions and the target position. Possible situations and associated strategies are futher illustrated in the following parts. Key principles are highlighted in the in the following figure.
 
 
-[rotoscope: pen and control loop]
+#+CAPTION:    Control Loop
+#+LABEL:      fig:control-loop
+#+ATTR_LaTeX: :width 90mm
+[[./images/control-loop.png]]
 
 
 **** Model of the Human Wrist
