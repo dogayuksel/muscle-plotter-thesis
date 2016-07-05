@@ -26,12 +26,19 @@
 #+LATEX: \newpage{}
 #+TOC: headlines 2
 #+LATEX: \newpage{}
+#+LATEX: \listoffigures{}
+#+LATEX: \newpage{}
 :END:
 
 * Introduction
 ** An EMS and Anoto Pen based output system
 *** Allows users to a computer solely with pen and paper.
 *** An approach that blends the computer and the user
+
+#+CAPTION:    Muscle Plotter - Teaser
+#+LABEL:      fig:muscle-plotter-teaser
+#+ATTR_LaTeX: :width 90mm
+[[./images/intro.jpg]]
 
 ** Motivation
 *** A pen based interface is intuitive
@@ -90,7 +97,10 @@
    Current implementation of muscle-plotter uses an Anoto Digitizer Pen & Paper for input and a medically compliant 8-channel portable EMS simulator (from HASOMED) for output. Tracking data from the Anoto pen is relayed through a windows machine to the python back-end running on a Mac OS. Communication between the EMS machine and the python back end takes place through the custom serial protocol via USB. Current implementation only uses 4 channels of the EMS device. This setup can be miniaturized with a hardware similar to the one proposed in Proprioceptive Interaction [cite].
 
 
-   [system overview figure]
+#+CAPTION:    System Overview - Miniturized
+#+LABEL:      fig:suggested-system-overview-miniture
+#+ATTR_LaTeX: :width 90mm
+[[./images/system.jpg]]
 
 
    Following chapter will further describe the implementation in detail. First, the input module is going to be described, later output of the system will be detailed. Finally the back-end that orchestrates two will be extensively analyzed.
@@ -115,9 +125,16 @@ The connection from Anoto Window API and the python backend is done via Open Sou
     Medical grade EMS Machine produced by HASOMED is used to stimulate the arm of the user. In the current implementation 4 channels of the machine is connected to the arm of the user. Each channel is responsible for a different axis of motion. For a right handed setup; flexor carpi radialis moves the pen left, extensor carpi radialis brevis and partially flexor digitorum moves the pen right. Flexor carpi ulnaris is used to push the pen onto the paper, which in return helps to reduce oscillations and slow down. Finally extensor carpi radialis longus lifts the pen up from the paper.
 
 
-[figure: pads placements left]
+#+CAPTION:    Pad Placement - Flexor
+#+LABEL:      fig:pad-placement-flexor
+#+ATTR_LaTeX: :width 90mm
+[[./images/flexor.jpg]]
 
-[figure: pads placements right]
+#+CAPTION:    Pad Placement - Extensor
+#+LABEL:      fig:pad-placement-extensor
+#+ATTR_LaTeX: :width 90mm
+[[./images/extensor.jpg]]
+
 
 ** Back-end System
    A back-end manages the connection to the EMS machine and the Anoto pen.
