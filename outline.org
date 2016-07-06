@@ -41,7 +41,7 @@
 [[./images/intro.jpg]]
 
 ** Motivation
-*** A pen based interface is intuitive
+*** A pen based interface is intuitive \cite{ullman_importancedrawing}
 *** Interactions without screens is the future
 *** Interface without an interface is the future
 
@@ -94,7 +94,7 @@
 
 * Implementation
 ** Overview
-   Current implementation of muscle-plotter uses an Anoto Digitizer Pen & Paper for input and a medically compliant 8-channel portable EMS simulator (from HASOMED) for output. Tracking data from the Anoto pen is relayed through a windows machine to the python back-end running on a Mac OS. Communication between the EMS machine and the python back end takes place through the custom serial protocol via USB. Current implementation only uses 4 channels of the EMS device. This setup can be miniaturized with a hardware similar to the one proposed in Proprioceptive Interaction [cite].
+   Current implementation of muscle-plotter uses an Anoto Digitizer Pen & Paper for input and a medically compliant 8-channel portable EMS simulator (from HASOMED)\cite{hasomed} for output. Tracking data from the Anoto pen is relayed through a windows machine to the python back-end running on a Mac OS. Communication between the EMS machine and the python back end takes place through the custom serial protocol via USB. Current implementation only uses 4 channels of the EMS device. This setup can be miniaturized with a hardware similar to the one proposed in Proprioceptive Interaction \cite{lopes_proprioceptive}.
 
 
 #+CAPTION:    System Overview - Miniturized
@@ -106,7 +106,7 @@
    Following chapter will further describe the implementation in detail. First, the input module is going to be described, later output of the system will be detailed. Finally the back-end that orchestrates two will be extensively analyzed.
 
 ** Tracking System
-    Input to the system is handled by the Anoto Digitizer Pen & Paper that acts as a precise tracker. the Anoto paper has a patented dot pattern that encodes the location data for each point. The accuracy of the location is quite high where each millimeter has 30 unique points. The camera on the pen scans and returns as long as the pen is pushing to the paper. The angle of the pen influences the quality of tracking. The users are advised to hold the pen at an upright angle. It is important to mention that there is constant delay as the pen captures and analyses this image. This delay has a detrimental effect on the performance of the control loop. It will be further discussed later in this chapter. In our current implementation, there is a Windows server running the drives provided by the Anoto company relaying data to the back-end server. The details of these drivers (from the vendor we’inspire) is confined by a Non disclosure agreement.
+    Input to the system is handled by the Anoto Digitizer Pen & Paper that acts as a precise tracker \cite{anoto}. the Anoto paper has a patented dot pattern that encodes the location data for each point. The accuracy of the location is quite high where each millimeter has 30 unique points. The camera on the pen scans and returns as long as the pen is pushing to the paper. The angle of the pen influences the quality of tracking. The users are advised to hold the pen at an upright angle. It is important to mention that there is constant delay as the pen captures and analyses this image. This delay has a detrimental effect on the performance of the control loop. It will be further discussed later in this chapter. In our current implementation, there is a Windows server running the drives provided by the Anoto company relaying data to the back-end server. The details of these drivers (from the vendor we’inspire) is confined by a Non disclosure agreement.
 
 
 The connection from Anoto Window API and the python backend is done via Open Sound Control (OSC). Each observation of the Anoto Pen is packaged and contains a location, nature of the observation ( pen up, pen down and drag) and a timestamp. Time stamp receieved is used for speed calculations. OSC packets are relayed to the python server through Ethernet.
@@ -257,3 +257,7 @@ The connection from Anoto Window API and the python backend is done via Open Sou
 ** Future Work
 *** Evaluate applications 
 *** Improve recognition
+
+
+#+LATEX: \newpage{}
+#+LATEX: \printbibliography{}
