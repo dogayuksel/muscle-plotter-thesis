@@ -41,9 +41,14 @@
 [[./images/intro.jpg]]
 
 ** Motivation
+
 *** A pen based interface is intuitive \cite{ullman_importancedrawing}
 *** Interactions without screens is the future
 *** Interface without an interface is the future
+*** Interactive system are getting smaller
+**** Trend is mobile but, we can see further integration
+**** EMS is promising in miniaturization
+
 
 ** Contribution
 *** Combining pen paper interactions with EMS is novel
@@ -55,26 +60,28 @@
 
 
 * Fundamentals and Related Work
+
 ** Fundamentals
-*** Pen And Paper interactions
+
+   This thesis is related to interactive pen-based interfaces, interactive systems based on exoskeletons and electrical muscle situmulators. Following chapter will further investigate examples from the available research.
+
+** Related Work
+
+*** Pen-based devices and sensemaking systems
+     Interactive systems based on pen and paper has existed since the dawn of HCI. Muscle-plotter, uses the traces left by the pen held by the user as an output medium. Following are the applications that enhance the pen and paper interactions from the HCI domain.
 **** Pen and paper is an important cognitive tool
 **** Acts as an extended memory
 **** New technology still mimics the spatial qualities of paper
-*** Interactive system are getting smaller
-**** Trend is mobile but, we can see further integration
-**** EMS is promising in miniaturization
+**** Magnetic table
 
 
-** Related Work
+*** Exoskeletons
+
 *** State of the art of interactive EMS Systems
     EMS has been around for over half a century. It is mainly used for medical applications. Over several years HCI community has grown interest. Following are several implementations related, worth mentioning.
-**** Affordance++
-**** Possesed Hand
 
-*** Pen and paper interactions from Research Domain
-    Interactive systems based on pen and paper has existed since the dawn of HCI. Muscle-plotter, uses the traces left by the pen held by the user as an output medium. Following are the applications that enhance the pen and paper interactions from the HCI domain.
-**** Magnetic table
-**** Exoskeletons
+**** Affordance++ \cite{lopes_affordance++}
+**** Possesed Hand \cite{tamaki_possessedhand}
 
 
 * Muscle Plotter / Applications
