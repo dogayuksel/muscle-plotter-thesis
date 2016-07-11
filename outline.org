@@ -173,10 +173,13 @@ The connection from Anoto Window API and the python backend is done via Open Sou
 
 
 **** Model of the Human Wrist
-     Muscle-plotter uses a simple model of the human arm to manage motion of the wirst. The wrist is assumed to be a level attached to two strings. Muscles can be modelled as strings as any given time there is a tension on it. Sitimulation through nerves results in contraction. In order to move, desired side  contracts more then the opposing side. As a result a similar motion can be achieved with different configurations of contractions on opposing muscles. Any given static position of the wrist is an equilibrium of tension caused by opposing muscles. Muscle-plotter relies on these principles to achieve the accuracy it needs as both muscles on opposing sides are sequentially situmulated.
+     Muscle-plotter uses a simple model of the human arm to manage motion of the wirst. The wrist is assumed to be a level attached to two strings. Muscles can be modelled as strings as any given time there is a tension on it \cite{schmidt_motorcontrol}. Situmulation through nerves results in contraction. In order to move, desired side  contracts more then the opposing side. As a result a similar motion can be achieved with different configurations of contractions on opposing muscles. Any given static position of the wrist is an equilibrium of tension caused by opposing muscles. Muscle-plotter relies on these principles to achieve the accuracy it needs as both muscles on opposing sides are sequentially situmulated.
 
 
-[figure from the book]
+#+CAPTION:    Spring Mass Model
+#+LABEL:      fig:spring-mass-model
+#+ATTR_LaTeX: :width 90mm
+[[./images/spring-mass-model.png]]
 
 
 **** Targeting and travel
