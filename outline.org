@@ -63,15 +63,18 @@
 
 ** Fundamentals
 
-   This thesis is related to interactive pen-based interfaces, interactive systems based on exoskeletons and electrical muscle situmulators. Following chapter will further investigate examples from the available research.
+   # importance of sketching
+   Muscle-plotter builds upon pen and paper interactions, activities such as writing, note taking, sketching that draws parallel to human intellectual development. These activities are both essential for developing own ideas and communicating them. Ullman et al. have investigated how mechanical designers used drawings, and observed that it 'acts as an extended memory', helps analysing and simulating forms, enables communication of ideas \cite{ullman_importancedrawing}.
+
+   This thesis is further related to interactive pen-based interfaces, interactive systems based on exoskeletons or electrical muscle situmulators. Following chapter will further investigate examples from the state of the art research.
 
 ** Related Work
 
-*** Pen-based devices and sensemaking systems
-     Interactive systems based on pen and paper has existed since the dawn of HCI. Muscle-plotter, uses the traces left by the pen held by the user as an output medium. Following are the applications that enhance the pen and paper interactions from the HCI domain.
+*** Pen-based Devices
+    Interactive systems based on pen and paper has existed since the dawn of HCI. Already competent capabilities of pen and paper is further enchaced by intelligent systems and interaction techniques. Holding a pen is traditionally unimanual and that allows cooparative unimanual interactions through these interaction techniques \cite{Hinckley_coopbimanual, Guiard_asymetricbimanual}.
+
 **** Pen and paper is an important cognitive tool
-**** Acts as an extended memory
-**** New technology still mimics the spatial qualities of paper
+
 **** Magnetic table
 
 
@@ -86,10 +89,12 @@
 
 * Muscle Plotter / Applications
 ** Overview
-   In the simplest case applications for muscle-plotter are initiated by the user. To accomplish a successful interaction user takes turns with the computer, describes a domain and gets the answers later by applying the required motion. We have implemented several applications in this manner, within several domains and will further describe them as walkthroughs in the following section.
 
-** Wind tunnel as a simulation / advanced widgets on paper
-*** Preparing the workspace / input with pen and recognition
+   In the simplest case, applications for muscle-plotter are initiated by the user. To accomplish a successful interaction user takes turns with the computer, describes a domain and gets the answers later by applying the required motion. This thesis describes several applications implemented in this manner, within several domains and will further describe them as walkthroughs in the following section in detail.
+
+** Walkthrough of Wind-Tunnel Simulation
+
+   Walkthrough of Windtunnel simulation implemented with muscle-plotter showcases a car designer sketching and analysing the aerodynamics of a car. The walkthrough includes several iterations on the sketch which allows the designer to understand implications of the intractive changes on the car sketch. As mentioned in the overview, the user starts the interaction by describing the domian, taking his or her turn. In this case user writes 'windtunnel' and draws crop marks in a suitable area on the paper. Crop-marks designate the input area for the sketch. Muscle-plotter recognizes the sketch and simulates the wind velocity field, further serves is as stream lines.
 
 ** Math function plots
 
@@ -101,7 +106,7 @@
 
 * Implementation
 ** Overview
-   Current implementation of muscle-plotter uses an Anoto Digitizer Pen & Paper for input and a medically compliant 8-channel portable EMS simulator (from HASOMED)\cite{hasomed} for output. Tracking data from the Anoto pen is relayed through a windows machine to the python back-end running on a Mac OS. Communication between the EMS machine and the python back end takes place through the custom serial protocol via USB. Current implementation only uses 4 channels of the EMS device. This setup can be miniaturized with a hardware similar to the one proposed in Proprioceptive Interaction \cite{lopes_proprioceptive}.
+   Current implementation of muscle-plotter uses an Anoto Digitizer Pen & Paper for input and a medically compliant 8-channel portable EMS simulator (from HASOMED \cite{hasomed}) for output. Tracking data from the Anoto pen is relayed through a windows machine to the python back-end running on a Mac OSX. Communication between the EMS machine and the python back end takes place through the custom serial protocol via USB. Current implementation only uses 4 channels of the EMS device. This setup can be miniaturized with a hardware similar to the one proposed in Proprioceptive Interaction \cite{lopes_proprioceptive}.
 
 
 #+CAPTION:    System Overview - Miniturized
