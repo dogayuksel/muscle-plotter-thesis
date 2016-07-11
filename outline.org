@@ -173,11 +173,11 @@ The connection from Anoto Window API and the python backend is done via Open Sou
 
 
 **** Model of the Human Wrist
-     Muscle-plotter uses a simple model of the human arm to manage motion of the wirst. The wrist is assumed to be a level attached to two strings. Muscles can be modelled as strings as any given time there is a tension on it \cite{schmidt_motorcontrol}. Situmulation through nerves results in contraction. In order to move, desired side  contracts more then the opposing side. As a result a similar motion can be achieved with different configurations of contractions on opposing muscles. Any given static position of the wrist is an equilibrium of tension caused by opposing muscles. Muscle-plotter relies on these principles to achieve the accuracy it needs as both muscles on opposing sides are sequentially situmulated.
+     Muscle-plotter uses a simple model of the human arm to manage the motion of the wrist. The wrist is assumed to be a level attached to two strings. The motion takes place when tension on one of the strings changes as described by the `equilibrium point model' \cite{schmidt_motorcontrol}. In the case of muscle-plotter situmulation through nerves results in contraction. To achieve a motion, desired side should be contracted more then the opposing side. As a result same target position can be reached with different configurations of contractions on opposing muscles. Any given static position of the wrist is an equilibrium of tension caused by opposing muscles \cite{schmidt_motorcontrol}. Muscle-plotter relies on these principles to achieve the accuracy it needs as both muscles on opposing sides are sequentially situmulated. In other words intended position of the arm can be reached by applying different pairs of impulsed to flexor and extensor muscles.
 
 
-#+CAPTION:    Spring Mass Model
-#+LABEL:      fig:spring-mass-model
+#+CAPTION:    Equilibrium point model
+#+LABEL:      fig:Equilibrium point model
 #+ATTR_LaTeX: :width 90mm
 [[./images/spring-mass-model.png]]
 
