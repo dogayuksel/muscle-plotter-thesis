@@ -87,7 +87,7 @@ This thesis explores creating an interactive pen and paper application using Ele
 ** Fundamentals
 
    # importance of sketching
-   \App{} builds upon pen and paper interactions, activities such as writing, note taking, sketching that draws parallel to human intellectual development. These activities are both essential for developing own ideas and communicating them. Ullman et al. have investigated how mechanical designers used drawings, and observed that it 'acts as an extended memory', helps analysing and simulating forms, enables communication of ideas \cite{ullman_importancedrawing}.
+   \App{} builds upon pen and paper interactions, activities such as writing, note taking, sketching that draws parallel to human intellectual development. These activities are both essential for developing own ideas and communicating them. Ullman et al. have investigated how mechanical designers used drawings, and observed that it 'acts as an extended memory', helps analysing and simulating forms, and enables communication of ideas \cite{ullman_importancedrawing}.
 
    This thesis is further related to interactive pen-based interfaces, interactive systems based on exoskeletons or electrical muscle situmulators. Following chapter will further investigate examples from the state of the art research.
 
@@ -112,7 +112,7 @@ This thesis explores creating an interactive pen and paper application using Ele
 *** State of the art of interactive EMS Systems
     EMS has been around for over half a century. It is mainly used for medical applications. Over several years HCI community has grown interest. Following are several implementations related, worth mentioning.
 
-    EMS is a technique originated in the field of medical reha- bilitation that applies electrical impulses to involuntarily contact muscle fibers; these impulses are delivered to the user’s muscles via electrodes attached to the skin \cite{Kruijff_hapticfeedback, strojnik_programmed}.
+    EMS is a technique originated in the field of medical rehabilitation that applies electrical impulses to involuntarily contact muscle fibers; these impulses are delivered to the user’s muscles via electrodes attached to the skin \cite{Kruijff_hapticfeedback, strojnik_programmed}.
 
     Recently, researchers in HCI started to build interactive systems based on EMS. The Possessed Hand \cite{tamaki_possessedhand}, for example, is a guidance device that helps users learn for example how to play a new instrument. Pedestrian Cruise Control informs the user’s leg muscles when to turn \cite{pfeiffer_cruise}. In contrast, \app{} actuates muscles directly, thereby eliminates the cognitive load involved by systems that merely inform users when to turn.
 
