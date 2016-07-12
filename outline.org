@@ -79,7 +79,7 @@ This thesis explores creating an interactive pen and paper application using Ele
 ** Thesis overview
    This thesis will continue by detailing the Related work in the next chapter. It will then further investigate walkthroughs of the applications developed. In the following chapter, essential components of the implementation of \app{} described. Then finally the thesis is concluded with a discussion.
 
-\newpage{}
+
 
 
 * Fundamentals and Related Work
@@ -117,8 +117,6 @@ This thesis explores creating an interactive pen and paper application using Ele
     Recently, researchers in HCI started to build interactive systems based on EMS. The Possessed Hand \cite{tamaki_possessedhand}, for example, is a guidance device that helps users learn for example how to play a new instrument. Pedestrian Cruise Control informs the user’s leg muscles when to turn \cite{pfeiffer_cruise}. In contrast, \app{} actuates muscles directly, thereby eliminates the cognitive load involved by systems that merely inform users when to turn.
 
     One motivation for the use of EMS in interactive system is that it allows replacing motors, thereby resulting in much smaller, even mobile form factors. Muscle-propelled force feedback, for example, uses EMS to provide directional force-feedback (left & right) in mobile gaming \cite{lopes_musclepropell}. Pose-IO is an interactive wearable system that allows for eyes-free input output with a computer system \cite{lopes_proprioceptive}. Affordance++ extends on this concept by allowing objects to actuate the user’s hand in order to make it manipulate the object properly \cite{lopes_affordance++}.
-
-\newpage{}
 
 
 * Muscle Plotter / Applications
