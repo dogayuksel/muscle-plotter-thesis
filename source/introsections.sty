@@ -1,0 +1,52 @@
+
+\renewenvironment{titlepage}{
+   \setcounter{page}{1}
+   %% Set the line spacing to 1 for the title page.
+   \begin{spacing}{1}
+   \begin{large}
+   \begin{center}
+      \mbox{}
+      \vfill
+      \begin{sc}
+      {\@title}\\
+      \end{sc}
+      \vfill
+      by \\
+      \vfill
+      {\@author}\\
+%      \centerline{\psfig{figure=crest.ps,width=1in}}
+      \vfill
+      Submitted in conformity with the requirements\\
+      for the degree of {\@degree}\\
+      \vfill
+      Heriot Watt University\\
+       \centerline{\includegraphics[width=1in]{crest/crest.pdf}}
+      \vfill
+      School of {\@department}\\
+      \vfill
+      Submitted {\@gmonth}, {\@gyear}
+      \vfill
+
+      \small
+      The copyright in this thesis is owned by the author. Any
+      quotation from this thesis or use of any of the information
+      contained in it must acknowledge this thesis as the source of
+      the quotation or information.
+      \normalsize
+
+      %Copyright {\copyright} {\@gyear} by {\@author}\\
+      \vspace*{.2in}
+   \end{center}
+   \end{large}
+   \end{spacing}
+   \end{titlepage}
+   \setcounter{page}{2}
+}%\maketitle
+
+\newenvironment{abstract}
+{\thispagestyle{plain}
+\begin{center}
+  \section*{Abstract}
+ \end{center}
+ \begingroup
+}{\newpage\endgroup}
