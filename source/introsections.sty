@@ -1,47 +1,77 @@
-
 \renewenvironment{titlepage}{
-   \setcounter{page}{1}
-   %% Set the line spacing to 1 for the title page.
-   \begin{spacing}{1}
-   \begin{large}
-   \begin{center}
-      \mbox{}
-      \vfill
-      \begin{sc}
-      {\@title}\\
-      \end{sc}
-      \vfill
-      by \\
-      \vfill
-      {\@author}\\
-%      \centerline{\psfig{figure=crest.ps,width=1in}}
-      \vfill
-      Submitted in conformity with the requirements\\
-      for the degree of {\@degree}\\
-      \vfill
-      Heriot Watt University\\
-       \centerline{\includegraphics[width=1in]{crest/crest.pdf}}
-      \vfill
-      School of {\@department}\\
-      \vfill
-      Submitted {\@gmonth}, {\@gyear}
-      \vfill
+  \thispagestyle{empty}
+  \begin{center}
+    \vspace*{1.4cm}
+    {\LARGE \textbf{Technische Universit{\"a}t Berlin}}
+    \vspace{0.5cm}
 
-      \small
-      The copyright in this thesis is owned by the author. Any
-      quotation from this thesis or use of any of the information
-      contained in it must acknowledge this thesis as the source of
-      the quotation or information.
-      \normalsize
+    {\large Institut f{\"u}r Softwaretechnik und Theoretische Informatik\\[1mm]}
+    {\large Quality and Usability Lab\\[5mm]}
 
-      %Copyright {\copyright} {\@gyear} by {\@author}\\
-      \vspace*{.2in}
-   \end{center}
-   \end{large}
-   \end{spacing}
-   \end{titlepage}
-   \setcounter{page}{2}
-}%\maketitle
+    Fakult{\"a}t IV\\
+    Ernst-Reuter-Platz 7\\
+    10587 Berlin\\
+    https://www.qu.tu-berlin.de/\\
+
+    \vspace*{1cm}
+    \includegraphics[width=4cm]{./images/tu-logo.png}\\
+    \vspace*{1cm}
+    {\LARGE Master Thesis}\\
+    \vspace{1.0cm}
+    {\LARGE \textbf{Muscle-Plotter}}\\
+    \vspace*{0.3cm}
+    {\small \textbf{Pen-paper interactions through Electrical Muscle Situmulation}}\\
+    \vspace*{1.0cm}
+    {\LARGE Doğa Yüksel}\\
+    \vspace*{0.5cm}
+    Matriculation Number: 368264\\
+    \today\\ % 	date of submission
+    \vspace*{1.0cm}
+    Supervised by\\
+    Prof. Dr.-Ing. Sebastian M{\"o}ller\\
+    \vspace*{0.5cm}
+    Assistant Supervisors\\
+    Prof. Dr. Patrick Baudisch and Pedro Lopes
+    \vspace{3cm}
+  \end{center}
+  \begingroup
+}{\newpage\endgroup}
+
+\newenvironment{hpititle}{
+  \thispagestyle{empty}
+  \vspace*{3cm}
+  \begin{center}
+    \includegraphics[width=0.4\textwidth]{./images/hpi-logo.jpg}
+  \end{center}
+  \vspace*{0.2cm}
+  \begin{center}
+    Hasso-Plattner-Institute at Potsdam University\\
+    Prof.-Dr.-Helmert-Str. 2-3\\
+    14482 Potsdam\\
+  \vspace*{0.5cm}
+  This master thesis originated in cooperation with the Hasso-Plattner-Institute.
+  \end{center}
+  \vspace*{1cm}
+  \begingroup
+}{\newpage\endgroup}
+
+\newenvironment{declaration}{
+  \thispagestyle{empty}
+  \begin{large}
+    \vspace*{6cm}
+    \noindent
+    I hereby declare that I wrote this thesis myself with the help of no more than the mentioned literature and auxiliary means. Some of the content is derived from the research paper ``Muscle-Plotter'' which this thesis is based on and I am a co-author of.\\
+    \vspace{2cm}
+    \noindent
+    Berlin, \today
+    \vspace{3cm}
+    \hspace*{7cm}%
+    \dotfill\\
+    \hspace*{8.5cm}%
+    \textit{Doğa Yüksel}
+  \end{large}
+  \begingroup
+}{\newpage\endgroup}
 
 \newenvironment{abstract}
 {\thispagestyle{plain}

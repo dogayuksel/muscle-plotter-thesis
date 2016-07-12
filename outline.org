@@ -13,15 +13,13 @@
 #+LATEX_HEADER: \usepackage{./source/introsections}
 :END:
 :VARIABLES:
-#+TITLE: Muscle-Plotter
-#+author:Doğa Yüksel
 #+LATEX_HEADER: \newcommand{\app}{\emph{muscle-plotter}}
 #+LATEX_HEADER: \newcommand{\App}{\emph{Muscle-plotter}}
 :END:
 :HEADERFOOTER:
 #+LATEX_HEADER: \usepackage{scrlayer-scrpage}
-#+LATEX_HEADER: \ohead{@title}
-#+LATEX_HEADER: \ihead{@author}
+#+LATEX_HEADER: \ohead{Muscle-Plotter}
+#+LATEX_HEADER: \ihead{Doğa Yüksel}
 #+LATEX_HEADER: \ofoot[]{\thepage}
 #+LATEX_HEADER: \ifoot{Master Thesis, TU Berlin, Fachgebiet X, 2016}
 :END:
@@ -29,6 +27,10 @@
 #+LATEX: \frontmatter{}
 #+LATEX: \begin{titlepage}
 #+LATEX: \end{titlepage}
+#+LATEX: \begin{hpititle}
+#+LATEX: \end{hpititle}
+#+LATEX: \begin{declaration}
+#+LATEX: \end{declaration}
 #+LATEX: \begin{abstract}
 This thesis explores creating an interactive pen and paper application using Electrical Muscle Stimulation. Using this application users can input and get meaningful expressive output from a computer system in a mobile context. Using pen and paper allows the user to engage in cognitively demanding tasks, such as solving math problems. In the simplest case user inputs the a math function and later \app{} uses user's hand to plot the function. This example is further expanded into fitting lines through points, finding points of interests etc. These core components are demonstrated in six different applications from different domains.
 
