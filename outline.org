@@ -1,7 +1,8 @@
 :SETUP:
 #+OPTIONS: toc:nil date:nil
 #+LATEX_CLASS: koma-article
-#+LATEX_CLASS_OPTIONS: [a4paper, 11pt]
+#+LATEX_CLASS_OPTIONS: [a4paper, 12pt, twoside]
+#+LATEX_HEADER: \usepackage[hmarginratio=1:1]{geometry}
 #+LATEX_HEADER: \usepackage{mathptmx}
 #+LATEX_HEADER: \usepackage[scaled=.90]{helvet}
 #+LATEX_HEADER: \usepackage{courier}
@@ -11,25 +12,46 @@
 #+LaTeX_HEADER: \addbibresource{/Users/doga/.org/bibtex/file-1.bib}
 :END:
 
+:HEADERFOOTER:
+#+LATEX_HEADER: \usepackage{scrpage2}
+#+LATEX_HEADER: \pagestyle{scrheadings}
+#+LATEX_HEADER: \ohead{muscle-plotter}
+#+LATEX_HEADER: \ihead{Doğa Yüksel}
+#+LATEX_HEADER: \ofoot[]{\thepage}
+#+LATEX_HEADER: \ifoot{Master Thesis, TU Berlin, Fachgebiet X, 2016}
+:END:
+
+:APP_ALIAS:
+#+LATEX_HEADER: \newcommand{\app}{\emph{muscle-plotter}}
+#+LATEX_HEADER: \newcommand{\App}{\emph{Muscle-plotter}}
+:END:
+
 :INTRO:
-#+TITLE: Muscle Plotter
+#+TITLE: Muscle-Plotter
 #+author:Doğa Yüksel
+#+LATEX: \frontmatter{}
 #+LATEX: \thispagestyle{empty}
 #+LATEX: \newpage{}
 #+LATEX: \begin{abstract}
 
-  This thesis explores creating an interactive pen and paper application using Electrical Muscle Stimulation. Using this application users can input and get meaningful expressive output from a computer system in a mobile context. Using pen and paper allows the user to engage in cognitively demanding tasks, such as solving math problems. In the simplest case user inputs the a math function and later muscle-plotter uses user's hand to plot the function. This example is further expanded into fitting lines through points, finding points of interests etc. These core components are demonstrated in six different applications from different domains.
+This thesis explores creating an interactive pen and paper application using Electrical Muscle Stimulation. Using this application users can input and get meaningful expressive output from a computer system in a mobile context. Using pen and paper allows the user to engage in cognitively demanding tasks, such as solving math problems. In the simplest case user inputs the a math function and later \app{} uses user's hand to plot the function. This example is further expanded into fitting lines through points, finding points of interests etc. These core components are demonstrated in six different applications from different domains.
 
-  Muscle-plotter is the first EMS system that produces spacial output, hence is more expressive then earlier systems proposed. In our user study, participants drew random plots within 4mm accuracy and preserved accuracy up to 3 cycles per cm.
+\App{} is the first EMS system that produces spacial output, hence is more expressive then earlier systems proposed. In our user study, participants drew random plots within 4mm accuracy and preserved accuracy up to 3 cycles per cm.
 
 #+LATEX: \end{abstract}
+#+LATEX: \thispagestyle{empty}
 #+LATEX: \newpage{}
+
 #+TOC: headlines 2
+#+LATEX: \thispagestyle{empty}
 #+LATEX: \newpage{}
+
 #+LATEX: \listoffigures{}
+#+LATEX: \thispagestyle{empty}
 #+LATEX: \newpage{}
 :END:
 
+#+LATEX: \mainmatter{}
 * Introduction
 ** An EMS and Anoto Pen based output system
 *** Allows users to a computer solely with pen and paper.
@@ -51,10 +73,13 @@
 
 
 ** Contribution
+
+   \App{} extends on this line of work by providing a more expressive EMS-based system, which is attained by persisting the EMS output onto the paper; this lends itself to more expressive and longer interactions than in previous EMS-based systems which, instead, communicate via discrete poses of the users’ body.
+
 *** Combining pen paper interactions with EMS is novel
 
 ** Thesis overview
-   This thesis will continue by detailing the Related work in the next chapter. It will then further investigate walkthroughs of the applications developed. In the following chapter, essential components of the implementation of muscle-plotter described. Then finally the thesis is concluded with a discussion.
+   This thesis will continue by detailing the Related work in the next chapter. It will then further investigate walkthroughs of the applications developed. In the following chapter, essential components of the implementation of \app{} described. Then finally the thesis is concluded with a discussion.
 
 \newpage{}
 
@@ -64,37 +89,48 @@
 ** Fundamentals
 
    # importance of sketching
-   Muscle-plotter builds upon pen and paper interactions, activities such as writing, note taking, sketching that draws parallel to human intellectual development. These activities are both essential for developing own ideas and communicating them. Ullman et al. have investigated how mechanical designers used drawings, and observed that it 'acts as an extended memory', helps analysing and simulating forms, enables communication of ideas \cite{ullman_importancedrawing}.
+   \App{} builds upon pen and paper interactions, activities such as writing, note taking, sketching that draws parallel to human intellectual development. These activities are both essential for developing own ideas and communicating them. Ullman et al. have investigated how mechanical designers used drawings, and observed that it 'acts as an extended memory', helps analysing and simulating forms, enables communication of ideas \cite{ullman_importancedrawing}.
 
    This thesis is further related to interactive pen-based interfaces, interactive systems based on exoskeletons or electrical muscle situmulators. Following chapter will further investigate examples from the state of the art research.
 
 ** Related Work
 
-*** Pen-based Devices
+*** Pen-based Interaction Techniques
+
     Interactive systems based on pen and paper has existed since the dawn of HCI. Already competent capabilities of pen and paper is further enchaced by intelligent systems and interaction techniques. Holding a pen is traditionally unimanual and that allows cooparative unimanual interactions through these interaction techniques \cite{Hinckley_coopbimanual, Guiard_asymetricbimanual}.
 
-**** Pen and paper is an important cognitive tool
+    Based of the principles mentioned above, interaction techniques developed of pen-based systems are as follows, connonically SketchPad \cite{sutherland_sketch}. Another example is `Teddy' which is a system that allows 3D modeling based on 2D sketching \cite{igarashi_teddy}. CrossY tackles the problem of interacting with GUI elements on a paper with a pen \cite{Apitz_crossy}. PapierCraft is another example where users can interact with the elements on paper using gestures such as pigtails, crop marks or underlines to acomplish actions such as copy & paste, linking, etc. \cite{liao_papiercraft}.
 
-**** Magnetic table
+    Several other studies extend the use of pen and paper to an other domain in particular to mathematics. Flatland \cite{mynatt_flatland}, for example, is a pen-based interface for whiteboards that supports basic math and map drawing. Also, both MathPad \cite{laviola_mathpad} and Hands-on Math \cite{zeleznik_hands} are systems that provide deeper support for understanding of mathematics.
 
+*** Haptic Output Systems
 
-*** Exoskeletons
+    Some researchers have taken tangible input further by using it not only for input but also for output. Notably the Actuated Workbench closed the loop for a tangible tabletop system by actuating the pucks using magnetic forces \cite{pangaro_actuated}. Another example for closing the loop comes from Gesture Output \cite{roudaut_gesture} in which the loop of touch gestures on a mobile phone is closed by actuating the user’s finger.
+
+    Most haptic systems with sufficient force to actuate users transmit forces from a motor to the user’s body via pulleys \cite{murayama_spidar} or exoskeletons \cite{tsetserukou_exointerfaces}. An exemplary device is the Phantom, a desktop sized robotic arm featuring a pen as its’ ending. Phantom or comparable systems have been used for pen-based menu interaction \cite{oakley_solving}, for rendering bar charts for visually impaired users \cite{wall_assessing}, and so forth.
+
+    Also using Actuated Workbench’s principle of magnetic forces as guides, Depend is a sketching system that uses a custom ferromagnetic surface to actuate a ballpoint pen \cite{yamaoka_depend}. The system is unfortunately stationary but in turn provides 2D actuation across the surface. A re-iteration of this interface, Depend 2.0 \cite{yamaoka_pen}, mitigates the mobility issue by using asymmetric vibration patterns to generate a virtual traction force which the user must respond to and turn in that direction voluntarily; this is based on the same underlying principle as Traxion \cite{rekimoto_traxion}.
 
 *** State of the art of interactive EMS Systems
     EMS has been around for over half a century. It is mainly used for medical applications. Over several years HCI community has grown interest. Following are several implementations related, worth mentioning.
 
-**** Affordance++ \cite{lopes_affordance++}
-**** Possesed Hand \cite{tamaki_possessedhand}
+    EMS is a technique originated in the field of medical reha- bilitation that applies electrical impulses to involuntarily contact muscle fibers; these impulses are delivered to the user’s muscles via electrodes attached to the skin \cite{Kruijff_hapticfeedback, strojnik_programmed}.
+
+    Recently, researchers in HCI started to build interactive systems based on EMS. The Possessed Hand \cite{tamaki_possessedhand}, for example, is a guidance device that helps users learn for example how to play a new instrument. Pedestrian Cruise Control informs the user’s leg muscles when to turn \cite{pfeiffer_cruise}. In contrast, \app{} actuates muscles directly, thereby eliminates the cognitive load involved by systems that merely inform users when to turn.
+
+    One motivation for the use of EMS in interactive system is that it allows replacing motors, thereby resulting in much smaller, even mobile form factors. Muscle-propelled force feedback, for example, uses EMS to provide directional force-feedback (left & right) in mobile gaming \cite{lopes_musclepropell}. Pose-IO is an interactive wearable system that allows for eyes-free input output with a computer system \cite{lopes_proprioceptive}. Affordance++ extends on this concept by allowing objects to actuate the user’s hand in order to make it manipulate the object properly \cite{lopes_affordance++}.
+
+\newpage{}
 
 
 * Muscle Plotter / Applications
 ** Overview
 
-   In the simplest case, applications for muscle-plotter are initiated by the user. To accomplish a successful interaction user takes turns with the computer, describes a domain and gets the answers later by applying the required motion. This thesis describes several applications implemented in this manner, within several domains and will further describe them as walkthroughs in the following section in detail.
+   In the simplest case, applications for \app{} are initiated by the user. To accomplish a successful interaction user takes turns with the computer, describes a domain and gets the answers later by applying the required motion. This thesis describes several applications implemented in this manner, within several domains and will further describe them as walkthroughs in the following section in detail.
 
 ** Walkthrough of Wind-Tunnel Simulation
 
-   Walkthrough of Windtunnel simulation implemented with muscle-plotter showcases a car designer sketching and analysing the aerodynamics of a car. The walkthrough includes several iterations on the sketch which allows the designer to understand implications of the intractive changes on the car sketch. As mentioned in the overview, the user starts the interaction by describing the domian, taking his or her turn. In this case user writes 'windtunnel' and draws crop marks in a suitable area on the paper. Crop-marks designate the input area for the sketch. Muscle-plotter recognizes the sketch and simulates the wind velocity field, further serves is as stream lines.
+   Walkthrough of Windtunnel simulation implemented with \app{} showcases a car designer sketching and analysing the aerodynamics of a car. The walkthrough includes several iterations on the sketch which allows the designer to understand implications of the intractive changes on the car sketch. As mentioned in the overview, the user starts the interaction by describing the domian, taking his or her turn. In this case user writes 'windtunnel' and draws crop marks in a suitable area on the paper. Crop-marks designate the input area for the sketch. \App{} recognizes the sketch and simulates the wind velocity field, further serves is as stream lines.
 
 ** Math function plots
 
@@ -106,30 +142,24 @@
 
 * Implementation
 ** Overview
-   Current implementation of muscle-plotter uses an Anoto Digitizer Pen & Paper for input and a medically compliant 8-channel portable EMS simulator (from HASOMED \cite{hasomed}) for output. Tracking data from the Anoto pen is relayed through a windows machine to the python back-end running on a Mac OSX. Communication between the EMS machine and the python back end takes place through the custom serial protocol via USB. Current implementation only uses 4 channels of the EMS device. This setup can be miniaturized with a hardware similar to the one proposed in Proprioceptive Interaction \cite{lopes_proprioceptive}.
-
+   Current implementation of \app{} uses an Anoto Digitizer Pen & Paper for input and a medically compliant 8-channel portable EMS simulator (from HASOMED \cite{hasomed}) for output. Tracking data from the Anoto pen is relayed through a windows machine to the python back-end running on a Mac OSX. Communication between the EMS machine and the python back end takes place through the custom serial protocol via USB. Current implementation only uses 4 channels of the EMS device. This setup can be miniaturized with a hardware similar to the one proposed in Proprioceptive Interaction \cite{lopes_proprioceptive}.
 
 #+CAPTION:    System Overview - Miniturized
 #+LABEL:      fig:suggested-system-overview-miniture
 #+ATTR_LaTeX: :width 90mm
 [[./images/system.jpg]]
 
-
    Following chapter will further describe the implementation in detail. First, the input module is going to be described, later output of the system will be detailed. Finally the back-end that orchestrates two will be extensively analyzed.
 
 ** Tracking System
     Input to the system is handled by the Anoto Digitizer Pen & Paper that acts as a precise tracker \cite{anoto}. the Anoto paper has a patented dot pattern that encodes the location data for each point. The accuracy of the location is quite high where each millimeter has 30 unique points. The camera on the pen scans and returns as long as the pen is pushing to the paper. The angle of the pen influences the quality of tracking. The users are advised to hold the pen at an upright angle. It is important to mention that there is constant delay as the pen captures and analyses this image. This delay has a detrimental effect on the performance of the control loop. It will be further discussed later in this chapter. In our current implementation, there is a Windows server running the drives provided by the Anoto company relaying data to the back-end server. The details of these drivers (from the vendor we’inspire) is confined by a Non disclosure agreement.
 
-
 The connection from Anoto Window API and the python backend is done via Open Sound Control (OSC). Each observation of the Anoto Pen is packaged and contains a location, nature of the observation ( pen up, pen down and drag) and a timestamp. Time stamp receieved is used for speed calculations. OSC packets are relayed to the python server through Ethernet.
 
-
 ** EMS Machine and Pad Placement
-    EMS machine by HASOMED is capable of generating a stimulation up to 400Hz. In our implementation at a given time two channels are active at most, as a result, each muscle shares the capacity where each is stimulated with 200Hz. Furthermore the machine allows to control the amplitude and duty cycle of the signal. The system uses amplitudes ranging from 6mA to 16mA based on calibration results. Duty cycle can range between 20\micro{}s to 500\micro{}s, which provides a very large dynamic range of modulation. Muscle-plotter mainly controls duty cycles to achieve its accuracy. The amplitude is temporarily raised to boost actuation in certain conditions that will be described in the control loop section.
-
+    EMS machine by HASOMED is capable of generating a stimulation up to 400Hz. In our implementation at a given time two channels are active at most, as a result, each muscle shares the capacity where each is stimulated with 200Hz. Furthermore the machine allows to control the amplitude and duty cycle of the signal. The system uses amplitudes ranging from 6mA to 16mA based on calibration results. Duty cycle can range between 20\micro{}s to 500\micro{}s, which provides a very large dynamic range of modulation. \App{} mainly controls duty cycles to achieve its accuracy. The amplitude is temporarily raised to boost actuation in certain conditions that will be described in the control loop section.
 
     Medical grade EMS Machine produced by HASOMED is used to stimulate the arm of the user. In the current implementation 4 channels of the machine is connected to the arm of the user. Each channel is responsible for a different axis of motion. For a right handed setup; flexor carpi radialis moves the pen left, extensor carpi radialis brevis and partially flexor digitorum moves the pen right. Flexor carpi ulnaris is used to push the pen onto the paper, which in return helps to reduce oscillations and slow down. Finally extensor carpi radialis longus lifts the pen up from the paper.
-
 
 #+CAPTION:    Pad Placement - Flexor
 #+LABEL:      fig:pad-placement-flexor
@@ -141,46 +171,38 @@ The connection from Anoto Window API and the python backend is done via Open Sou
 #+ATTR_LaTeX: :width 90mm
 [[./images/extensor.jpg]]
 
-
 ** Back-end System
    A back-end manages the connection to the EMS machine and the Anoto pen.
 
 *** Calibration Procedure
-    Calibration is an important aspect current EMS applications. Muscle-plotter requires meticulus calibration to be suitable for the user. Calibration generally takes place in three step, base on the comfort levels of the user.
+    Calibration is an important aspect current EMS applications. \App{} requires meticulus calibration to be suitable for the user. Calibration generally takes place in three step, base on the comfort levels of the user.
 
-
-**** 1) Comfortable actuation current
+**** Comfortable actuation current
      As mentioned in above, the throughput of the EMS as motion dramatically changes based on the anathomy of the users arm. Several factors, such as muscle size, skin thickness and hair density causes this variation. The implemantation includes a script that step by step sweeps up the intensity of the milliamps aplied to each side (left and right). The experimenter observes the minimum current that starts the motion and a the maximum current that results in a significant motion but still is not painfull. These values determine the range of vallues that can be used on the next step.
 
-**** 2) Slope gradients
-     After the comfortable EMS range for the user is determined, user is asked to draw straight lines along the paper in the posture required to use muscle-plotter. At this calibration step, calibration script actuates user's arm with random pairs of currents on each side. The script records the resulting angle after actuation. After desired number of trial pairs final result is observed on a two dimentional plot. To conclude this step, three pairs that result in maximum variation between resulting slopes are chosen for each side. EMS is efficient in creating jerky motions, however slow controlled motions are harder to generate. Actuation both sides, using bith opposing muscles, allows muscle-plotter to increase control on the wrist. Following figure shows the visualisation of these slopes.
-
+**** Slope gradients
+     After the comfortable EMS range for the user is determined, user is asked to draw straight lines along the paper in the posture required to use \app{}. At this calibration step, calibration script actuates user's arm with random pairs of currents on each side. The script records the resulting angle after actuation. After desired number of trial pairs final result is observed on a two dimentional plot. To conclude this step, three pairs that result in maximum variation between resulting slopes are chosen for each side. EMS is efficient in creating jerky motions, however slow controlled motions are harder to generate. Actuation both sides, using bith opposing muscles, allows \app{} to increase control on the wrist. Following figure shows the visualisation of these slopes.
 
 [figure: visualisation of slopes]
 
-**** 3) Brake Calibration
-     Muscle plotter has two modes for brakes.
-
+**** Brake Calibration
+     \App{} has two modes for brakes.
 
 *** Control Loop
-    Control loop of muscle-plotter uses a series of strategies based on the state of the user's hand motions and the target position. Possible situations and associated strategies are futher illustrated in the following parts. Key principles are highlighted in the in the following figure.
-
+    Control loop of \app{} uses a series of strategies based on the state of the user's hand motions and the target position. Possible situations and associated strategies are futher illustrated in the following parts. Key principles are highlighted in the in the following figure.
 
 #+CAPTION:    Control Loop
 #+LABEL:      fig:control-loop
 #+ATTR_LaTeX: :width 90mm
 [[./images/control-loop.png]]
 
-
 **** Model of the Human Wrist
-     Muscle-plotter uses a simple model of the human arm to manage the motion of the wrist. The wrist is assumed to be a level attached to two strings. The motion takes place when tension on one of the strings changes as described by the `equilibrium point model' \cite{schmidt_motorcontrol}. In the case of muscle-plotter situmulation through nerves results in contraction. To achieve a motion, desired side should be contracted more then the opposing side. As a result same target position can be reached with different configurations of contractions on opposing muscles. Any given static position of the wrist is an equilibrium of tension caused by opposing muscles \cite{schmidt_motorcontrol}. Muscle-plotter relies on these principles to achieve the accuracy it needs as both muscles on opposing sides are sequentially situmulated. In other words intended position of the arm can be reached by applying different pairs of impulsed to flexor and extensor muscles.
-
+     \App{} uses a simple model of the human arm to manage the motion of the wrist. The wrist is assumed to be a level attached to two strings. The motion takes place when tension on one of the strings changes as described by the `equilibrium point model' \cite{schmidt_motorcontrol}. In the case of \app{} situmulation through nerves results in contraction. To achieve a motion, desired side should be contracted more then the opposing side. As a result same target position can be reached with different configurations of contractions on opposing muscles. Any given static position of the wrist is an equilibrium of tension caused by opposing muscles \cite{schmidt_motorcontrol}. \App{} relies on these principles to achieve the accuracy it needs as both muscles on opposing sides are sequentially situmulated. In other words intended position of the arm can be reached by applying different pairs of impulsed to flexor and extensor muscles.
 
 #+CAPTION:    Equilibrium point model
 #+LABEL:      fig:Equilibrium point model
 #+ATTR_LaTeX: :width 90mm
 [[./images/spring-mass-model.png]]
-
 
 **** Targeting and travel
 
@@ -190,15 +212,13 @@ The connection from Anoto Window API and the python backend is done via Open Sou
 
 *** Higher level API for Flow Control
 
-   Canvas elements enable the user to control the flow and structure of muscle-plotter's output. We have designed several widgets for different data structures. Scalar values are represented on a line, they consist of a single axis. Functions are represented in a two dimensional area, as they exist on two axes. These widgets on paper, what ever the underlying data structure is, have some characteristics in common. All the canvas elements define an actual space on the paper with designated areas for interaction. These elements have essentials to be initialized, as well as optional modifications to shape and control the output. These widgets determine where electronic muscle stimulation is going to active, which in return serves as starting point for the plots. In the following chapter, we introduce the widgets based on their underlying data structure, describing the methods of initiation and use. All elements are drawn onto the paper, it is important to remind that they persist in an inactive state even when the user is working on an other part of the paper. They can be reused with appropriate commands.
+   Canvas elements enable the user to control the flow and structure of \app{}'s output. We have designed several widgets for different data structures. Scalar values are represented on a line, they consist of a single axis. Functions are represented in a two dimensional area, as they exist on two axes. These widgets on paper, what ever the underlying data structure is, have some characteristics in common. All the canvas elements define an actual space on the paper with designated areas for interaction. These elements have essentials to be initialized, as well as optional modifications to shape and control the output. These widgets determine where electronic muscle stimulation is going to active, which in return serves as starting point for the plots. In the following chapter, we introduce the widgets based on their underlying data structure, describing the methods of initiation and use. All elements are drawn onto the paper, it is important to remind that they persist in an inactive state even when the user is working on an other part of the paper. They can be reused with appropriate commands.
 
 **** Single axis elements
 
-    These widgets are designed to output scalar values that are projected onto a line. Resulting value is represented in spacial reference to the domain of the axis draw for the widget. These can be used for the output of a single class as well as to compare different classes in the same domain. Output domain can range between Boolean to real numbers. Limitations imposed by muscle-plotter determines the sense making possibilities and the fidelity of the output. We have some design principles that allows the user to modify the axis to achieve reasonable outputs.
-
+    These widgets are designed to output scalar values that are projected onto a line. Resulting value is represented in spacial reference to the domain of the axis draw for the widget. These can be used for the output of a single class as well as to compare different classes in the same domain. Output domain can range between Boolean to real numbers. Limitations imposed by \app{} determines the sense making possibilities and the fidelity of the output. We have some design principles that allows the user to modify the axis to achieve reasonable outputs.
 
     To initiate a single axis element, after writing the designated command to initiate, user draws a line in any orientation on the paper. By default, south-west facing edge of the line is assigned to the minimum value, while north-east facing edge is assigned to the maximum value. If the minimum and maximum values are not defined in the next optional step, default values for the specific domain is used. For example 0 to 1 in drag coefficient comparison, or the x value of the maximum of a plot would be projected on to the domain represented by the plot itself in maximum analysis of a function. The axis can be scaled by the user simply by annotating the maximum and/or the minimum value.
-
 
     After all the essentials are placed on the paper, the scale component is ready to use. It starts of by user placing the tip of the pen at the beginning of the scale. If the pen lands in the accepted proximity of the origin, ems channels on both sides (left and right presented earlier) of the arm are activated at a tactile feedback level that doesn't actuate the user. This output only signifies that an output interaction is taking place. At this point, user starts dragging the pen keeping the tip on the paper to the end of the axis line. The back-end system, tracks user's motion and triggers a quick nudge followed by a pulse on the upper channel. This gesture leaves a visible trace behind on the axis, where desired value is projected on the the axis on the paper. The user can observe and annotate the value, as the widget is not active after a successful output procedure.
 
@@ -206,24 +226,17 @@ The connection from Anoto Window API and the python backend is done via Open Sou
 
     Double axis elements have a major and a minor axis. The user drags the pen along the major axis, while the system takes the tip of the pen to the value corresponding on the minor axis with respect to the specific location on the major axis.
 
-
     As we have presented on the walk-through, our main contribution comes from the spatial expressivity of plotting one-to-functions, such as streamlines of the wind-tunnel or the speed values for a defined cross-section. For both use cases the space defined on the paper is same in nature, while the tools to define are domain dependent. In the wind-tunnel case, there exists a line for every point on the vertical start axis as stream lines result from a single solution of a vector field. On the other hand for the speed values line example, there exists one unique line, that the user can plot.
 
-
     In order to initiate a multiple axis plot, the user has to define a space on the paper. This is done by drawing two perpendicular lines representing the axes or crop-marks that encompasses the area. In case of a function plot, after defining axis lines user can optionally update the domain. Otherwise, defaults for the specific example is used just as defined in single axis examples.
-
    
-    In a similar fashion to scales, the user should start at a specific position to instantiate the plotting procedure. In a generic plot, the output can be located in different quadrants. We have defined a method for the user to locate it to start plotting. Following interactions to find plot starting points are similar in nature to the scalar interactions described above. In the first case, where there is a zero crossing on the negative side of the major axis, user places the tip of the pen to the far left (negative, west) of the horizontal, major, dragging axis. The paper should have been rotated to a comfortable angle for a convenient plot. Then the user follows the axis, when zero crossing is reached, muscle-plotter takes over the control of the arm to output the rest of the plot. If necessary, the user can rotate the paper 180 degrees and plot the negative side of the desired line.
+    In a similar fashion to scales, the user should start at a specific position to instantiate the plotting procedure. In a generic plot, the output can be located in different quadrants. We have defined a method for the user to locate it to start plotting. Following interactions to find plot starting points are similar in nature to the scalar interactions described above. In the first case, where there is a zero crossing on the negative side of the major axis, user places the tip of the pen to the far left (negative, west) of the horizontal, major, dragging axis. The paper should have been rotated to a comfortable angle for a convenient plot. Then the user follows the axis, when zero crossing is reached, \app{} takes over the control of the arm to output the rest of the plot. If necessary, the user can rotate the paper 180 degrees and plot the negative side of the desired line.
 
+    In the case of in the case of no zero crossing before the origin, \app{} signals a pen-up before first scanning starts. At this point the user knows that there isn't a zero crossing between 3rd and 4th quadrants. The step  user should do is to scan the y axis, to find any y-crossings. Ideally user starts from the minimum point of the minor axis and drags the tip of the pen to the maximum point of the axis. If there is a y-crossing of the plot, \app{} assigns a pen-down on the target location. From this point on the user follows parallel to the major axis to continue as a normal plot. The negative side of the function can be plotted by rotating the paper in a similar manner to the first case.
 
-    In the case of in the case of no zero crossing before the origin, muscle-plotter signals a pen-up before first scanning starts. At this point the user knows that there isn't a zero crossing between 3rd and 4th quadrants. The step  user should do is to scan the y axis, to find any y-crossings. Ideally user starts from the minimum point of the minor axis and drags the tip of the pen to the maximum point of the axis. If there is a y-crossing of the plot, muscle-plotter assigns a pen-down on the target location. From this point on the user follows parallel to the major axis to continue as a normal plot. The negative side of the function can be plotted by rotating the paper in a similar manner to the first case.
-
-
-    In the last case, when there is no zero crossing between 3rd and 4h quadrants and there is no y-axis intersection, the second axis find attempt of the user is interrupted by a pen-up as the tip of the pen is place on the minor-axis, (y-axis). The users follows over the major axis to find the crossing there. Muscle-plotter takes over control as the crossing is reached. The plot can be completed in a similar manner by rotating it as described in previous cases.
-
+    In the last case, when there is no zero crossing between 3rd and 4h quadrants and there is no y-axis intersection, the second axis find attempt of the user is interrupted by a pen-up as the tip of the pen is place on the minor-axis, (y-axis). The users follows over the major axis to find the crossing there. \app{} takes over control as the crossing is reached. The plot can be completed in a similar manner by rotating it as described in previous cases.
 
 ***** (did we ever talk about cases where there is no crossing at all? i.e. (1/x))
-
 
 **** function definitions
 
@@ -251,21 +264,18 @@ The connection from Anoto Window API and the python backend is done via Open Sou
 ** Can't consider as 2D drawing
 ** Our implementation is a steering action
 
-** Design Considerations for Muscle-Plotter
+** Design Considerations for \App{}
 *** Discoverability
-    Muscle-plotter provides an interactive environment using user initiated components on paper. This approach differs from previous interactive systems as the user is expected to have a prior knowledge of the provided language. In many cases our interactions start with an empty sheet of paper. On the other hand screen based interactive systems provide discoverability as the system itself has a wider channel for output, such applications can start with a tutorial expecting the user to have zero prior knowledge. Designing applications for muscle-plotter should consider this to provide an engaging experience. According to the domain of the application, command keywords could be flexible and adaptive, moreover similar to a natural language.
-
+    \App{} provides an interactive environment using user initiated components on paper. This approach differs from previous interactive systems as the user is expected to have a prior knowledge of the provided language. In many cases our interactions start with an empty sheet of paper. On the other hand screen based interactive systems provide discoverability as the system itself has a wider channel for output, such applications can start with a tutorial expecting the user to have zero prior knowledge. Designing applications for \app{} should consider this to provide an engaging experience. According to the domain of the application, command keywords could be flexible and adaptive, moreover similar to a natural language.
 
 *** User Feedback
-    Usabilty theory for interactive systems inform the user about the state of the world. Muscle-plotter is able to provide positive and negative feedback in a non intrusive way with distinct gestures. Interactions with muscle-plotter should make use of feedback messages, in order to provide the user with an awareness of the state of system. As the interactions happen on a piece of paper, certain locations marked by the user, should behave in a consistent way. The user can approach a plot for several actions, such as actual plotting, zooming into a certain section, re-labeling the axis or selecting a region for further analysis.
-
+    Usabilty theory for interactive systems inform the user about the state of the world. \App{} is able to provide positive and negative feedback in a non intrusive way with distinct gestures. Interactions with \app{} should make use of feedback messages, in order to provide the user with an awareness of the state of system. As the interactions happen on a piece of paper, certain locations marked by the user, should behave in a consistent way. The user can approach a plot for several actions, such as actual plotting, zooming into a certain section, re-labeling the axis or selecting a region for further analysis.
 
 *** Widget size and expected error
-    Muscle-plotter has a limited accuracy due to the limitations of EMS. Interactive elements on paper should be scaled at a size greater that leaves the expected error insignificant. For example, a continuous scale described previously should verify that the output will provide a significant answer.
-
+    \App{} has a limited accuracy due to the limitations of EMS. Interactive elements on paper should be scaled at a size greater that leaves the expected error insignificant. For example, a continuous scale described previously should verify that the output will provide a significant answer.
 
 *** Output Persistence and clutter on paper
-    The output of muscle plotter is persistent on paper. When the user draws a certain plot on a given axis, the output stays on the paper way longer then the length of the interaction. In an example of function plotting if the outputs were made and their essential characteristics are not different enough, the answers can be mixed up. As a solution, the user has the flexibility to annotate the output. This would allow the number of distinct traces that can be recalled later on. However, after a certain number of plots, the intelligibility would diminish. This is an inherent problem with writing on the paper, where the user would extend to the empty space below or to the next page. Muscle plotter widgets are reusable, however they are also easy to initiate.
+    The output of \app{} is persistent on paper. When the user draws a certain plot on a given axis, the output stays on the paper way longer then the length of the interaction. In an example of function plotting if the outputs were made and their essential characteristics are not different enough, the answers can be mixed up. As a solution, the user has the flexibility to annotate the output. This would allow the number of distinct traces that can be recalled later on. However, after a certain number of plots, the intelligibility would diminish. This is an inherent problem with writing on the paper, where the user would extend to the empty space below or to the next page. \App{} widgets are reusable, however they are also easy to initiate.
 
 
 * Conclusion
@@ -275,4 +285,6 @@ The connection from Anoto Window API and the python backend is done via Open Sou
 
 
 #+LATEX: \newpage{}
+#+LATEX: \backmatter{}
+#+LATEX: \thispagestyle{empty}
 #+LATEX: \printbibliography{}
