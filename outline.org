@@ -1,6 +1,6 @@
 :SETUP:
-#+OPTIONS: toc:nil date:nil
-#+LATEX_CLASS: koma-article
+#+OPTIONS: toc:nil date:nil title:nil
+#+LATEX_CLASS: koma-book
 #+LATEX_CLASS_OPTIONS: [a4paper, 12pt, twoside]
 #+LATEX_HEADER: \usepackage[hmarginratio=1:1]{geometry}
 #+LATEX_HEADER: \usepackage{mathptmx}
@@ -11,37 +11,36 @@
 #+LaTeX_HEADER: \usepackage[backend=bibtex,sorting=none]{biblatex}
 #+LaTeX_HEADER: \addbibresource{/Users/doga/.org/bibtex/file-1.bib}
 :END:
-
 :HEADERFOOTER:
-#+LATEX_HEADER: \usepackage{scrpage2}
-#+LATEX_HEADER: \pagestyle{scrheadings}
-#+LATEX_HEADER: \ohead{muscle-plotter}
+#+LATEX_HEADER: \usepackage{scrlayer-scrpage}
+#+LATEX_HEADER: \ohead{Muscle-plotter}
 #+LATEX_HEADER: \ihead{Doğa Yüksel}
 #+LATEX_HEADER: \ofoot[]{\thepage}
 #+LATEX_HEADER: \ifoot{Master Thesis, TU Berlin, Fachgebiet X, 2016}
 :END:
-
 :APP_ALIAS:
 #+LATEX_HEADER: \newcommand{\app}{\emph{muscle-plotter}}
 #+LATEX_HEADER: \newcommand{\App}{\emph{Muscle-plotter}}
 :END:
 
 :INTRO:
+#+LATEX: \frontmatter{}
 #+TITLE: Muscle-Plotter
 #+author:Doğa Yüksel
-#+LATEX: \frontmatter{}
+#+LATEX: \maketitle{}
 #+LATEX: \thispagestyle{empty}
 #+LATEX: \newpage{}
-#+LATEX: \begin{abstract}
+
+Abstract
 
 This thesis explores creating an interactive pen and paper application using Electrical Muscle Stimulation. Using this application users can input and get meaningful expressive output from a computer system in a mobile context. Using pen and paper allows the user to engage in cognitively demanding tasks, such as solving math problems. In the simplest case user inputs the a math function and later \app{} uses user's hand to plot the function. This example is further expanded into fitting lines through points, finding points of interests etc. These core components are demonstrated in six different applications from different domains.
 
 \App{} is the first EMS system that produces spacial output, hence is more expressive then earlier systems proposed. In our user study, participants drew random plots within 4mm accuracy and preserved accuracy up to 3 cycles per cm.
 
-#+LATEX: \end{abstract}
 #+LATEX: \thispagestyle{empty}
 #+LATEX: \newpage{}
 
+#+LATEX: \renewcommand{\contentsname}{Table of Contents}
 #+TOC: headlines 2
 #+LATEX: \thispagestyle{empty}
 #+LATEX: \newpage{}
@@ -284,7 +283,8 @@ The connection from Anoto Window API and the python backend is done via Open Sou
 *** Improve recognition
 
 
-#+LATEX: \newpage{}
+
 #+LATEX: \backmatter{}
-#+LATEX: \thispagestyle{empty}
+#+LATEX: \newpage{}
 #+LATEX: \printbibliography{}
+
