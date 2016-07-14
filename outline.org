@@ -119,14 +119,37 @@ This thesis explores creating an interactive pen and paper application using Ele
     One motivation for the use of EMS in interactive system is that it allows replacing motors, thereby resulting in much smaller, even mobile form factors. Muscle-propelled force feedback, for example, uses EMS to provide directional force-feedback (left & right) in mobile gaming \cite{lopes_musclepropell}. Pose-IO is an interactive wearable system that allows for eyes-free input output with a computer system \cite{lopes_proprioceptive}. Affordance++ extends on this concept by allowing objects to actuate the user’s hand in order to make it manipulate the object properly \cite{lopes_affordance++}.
 
 
-* Muscle Plotter / Applications
+* Applications
 ** Overview
 
-   In the simplest case, applications for \app{} are initiated by the user. To accomplish a successful interaction user takes turns with the computer, describes a domain and gets the answers later by applying the required motion. This thesis describes several applications implemented in this manner, within several domains and will further describe them as walkthroughs in the following section in detail.
+   In the simplest case, applications for \app{} are initiated by the user. To interact user takes turns with the computer, describes a domain and gets the answers later by applying the required motion. This thesis describes several applications implemented in this manner, within several domains and will further describe them as walkthroughs in the following section in detail.
 
-** Walkthrough of Wind-Tunnel Simulation
+** TODO Walkthrough of Wind-Tunnel Simulation
 
-   Walkthrough of Windtunnel simulation implemented with \app{} showcases a car designer sketching and analysing the aerodynamics of a car. The walkthrough includes several iterations on the sketch which allows the designer to understand implications of the intractive changes on the car sketch. As mentioned in the overview, the user starts the interaction by describing the domian, taking his or her turn. In this case user writes 'windtunnel' and draws crop marks in a suitable area on the paper. Crop-marks designate the input area for the sketch. \App{} recognizes the sketch and simulates the wind velocity field, further serves is as stream lines.
+   Following walkthrough with \app{} showcases a designer analysing the aerodynamic properties of a car sketch. Walkthrough demonstrates the interaction principles of \app{} as it allows the designer to understand implications of the changes on the car form.
+
+   User starts the interaction by selecting a domain from \app{}. This entry and the following sequence of actions contitude as input and prepares \app{} to output. In this case user writes the keyword, 'windtunnel'. Muscle-plotter processes input for pottential keywords to provide the transition. Tessarect [ cite tessaret!!! ] classifies the input, later to match to a keyword in a dictionary.
+
+   #+CAPTION: Windtunnel, Crop-Marks, Sketch
+   #+NAME: fig:windtunnel1
+   #+ATTR_LaTeX: width=90mm
+   [[./images/intro.jpg]]
+
+   After writing the keyword, 'windtunnel, user should proceed to define the boundaries of the simulation area. As displayed in the figure [[fig:windtunnel1]] user defines this two dimentinal space with crop marks. At this stage the \app{} is state stores windtunnel as an object with the designated canvas. Input from Anoto Pen is further processed based on this context defined in the state. As the users sketches the car, Anoto Points are stored and contionusly processed to construct the outlines of the shape which later is used to create streamlines. 
+
+   After input requirements are satistified, user can interact with the canvas to receive an output. By design \app{}'s windtunnel defines left boundry to be the entry point of the wind particals for the simulation. To plot a streamline user puts the Anoto pen on the left of the canvas and starts pulling the arm thus the pen tip perpendicular to the entry axis. During this motion, \app{} steers the wrist of the user to plot the trajectory of a particle in the windtunnel. After plotting several times starting from different locations on the vertical axis, user can see an overview of the sketch's aerodynamic behaivour through the field of streamlines. Figure [[fig:windtunnel2]] shows the interactions upto this point.
+
+   #+CAPTION: Plotted Streamlines
+   #+NAME: fig:windtunnel2
+   #+ATTR_LaTeX: width=90mm
+   [[./images/intro.jpg]]
+
+   As wintunnel canvas exists as an object on paper, user can change contexts by using spacial quantities of the paper. User starts another windtunnel object by writing the keyword followed by crop marks to define the canvas. User continues the interaction by making a new sketch for second car form to be simulated. In proximity of the new canvas, user plots the field for the windtunnel. Figure [[fig:windtunnel3]] shows 2 windtunnel objects.
+
+   #+CAPTION: 2 Object on Paper
+   #+NAME: fig:windtunnel3
+   #+ATTR_LaTeX: width=90mm
+   [[./images/intro.jpg]]
 
 ** Math function plots
 
