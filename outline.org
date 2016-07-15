@@ -86,7 +86,7 @@ This thesis explores creating an interactive pen and paper application using Ele
 
 ** Fundamentals
 
-   \App{} builds upon pen and paper interactions, activities such as writing, note taking, sketching that is essential for human intellect. These activities are both essential for developing own ideas and communicating and building upon them. Ullman et al. have investigated how mechanical designers used drawings, and observed that it 'acts as an extended memory', helps analysing and simulating forms, and enables communication of ideas \cite{ullman_importancedrawing}.
+   \App{} builds upon pen and paper interactions, activities such as writing, note taking, sketching that is essential for human intellect. These activities form the pillars for developing own ideas, communicating and building upon them. Ullman et al. have investigated how mechanical designers used drawings, and observed that it 'acts as an extended memory', helps analysing and simulating forms, and enables communication of ideas \cite{ullman_importancedrawing}.
 
    This thesis is further related to interactive pen-based interfaces, interactive systems based on exoskeletons or electrical muscle situmulators. Following chapter will further investigate examples from the state of the art research.
 
@@ -150,10 +150,10 @@ This thesis explores creating an interactive pen and paper application using Ele
    #+ATTR_LaTeX: width=90mm
    [[./images/intro.jpg]]
 
-** Math function plots
 
-** Function Plotters in other contexts
+** TODO Function Plotters in other contexts
 *** RC Filter
+*** Math function plots
 *** Multiple choice menus
 *** Calculating integrals
 
@@ -258,11 +258,12 @@ The connection from Anoto Window API and the python backend is done via Open Sou
 
 **** function definitions
 
-*** Recognition System
+
+*** TODO Recognition System
     Image recognition -> OpenCV for sketches
     Text recognition -> Tessarect - OCR
 
-*** Application Specific Implementations
+*** TODO Application Specific Implementations
 **** Mathematical Applications
 **** RC Filter Response
 **** Statistic Applications
@@ -271,16 +272,17 @@ The connection from Anoto Window API and the python backend is done via Open Sou
 
 
 * User Study
-** Study design
-** Verify accuracy of the actuation method
-** Sample Curves chosen to understand the limitation
+** TODO Study design
+** TODO Verify accuracy of the actuation method
+** TODO Sample Curves chosen to understand the limitation
 
 
 * Discussion
-** Consider user study
-** Current implementation lacks control that allows actual drawing
-** Can't consider as 2D drawing
-** Our implementation is a steering action
+** TODO Consider user study
+*** Current implementation lacks control that allows actual drawing
+*** Can't consider as 2D drawing
+*** Our implementation is a steering action
+
 
 ** Design Considerations for \App{}
 *** Discoverability
@@ -296,7 +298,7 @@ The connection from Anoto Window API and the python backend is done via Open Sou
     The output of \app{} is persistent on paper. When the user draws a certain plot on a given axis, the output stays on the paper way longer then the length of the interaction. In an example of function plotting if the outputs were made and their essential characteristics are not different enough, the answers can be mixed up. As a solution, the user has the flexibility to annotate the output. This would allow the number of distinct traces that can be recalled later on. However, after a certain number of plots, the intelligibility would diminish. This is an inherent problem with writing on the paper, where the user would extend to the empty space below or to the next page. \App{} widgets are reusable, however they are also easy to initiate.
 
 
-* Conclusion
+* TODO Conclusion
 ** Future Work
 *** Evaluate applications 
 *** Improve recognition
