@@ -86,8 +86,7 @@ This thesis explores creating an interactive pen and paper application using Ele
 
 ** Fundamentals
 
-   # importance of sketching
-   \App{} builds upon pen and paper interactions, activities such as writing, note taking, sketching that draws parallel to human intellectual development. These activities are both essential for developing own ideas and communicating them. Ullman et al. have investigated how mechanical designers used drawings, and observed that it 'acts as an extended memory', helps analysing and simulating forms, and enables communication of ideas \cite{ullman_importancedrawing}.
+   \App{} builds upon pen and paper interactions, activities such as writing, note taking, sketching that is essential for human intellect. These activities are both essential for developing own ideas and communicating and building upon them. Ullman et al. have investigated how mechanical designers used drawings, and observed that it 'acts as an extended memory', helps analysing and simulating forms, and enables communication of ideas \cite{ullman_importancedrawing}.
 
    This thesis is further related to interactive pen-based interfaces, interactive systems based on exoskeletons or electrical muscle situmulators. Following chapter will further investigate examples from the state of the art research.
 
@@ -128,7 +127,7 @@ This thesis explores creating an interactive pen and paper application using Ele
 
    Following walkthrough with \app{} showcases a designer analysing the aerodynamic properties of a car sketch. Walkthrough demonstrates the interaction principles of \app{} as it allows the designer to understand implications of the changes on the car form.
 
-   User starts the interaction by selecting a domain from \app{}. This entry and the following sequence of actions contitude as input and prepares \app{} to output. In this case user writes the keyword, 'windtunnel'. Muscle-plotter processes input for pottential keywords to provide the transition. Tessarect [ cite tessaret!!! ] classifies the input, later to match to a keyword in a dictionary.
+   User starts the interaction by selecting a domain from \app{}. This entry and the following sequence of actions contitude as input and prepares \app{} to output. In this case user writes the keyword, 'windtunnel'. Muscle-plotter processes input for pottential keywords to provide the transition. Tessarect \cite{tesser_ocr} classifies the input, later to match to a keyword in a dictionary.
 
    #+CAPTION: Windtunnel, Crop-Marks, Sketch
    #+NAME: fig:windtunnel1
