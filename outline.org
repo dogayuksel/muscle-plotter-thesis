@@ -121,32 +121,55 @@ This thesis explores creating an interactive pen and paper application using Ele
 * Applications
 ** Overview
 
-   In the simplest case, applications for \app{} are initiated by the user. To interact user takes turns with the computer, describes a domain and gets the answers later by applying the required motion. This thesis describes several applications implemented in this manner, within several domains and will further describe them as walkthroughs in the following section in detail.
+   In the simplest case, applications for \app{} are initiated by the user, otherwise the setup can be standard pen paper activities mentioned earlier. To start an interaction user takes turns with the computer, describes a domain and gets the answers later by applying the required motion. This thesis describes several applications implemented in this manner, within several domains and will further describe them as walkthroughs in the following section in detail.
 
 ** TODO Walkthrough of Wind-Tunnel Simulation
 
-   Following walkthrough with \app{} showcases a designer analysing the aerodynamic properties of a car sketch. Walkthrough demonstrates the interaction principles of \app{} as it allows the designer to understand implications of the changes on the car form.
+   Following walkthrough with \app{} showcases a designer analysing the aerodynamic properties of a car sketch. Walkthrough demonstrates the interaction principles of \app{} as it allows the designer to understand implications of the changes of the car form.
 
-   User starts the interaction by selecting a domain from \app{}. This entry and the following sequence of actions contitude as input and prepares \app{} to output. In this case user writes the keyword, 'windtunnel'. Muscle-plotter processes input for pottential keywords to provide the transition. Tessarect \cite{tesser_ocr} classifies the input, later to match to a keyword in a dictionary.
+   User starts the interaction by selecting a domain from \app{}. This entry and the following sequence of actions contitude as input and prepares \app{} for output. In this case user writes the keyword, 'windtunnel'. Muscle-plotter processes input for pottential keywords to provide the transition. Tessarect \cite{tesser_ocr} classifies the input, later to match to a keyword in a dictionary.
 
    #+CAPTION: Windtunnel, Crop-Marks, Sketch
    #+NAME: fig:windtunnel1
    #+ATTR_LaTeX: width=90mm
    [[./images/intro.jpg]]
 
-   After writing the keyword, 'windtunnel, user should proceed to define the boundaries of the simulation area. As displayed in the figure [[fig:windtunnel1]] user defines this two dimentinal space with crop marks. At this stage the \app{} is state stores windtunnel as an object with the designated canvas. Input from Anoto Pen is further processed based on this context defined in the state. As the users sketches the car, Anoto Points are stored and contionusly processed to construct the outlines of the shape which later is used to create streamlines. 
+   After writing the keyword, 'windtunnel, user should proceed to define the boundaries of the simulation area. As displayed in the figure [[fig:windtunnel1]] user defines this two dimentinal space with crop marks. At this stage the \app{} stores windtunnel as an object with the designated canvas. Input from Anoto Pen is further processed based on this context defined in the state. As the users sketches the car, Anoto Points are stored and contionusly processed to construct the outlines of the shape which later is used to create streamlines.
 
-   After input requirements are satistified, user can interact with the canvas to receive an output. By design \app{}'s windtunnel defines left boundry to be the entry point of the wind particals for the simulation. To plot a streamline user puts the Anoto pen on the left of the canvas and starts pulling the arm thus the pen tip perpendicular to the entry axis. During this motion, \app{} steers the wrist of the user to plot the trajectory of a particle in the windtunnel. After plotting several times starting from different locations on the vertical axis, user can see an overview of the sketch's aerodynamic behaivour through the field of streamlines. Figure [[fig:windtunnel2]] shows the interactions upto this point.
+   After input requirements are satistified, users can interact with the canvas to receive an output. By design \app{}'s windtunnel defines left boundry to be the entry point of the wind particals for the simulation. To plot a streamline user puts the Anoto pen on the left of the canvas and starts pulling the arm thus the pen tip perpendicular to the entry axis. During this motion, \app{} steers the wrist of the user to plot the trajectory of a particle in the windtunnel. After plotting several times starting from different locations on the vertical axis, user can see an overview of the sketch's aerodynamic behaivour through the field of streamlines. Figure [[fig:windtunnel2]] shows the interactions upto this point.
 
    #+CAPTION: Plotted Streamlines
    #+NAME: fig:windtunnel2
    #+ATTR_LaTeX: width=90mm
    [[./images/intro.jpg]]
 
-   As wintunnel canvas exists as an object on paper, user can change contexts by using spacial quantities of the paper. User starts another windtunnel object by writing the keyword followed by crop marks to define the canvas. User continues the interaction by making a new sketch for second car form to be simulated. In proximity of the new canvas, user plots the field for the windtunnel. Figure [[fig:windtunnel3]] shows 2 windtunnel objects.
+   As wintunnel canvas exists as an object on paper, user can change contexts by using spacial quantities of the paper. User starts another windtunnel object on a suitable location on the paper by writing the keyword followed by crop marks to define the canvas. User continues the interaction by making a new sketch for second car form to be simulated. In proximity of the new canvas, starting from the entry point for the second simulation area, user plots the field for the windtunnel. Figure [[fig:windtunnel3]] shows 2 windtunnel objects on paper.
 
-   #+CAPTION: 2 Object on Paper
+   #+CAPTION: Plot for Second Car
    #+NAME: fig:windtunnel3
+   #+ATTR_LaTeX: width=90mm
+   [[./images/intro.jpg]]
+
+   At this point of the walkthrough user continues to dive deeper into the data generated by muscle plotter. In this case, uses a 'windtunnel' specific interation to select desired data set for detailing. As seen on figure [[fig:windtunnel4]] second car's streamlines look straigher which may suggest better aerodynamic performance. User creates a cross-section on the streamlines at the tail of the car, utilizing the spacial context on paper. As in figure [[fig:windtunnel4]] user draws a vertical line across the tail followed by an annotation as 'crosssection sedan' and 'crosssection hatchback' arbitary names that point to the data sets. These data sets are available in for further analysis.
+
+   To compare stored datasets, user moves to an empty space on paper and starts a new object with the keyword 'plot' followed by variable name that refers to the data set stored earlier. Plot keyword also required an axis to be specified as target. In this case user defines this area with two perpendicular lines, which are classified by the backend as axis objects. Similar to a manner of plotting streamlines user plots for first car. User repeats the action with the same keyword 'plot' followed by a different variable. By selecting the existing axis two data sets can be compared. 
+
+   #+CAPTION: Capturing Data for Line Graph
+   #+NAME: fig:windtunnel4
+   #+ATTR_LaTeX: width=90mm
+   [[./images/intro.jpg]]
+
+   Walkthrough continues with another feature of the \app{} that allows the user to take even a deeper look at the generated data, better understand the diffence between the performance of two car forms. As figure [[fig:windtunnel5]] shows user inputs a new keyword, 'zoom' and insted of choosing a cross-section, selects an area using crop-marks. Selected area is assisgned to a variable, in this case 'tail'. Tail is a modifier that refers to both data sets stored earlier. With a similar fashion to plotting windspeeds, selected region is plotted again. With this interaction user takes a closer look at the area of interest on the previous analysis.
+
+   #+CAPTION: Zoom at data set
+   #+NAME: fig:windtunnel5
+   #+ATTR_LaTeX: width=90mm
+   [[./images/intro.jpg]]
+
+   On the final step of the walkthrough user decides to compare drag coefficients of two bodies in the windtunnel. This example illustrates how \app{} can output scalar values. User starts of by writing 'plot drag', a keyword and a domain specific modifier. This command is followed by a pig tail on the car that user desires to output drag coefficient of. Finally user draws a line and annotates '0' and '1', which is the last configuration \app{} reqires to make an output. After input sequence, user drags the pen starting from '0' up and when tip is on the right point of the scale \app{} pushes the hand perpendicular to leave a tick mark and up moving pen away from the paper. Same action is repeated for the second car, in this case same axis is used utilizing spacial properties of the paper. At the end of this interaction sequence user gains insight to aerodynamic properties of the forms put on paper as sketches, which would take complicated calculations or computer modeling otherwise.
+
+   #+CAPTION: Scale widget comparison
+   #+NAME: fig:windtunnel6
    #+ATTR_LaTeX: width=90mm
    [[./images/intro.jpg]]
 
