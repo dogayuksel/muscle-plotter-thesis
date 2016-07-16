@@ -123,7 +123,7 @@ This thesis explores creating an interactive pen and paper application using Ele
 
    In the simplest case, applications for \app{} are initiated by the user, otherwise the setup can be standard pen paper activities mentioned earlier. To start an interaction user takes turns with the computer, describes a domain and gets the answers later by applying the required motion. This thesis describes several applications implemented in this manner, within several domains and will further describe them as walkthroughs in the following section in detail.
 
-** TODO Walkthrough of Wind-Tunnel Simulation
+** Wind-Tunnel Simulation
 
    Following walkthrough with \app{} showcases a designer analysing the aerodynamic properties of a car sketch. Walkthrough demonstrates the interaction principles of \app{} as it allows the designer to understand implications of the changes of the car form.
 
@@ -174,8 +174,19 @@ This thesis explores creating an interactive pen and paper application using Ele
    [[./images/intro.jpg]]
 
 
-** TODO Function Plotters in other contexts
+** Other Application Scenarios
+   \App{} allows users to accomplish complex sense making tasks with the help of an non intrusive backend. In order to further illustrate these capabilities following applications are implemented.
+
 *** RC Filter
+Figure [[fig:rcfilter]] shows \app{}'s filter design application built around designing first-order RC filters.
+
+   #+CAPTION: RC Filter Design
+   #+NAME: fig:rcfilter
+   #+ATTR_LaTeX: width=90mm
+   [[./images/intro.jpg]]
+
+Filter design applications can be used for understanding different filter designs by observing their frequency response. The domain is selected by writing the keyword 'RCfilter' followed by a variable name in this case 'highpass'. User further inputs required parameters as in keyword, variable, value sequence displayed on figure [[fig:rcfilter]] as 'RCFILTER CAP 47\micro{}F'. After the enviroment is initilized, user plots the the frequency responce to observe the design of the RC filter. At this step user changes the variables and re-plots the response, which allows to iteratively design filters with adjusting components.
+
 *** Math function plots
 *** Multiple choice menus
 *** Calculating integrals
