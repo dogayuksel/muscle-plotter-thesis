@@ -375,9 +375,18 @@ The connection from Anoto Window API and the python backend is done via Open Sou
 
 
 * TODO Conclusion
+
+  This thesis presented \app{}, an interactive system based on electrical muscle stimulation that offers more meaningful and expressive output. It is designed to assist users in cognitively demanding activities, such as designing an aerodynamically sound vehicle, by providing them with access to a computer system while they are sketching on pen and paper.
+
+  Muscle-plotter provides pen-on-paper interactions for both input and output. To interact, users input by writing, e.g., writing mathematical formulas or drawing shapes. The system outputs by actuating the user’s wrist so as to draw graphs, strokes, etc. In the thesis six simple applications have been demonstrated, including a wind-tunnel simulator, and RC circuit simulator, function plotting, as well as a set of generic widgets. To validate the accuracy wrist-actuation system, a user study has been conducted and presented.
+
 ** Future Work
-*** Evaluate applications 
+*** Evaluate applications
+    
 *** Improve recognition
+
+*** Interactive Text Books
+    \app{} interactions require some input from the user side, in order to determine the domain and configure the output. Predesign worksheets can be effective introduction to train to user such domains.
 
 
 
