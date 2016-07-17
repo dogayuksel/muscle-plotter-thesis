@@ -374,7 +374,7 @@ The connection from Anoto Window API and the python backend is done via Open Sou
     The output of \app{} is persistent on paper. When the user draws a certain plot on a given axis, the output stays on the paper way longer then the length of the interaction. In an example of function plotting if the outputs were made and their essential characteristics are not different enough, the answers can be mixed up. As a solution, the user has the flexibility to annotate the output. This would allow the number of distinct traces that can be recalled later on. However, after a certain number of plots, the intelligibility would diminish. This is an inherent problem with writing on the paper, where the user would extend to the empty space below or to the next page. \App{} widgets are reusable, however they are also easy to initiate.
 
 
-* TODO Conclusion
+* Conclusion
 
   This thesis presented \app{}, an interactive system based on electrical muscle stimulation that offers more meaningful and expressive output. It is designed to assist users in cognitively demanding activities, such as designing an aerodynamically sound vehicle, by providing them with access to a computer system while they are sketching on pen and paper.
 
@@ -382,12 +382,17 @@ The connection from Anoto Window API and the python backend is done via Open Sou
 
 ** Future Work
 *** Evaluate applications
+
+    This thesis approaches the user study in terms of understanding the accuracy and plotting capabilities of \app{}. The accuracy of the system should be considered when designing applications. Quality and the usability of the data outputed for application specific domains can be investigated.
+
+    As mentioned in the discussion \app{} preserves low frequencies while adding relatively small amounts of noise to higher spectrum. The cognitive capabilities of human brain remains as a question as it is unknown when added noise would totally hide away the intended answer. As mentioned usability of \app{} output can be further studied in a broder perspective.
     
 *** Improve recognition
 
-*** Interactive Text Books
-    \app{} interactions require some input from the user side, in order to determine the domain and configure the output. Predesign worksheets can be effective introduction to train to user such domains.
+    \App{} uses tesseract for character and keyword recognition. Tesseract is an excellent solution for optical character recognition, however hand-writing is a better task for classification using deep learning. Recent develelopments make it relatively easier to implement such a recognition system, which in return would significantly improve recognition performance of \app{}. Such an improvement would make more usable applications possible.
 
+*** Interactive Text Books
+    \app{} interactions require some input from the user side, in order to determine the domain and configure the output. In the simplest case, user has to acomplish a sequence of inputs to get a the first output. Predesigned worksheets would allow to simplify these steps, minimizing the learning curve as well as creating engaging interactions. An example of a worksheet could include interactive math textbooks.
 
 
 #+LATEX: \backmatter{}
