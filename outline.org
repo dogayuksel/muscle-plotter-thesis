@@ -302,6 +302,8 @@ The connection from Anoto Window API and the python backend is done via Open Sou
 
 *** Higher level API for Flow Control
 
+    \App{} interactions are implemented in the form of a widget. These widgets leverage pen-input techniques such as crossing to select 1D primitives (CrossY \cite{Apitz_crossy}), underline and crop marks (Papiercraft \cite{liao_papiercraft}), and a pigtail gesture to select 2D primitives (Scriboli \cite{Hinckley_delemiters}). All widgets output when the user crosses into its’ boundaries on the paper context. The output ends when \app{} stimulates the muscles that cause the user to lift the pen’s tip from the paper.
+
    Canvas elements enable the user to control the flow and structure of \app{}'s output. We have designed several widgets for different data structures. Scalar values are represented on a line, they consist of a single axis. Functions are represented in a two dimensional area, as they exist on two axes. These widgets on paper, what ever the underlying data structure is, have some characteristics in common. All the canvas elements define an actual space on the paper with designated areas for interaction. These elements have essentials to be initialized, as well as optional modifications to shape and control the output. These widgets determine where electronic muscle stimulation is going to active, which in return serves as starting point for the plots. In the following chapter, we introduce the widgets based on their underlying data structure, describing the methods of initiation and use. All elements are drawn onto the paper, it is important to remind that they persist in an inactive state even when the user is working on an other part of the paper. They can be reused with appropriate commands.
 
 **** Single axis elements
@@ -311,6 +313,15 @@ The connection from Anoto Window API and the python backend is done via Open Sou
     To initiate a single axis element, after writing the designated command to initiate, user draws a line in any orientation on the paper. By default, south-west facing edge of the line is assigned to the minimum value, while north-east facing edge is assigned to the maximum value. If the minimum and maximum values are not defined in the next optional step, default values for the specific domain is used. For example 0 to 1 in drag coefficient comparison, or the x value of the maximum of a plot would be projected on to the domain represented by the plot itself in maximum analysis of a function. The axis can be scaled by the user simply by annotating the maximum and/or the minimum value.
 
     After all the essentials are placed on the paper, the scale component is ready to use. It starts of by user placing the tip of the pen at the beginning of the scale. If the pen lands in the accepted proximity of the origin, ems channels on both sides (left and right presented earlier) of the arm are activated at a tactile feedback level that doesn't actuate the user. This output only signifies that an output interaction is taking place. At this point, user starts dragging the pen keeping the tip on the paper to the end of the axis line. The back-end system, tracks user's motion and triggers a quick nudge followed by a pulse on the upper channel. This gesture leaves a visible trace behind on the axis, where desired value is projected on the the axis on the paper. The user can observe and annotate the value, as the widget is not active after a successful output procedure.
+
+***** Scale Widget 
+      The scale widget outputs a single value per interaction, useful for comparing values. In case of clus- tered values in the same scale, muscle-plotter will output them by alternating the tick-marks to the left/right. In the walkthrough and scenarios, we featured the scale widget in: finding the drag-coefficient, finding an integral of a func- tion and plotting individual bars in a chart. Just as with the axes of a plot, the scale widget allows to redefine its axis for zoom in/out.
+
+***** Radio button
+      The radio button allows selecting one option out of a range or receiving output from one option, which is active. This can also be used for a yes/no dialog, useful when asking simple yes/no questions to muscle-plotter (e.g., to check if a number is prime). In the examples above, we demonstrated this widget at the example of a user configuring the intensity of an EMS channel.
+
+***** Checkbox
+      The checkbox is an extension of the radio button that allows for multiple choices to be active. This widget is useful for finding elements in lists such as options in a combo box. We demonstrated at the example of a user querying which EMS channels are currently active.
 
 **** Double axis elements - Parametric values / functions
 
@@ -326,21 +337,33 @@ The connection from Anoto Window API and the python backend is done via Open Sou
 
     In the last case, when there is no zero crossing between 3rd and 4h quadrants and there is no y-axis intersection, the second axis find attempt of the user is interrupted by a pen-up as the tip of the pen is place on the minor-axis, (y-axis). The users follows over the major axis to find the crossing there. \app{} takes over control as the crossing is reached. The plot can be completed in a similar manner by rotating it as described in previous cases.
 
-***** (did we ever talk about cases where there is no crossing at all? i.e. (1/x))
+***** Line chart
+      The walkthrough contained 3 specialized in- stances of the line chart widget, i.e., wind tunnel, the tail profile plots and the zoomed plots. The line chart widget supports the following interactions: zoom in/out by relabel- ing the axes, zoom in by selecting with crop marks, fitting a line through existing data points, performing operations on data traces and re-plotting the results as a trace (e.g., deriv- ative of a function. The line chart widget affords zoom- in/out by relabeling the axes of the plot.
 
-**** function definitions
 
+*** Recognition System
 
-*** TODO Recognition System
-    Image recognition -> OpenCV for sketches
-    Text recognition -> Tessarect - OCR
+**** Handwriting Recognition using Tesseract
 
-*** TODO Application Specific Implementations
+     To recognize hand-written input we integrated Tesseract \cite{tesser_ocr}, a trained recognizer with several languages and likely the most robust open-source OCR \cite{compar_open_sourc_ocr}. In Tesseract \app{} only loads the English language and common symbols such as “?”, “(“, etc. Before executing Tesseract on the user’s strokes we: (1) append all strokes that are less than 3mm apart from their center to form a character (enables multi-stroke writing). (2) Interpolate the points from Anoto to complete a line based on pen up and downs. (3) Convert to a black and white image for OCR. (4) If the next stroke is more than 1cm apart, the previous strokes are grouped into a command keyword and evaluated with the OCR. (5) After a command keyword is detected \app{} evaluates the incoming strokes character by character, this allows to directly write commands such as “PLOT F(X)=SIN(X)”.
+
+     Once the output of Tesseract is returned to muscle-plotter, we find the closest word using the Levenshtein distance (edit distance). We do so because many characters tend to create false positives with Tesseract, such as “L” and “(“ or “X” and “K”). Thus, when Tesseract recognizes “P(OT” instead of “PLOT”, muscle-plotter recognizes it from our set of keywords, since the Levenshtein-distance is 1 (i.e., by replacing one character we find a positive match). We allow a maximum edit-distance of a third the input word’s length (rounded down).
+
+*** Application Specific Implementations
 **** Mathematical Applications
+     To solve the mathematical formulae we invoke Octave through its Py- thon bindings. We use it for mathematics (derivatives, integrals, and so forth) and for plotting functions from formulae. We interface muscle-plotter and Octave by: (1) converting user-notation to Octave notation – when the user writes “sin(x)” we convert it to “feval((sin(x), range-of- plot)”; then, (2) send the formulae to Octave, sample it into points and return it to muscle-plotter; and, lastly, (3) transform these points to the Anoto paper’s coordinates and into the user-defined axis.
+
 **** RC Filter Response
+     We implemented a simple solver for high and low pass RC circuit filters. It works by solving the filter equations directly in the frequency domain. The val- ues for R and C are read from the users’ input when they write down “cap 10UF” (i.e., 10μF) and “resistor 330” (in Ohms).
+
 **** Statistic Applications
+     To perform statistics operations we utilize the Python’s Scipy Stats package. This allows us to invoke operations such as computing a standard deviation or a regression, which was demonstrated at the example of a linear regression through the bar chart data.
+
 **** Optical Ray Casting
+     The optics demonstration is a simple 2D ray casting based on \cite{thin_python} that deals exclusively with concave and convex lenses. The lenses focal points are simply proportional to the width of the drawn lenses bounding box.
+
 **** Wind-tunnel Simulation
+     The wind tunnel simulation is based on the Lattice-Boltzmann equations and adapted from Schroeder’s implementation \cite{lattic_boltz_simul_fluid}. To run a wind-tunnel simulation (i.e., to compute the wind speed streamlines) we: (1) rotate the model accordingly to the rotation of the wind-tunnel boundaries; (2) extract the shapes drawn in- side; (3) down-sample these shapes (e.g., the car) into a binary matrix of 200px height; this matrix contains the obstacles to the wind flow; (4) for 30 steps we execute the Lattice Boltzmann by always moving the wind-lines one more step and re-evaluating the collisions to compute the velocity flow; (5) once the user draws a line to get the wind streamline as output, we use Matplotlib’s streamlines function to obtain the streamline as a curve from the user’s pen down position.
 
 
 * User Study
@@ -413,17 +436,17 @@ The connection from Anoto Window API and the python backend is done via Open Sou
     [[./images/intro.jpg]]
 
 
-
 * Discussion
-** Considering User study
-*** Current user study verifies the accuracy but not the usability.
 
 ** Drawing vs. Steering
-*** Current implementation lacks control that allows actual drawing
-*** Can't consider as 2D drawing
-*** Our implementation is a steering action
+   Working principles of \app{} limits drawing capabilities to a single axis, which can't be considered as a 2D drawing activity. More complicated data is plotted with repating the same motion in different spacial contexts as seen in streamlines of the windtunnel. Plotting with \app{} is based on a steering motion as pen draws a curve. Exanding these limitations to a two dimentinal surface would require coordination of multiple muscles on the human body, arm, and wrist. Controling such a complex motion with EMS would require extensive control over each possible channel, perhaps with some levels of abstraction. 
 
-** Design Considerations for \App{}
+** Considering User study
+   \App{} is a novel interface that has different limitations and strenghts compared to traditional gui based systems. User study we have introduced tries to understand the plotting capabilities of the system, to better understand applications possible. However usability of those applications are left out from the user study.
+
+** Design Considerations
+   Based on the findings of designing applications for \app{}, this theses points to a couple of principles that are important to consider to create usable applications.
+   
 *** Discoverability
     \App{} provides an interactive environment using user initiated components on paper. This approach differs from previous interactive systems as the user is expected to have a prior knowledge of the provided language. In many cases our interactions start with an empty sheet of paper. On the other hand screen based interactive systems provide discoverability as the system itself has a wider channel for output, such applications can start with a tutorial expecting the user to have zero prior knowledge. Designing applications for \app{} should consider this to provide an engaging experience. According to the domain of the application, command keywords could be flexible and adaptive, moreover similar to a natural language.
 
@@ -455,7 +478,12 @@ The connection from Anoto Window API and the python backend is done via Open Sou
     \App{} uses tesseract for character and keyword recognition. Tesseract is an excellent solution for optical character recognition, however hand-writing is a better task for classification using deep learning. Recent develelopments make it relatively easier to implement such a recognition system, which in return would significantly improve recognition performance of \app{}. Such an improvement would make more usable applications possible.
 
 *** Interactive Text Books
-    \app{} interactions require some input from the user side, in order to determine the domain and configure the output. In the simplest case, user has to acomplish a sequence of inputs to get a the first output. Predesigned worksheets would allow to simplify these steps, minimizing the learning curve as well as creating engaging interactions. An example of a worksheet could include interactive math textbooks.
+    \app{} interactions require some input from the user side, in order to determine the domain and configure the output. In the simplest case, user has to acomplish a sequence of inputs to get a the first output. Predesigned worksheets would allow to simplify these steps, minimizing the learning curve as well as creating engaging interactions. Figure [[fig:optics-worksheet]] shows a sample prepared for testing. Combination of such examples could make upto interactive textbooks.
+
+    #+CAPTION:    Optics Worksheet Example
+    #+LABEL:      fig:optics-worksheet
+    #+ATTR_LaTeX: :width 90mm :float
+    [[./images/intro.jpg]]
 
 
 #+LATEX: \backmatter{}
