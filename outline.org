@@ -51,35 +51,31 @@ This thesis explores creating an interactive pen and paper application using Ele
 
 #+LATEX: \mainmatter{}
 * Introduction
-** An EMS and Anoto Pen based output system
-*** Allows users to a computer solely with pen and paper.
-*** An approach that blends the computer and the user
 
-    #+CAPTION:    Muscle Plotter - Teaser
-    #+LABEL:      fig:muscle-plotter-teaser
-    #+ATTR_LaTeX: :width 110mm
-    [[./images/intro.jpg]]
+  Interactive systems based on electrical muscle stimulation (EMS) actuate users by sending an electric signal to muscle fibers and motor neurons through electrodes attached to the skin. The possessed hand \cite{tamaki_possessedhand}, for example, used this technique to assist users while learning the finger poses required to play an instrument.
+
+  #+CAPTION:    Muscle Plotter - Teaser
+  #+LABEL:      fig:muscle-plotter-teaser
+  #+ATTR_LaTeX: :width 110mm
+  [[./images/intro.jpg]]
+
+  The main strength of EMS is that the resulting systems miniaturize well, thus lend themselves well to mobile use (mobile gaming \cite{lopes_musclepropell}) or wearable use (pedestrian cruise control \cite{pfeiffer_cruise}). A second key strength is their ability to implement input/output interactions that use the same modality (aka symmetric interaction \cite{roudaut_gesture}) by using the same gesture language for input and output (\cite{lopes_proprioceptive}).
+
+  Unfortunately, the price for these benefits is that the interactive EMS systems presented so far lack expressiveness. Existing interactive EMS systems output a single 1D output variable, such as screen tilt \cite{lopes_musclepropell} or wrist tilt \cite{lopes_proprioceptive} or one of n behaviors \cite{lopes_affordance++}. Since subsequent output overwrites earlier output, users can only see a single value at a given time.
+
+  In this paper, we explore how to create more expressive EMS-based systems. \App{} achieves this by persisting EMS output, allowing the system to build up a larger whole. More specifically, (1) muscle-plotter spreads out the 1D signal produced by EMS over a 2D surface. Rather than repeatedly updating a single value, this renders many values into curves. (2) By adding the pen, we persist this signal, allowing the system to build up a larger display, which in turn enables longer and more meaningful interactions.
 
 ** Motivation
 
-*** A pen based interface is intuitive \cite{ullman_importancedrawing}
-*** Interactions without screens is the future
-*** Interface without an interface is the future
-*** Interactive system are getting smaller
-**** Trend is mobile but, we can see further integration
-**** EMS is promising in miniaturization
-
+   Pen and paper is an important activity for concerning human creativity and productivity. The medium of pen paper is familiar for many people. Developing technologies that could enhance the capabilities of this medium can be beneficial to many. \App{} builds upon this idea and imagines posibility of a future interface without screens, an interface that could be miniturized and intergrated.
 
 ** Contribution
 
-   \App{} extends on this line of work by providing a more expressive EMS-based system, which is attained by persisting the EMS output onto the paper; this lends itself to more expressive and longer interactions than in previous EMS-based systems which, instead, communicate via discrete poses of the users’ body.
-
-*** Combining pen paper interactions with EMS is novel
+   \App{} extends on this line of work by providing a more expressive EMS-based system, which is attained by persisting the EMS output onto the paper. Older systems communicate via discrete poses of the users’ body, resulting with a single value any given time. User's wrist is actuated while dragging the pen to lay down a curve. This interaction lends itself to more expressive and longer interactions with ability to communicate series of values.
 
 ** Thesis overview
+
    This thesis will continue by detailing the Related work in the next chapter. It will then further investigate walkthroughs of the applications developed. In the following chapter, essential components of the implementation of \app{} described. Then finally the thesis is concluded with a discussion.
-
-
 
 
 * Fundamentals and Related Work
