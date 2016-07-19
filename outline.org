@@ -296,7 +296,17 @@ This thesis explores creating an interactive pen and paper application using Ele
      [[./images/system.jpg]]
 
 **** Brake Calibration
+
      \App{} has two modes for brakes, following section will further detail each. Which ever mode is active, the intensity of the brake has to be adjusted for the specific user. Back-end sytem, uses an extentiation of slope-gradients calculation presented earlier to enable adjustments. In brake calibration, users draw lines similar to the last step, but this time after a random time after actuation brakes are initiated. \App{} observes how efficiently wrist motion stabilizes again to select most stable brake intensity for the user.   
+
+**** Output from Calibration
+     Following table shows calibration results for three users that have participated in the user study. Values has been iteratively measured and adjusted during the calibration process.
+
+|        | right  |         |         | left   |        |         | brake   |
+|        | weak   | middle  | strong  | weak   | middle | strong  |         |
+| User 1 | 70/110 | 110/180 | 120/240 | 110/70 | 190/90 | 220/110 | 180/190 |
+| User 2 | 70/110 | 110/180 | 120/240 | 110/70 | 190/90 | 220/110 | 180/190 |
+| User 3 | 70/110 | 110/180 | 120/240 | 110/70 | 190/90 | 220/110 | 110/130 |
 
 *** Control Loop
     Control loop of \app{} uses a series of strategies based on the state of the user's hand motions and the target position. Possible situations and associated strategies are futher illustrated in the following section. Key principles are highlighted  in the following figure [[fig:control-loop]].
@@ -307,6 +317,7 @@ This thesis explores creating an interactive pen and paper application using Ele
 [[./images/control-loop.png]]
 
 **** Model of the Human Wrist
+
      \App{} uses a simple model of the human arm to manage the motion of the wrist. The wrist is assumed to be a level attached to two strings. When the wrist is stationary, tension on both sides are equal, hence forming an equilibrium. Wrist motion takes place when tension on one of the strings changes as described by the `equilibrium point model' \cite{schmidt_motorcontrol}. Situmulation through nerves and muscle fibers result in contractions stronger on one side of the wrist. When on side is  contracted more then the opposing side, motion occurs to tenser side. As a result same target position can be reached with different configurations of contractions on opposing muscles. When the wrist position changes, the length of the muscle fibers also change, perhaps to find another equilibrium point when forces are again equal on each side. Any given static position of the wrist is an equilibrium of forces caused by tension on opposing muscles. \cite{schmidt_motorcontrol}. \App{} relies on these principles to achieve the accuracy it needs as both muscles on opposing sides are sequentially situmulated in rapid successions. In other words intended position of the arm can be reached by applying different pairs of impulses to flexor and extensor muscles. This observation can also be deferred from the data collection step of the slope calibration process.
 
      #+CAPTION:    Equilibrium point model
@@ -315,10 +326,15 @@ This thesis explores creating an interactive pen and paper application using Ele
      [[./images/spring-mass-model.png]]
 
 **** Targeting and travel
-
+     
 **** Braking strategy
-****** Braking and Keeping on a target
-****** Ending an interaction
+
+***** Modes of Braking
+****** Tensing Up both sides
+****** Additional channel pushing down
+
+
+**** Ending an interaction
 
 *** Higher level API for Flow Control
 
@@ -369,6 +385,7 @@ This thesis explores creating an interactive pen and paper application using Ele
 
      Once the output of Tesseract is returned to muscle-plotter, we find the closest word using the Levenshtein distance (edit distance). We do so because many characters tend to create false positives with Tesseract, such as “L” and “(“ or “X” and “K”). Thus, when Tesseract recognizes “P(OT” instead of “PLOT”, muscle-plotter recognizes it from our set of keywords, since the Levenshtein-distance is 1 (i.e., by replacing one character we find a positive match). We allow a maximum edit-distance of a third the input word’s length (rounded down).
 
+
 *** Application Specific Implementations
 **** Mathematical Applications
      To solve the mathematical formulae we invoke Octave through its Py- thon bindings. We use it for mathematics (derivatives, integrals, and so forth) and for plotting functions from formulae. We interface muscle-plotter and Octave by: (1) converting user-notation to Octave notation – when the user writes “sin(x)” we convert it to “feval((sin(x), range-of- plot)”; then, (2) send the formulae to Octave, sample it into points and return it to muscle-plotter; and, lastly, (3) transform these points to the Anoto paper’s coordinates and into the user-defined axis.
@@ -410,7 +427,7 @@ This thesis explores creating an interactive pen and paper application using Ele
     #+ATTR_LaTeX: :width 90mm :float
     [[./images/intro.jpg]]
 
-    Figure [[fig:aparatus-1]] shows apparatus for the user study. Participants wore \app{}’s electrodes on the wrist flexor and extensor muscles as described in [[*EMS Machine and Pad Placement][pad placement section]]. Participants were seated with the dominant forearm rested on the table to reduce fatigue. Plots were made using the controller described in Implementation, which actuated flexors and extensors simultaneously but without brake channel, which was introduced as an outcome of this study. Brake effect was achieve via tensing both sides. During the \app{} software administered the respective functions to the user; all other functionality was disabled.
+    Figure [[fig:aparatus-1]] shows apparatus for the user study. Participants wore \app{}’s electrodes on the wrist flexor and extensor muscles as described in [[*Pad Placement][pad placement section]]. Participants were seated with the dominant forearm rested on the table to reduce fatigue. Plots were made using the controller described in Implementation, which actuated flexors and extensors simultaneously but without brake channel, which was introduced as an outcome of this study. Brake effect was achieve via tensing both sides. During the \app{} software administered the respective functions to the user; all other functionality was disabled.
 
 *** Participants
 
