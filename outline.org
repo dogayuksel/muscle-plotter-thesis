@@ -326,6 +326,11 @@ This thesis explores creating an interactive pen and paper application using Ele
      [[./images/spring-mass-model.png]]
 
 **** Targeting and travel
+***** Control Cycles
+      Control-loop of \app{} consists of control cycles exacuted consequtively. Each cycle makes observations and acts based on the respective state against the target. At a given point, when a control cycle begins expected trajectory of the pen tip is calculated based on the tranmission and processing delay of the Anoto Pen. In other words when the back-end reads the observation, the user is actually at a later point of the plot. This delay has been measured to be around 0.1s. 
+
+***** Dynamic Adjustments
+      If the user is lagging behind the target, the signal intensity applied to muscle that that causes the delay is increased by 1 mA. 
      
 **** Braking strategy
 
