@@ -418,7 +418,7 @@ This thesis explores creating an interactive pen and paper application using Ele
 **** Targeting and travel
 ***** Control Cycles
 
-      Control-loop of \app{} consists of control cycles executed consecutively. Each cycle makes observations and acts based on the respective state relative to the target. Figure [[fig:control-loop-fast]] illustrates consecutive decision cycles on the give curve. At a given point, when a control cycle begins expected trajectory of the pen tip is calculated keeping in mind the transmission and processing delay of the Anoto Pen. In other words when the back-end reads the observation, the user is actually at a later point of the plot. This delay has been measured to be around 0.1s. As seen On figure [[fig:control-loop-fast]] each green dot is the calculated trajectory, where blue points represent the respective targets for that specific cycle.
+      Control-loop of \app{} consists of control cycles executed consecutively. Each cycle makes observations and acts based on the respective state relative to the target. Figure [[fig:control-loop-fast]] illustrates consecutive decision cycles on the give curve. At a given point, when a control cycle begins expected trajectory of the pen tip is calculated keeping in mind the transmission and processing delay of the Anoto Pen. In other words when the back-end reads the observation, the user is actually at a later point of the plot. This delay has been measured to be around 0.1s. As seen on figure [[fig:control-loop-fast]] each green dot is the calculated trajectory, where blue points represent the respective targets for that specific cycle.
 
      #+CAPTION:    Observed and Target Points Visualized
      #+LABEL:      fig:control-loop-fast
@@ -473,7 +473,7 @@ brakes are activated. This mode can be considered as the derivation component of
 
 ***** Scale Widget 
 
-      The scale widget outputs a single value per interaction, useful for comparing scalar values. In case of clustered values in the same scale, muscle-plotter will output them by alternating the tick-marks to the left and right where the tick make is placed when desired value is reached. In the previous walkthrough and scenarios, scale widget is presented in: finding the drag-coefficient, finding an integral of a function and plotting individual bars in a chart. Just as with the axes of a plot, the scale widget allows to redefine its axis for zoom in/out that allows higher fidelity output.
+      The scale widget outputs a single value per interaction, useful for comparing scalar values. In case of clustered values in the same scale, \app{} will output them by alternating the tick-marks to the left and right where the tick make is placed when desired value is reached. In the previous walkthrough and scenarios, scale widget is presented in: finding the drag-coefficient, finding an integral of a function and plotting individual bars in a chart. Just as with the axes of a plot, the scale widget allows to redefine its axis for zoom in/out that allows higher fidelity output.
 
 ***** Radio button
       The radio button is a symmetric widget that allows both enabling a disabled option or disabling an active option and receiving the status of that option. This can also be used for a yes/no dialogues, or make simple queries to app{} (e.g., to check if a number is prime). Radio button widget is presented in the form example scenario where the user configures the intensity of an the brake channel.
@@ -503,14 +503,14 @@ brakes are activated. This mode can be considered as the derivation component of
    
     In a similar fashion to scales, the user should start at a specific position to instantiate the plotting procedure. In a generic plot, the output can be located in different quadrants. We have defined a method for the user to locate it to start plotting. Following interactions to find plot starting points are similar in nature to the scalar interactions described above. In the first case, where there is a zero crossing on the negative side of the major axis, user places the tip of the pen to the far left (negative, west) of the horizontal, major, dragging axis. The paper should have been rotated to a comfortable angle for a convenient plot. Then the user follows the axis, when zero crossing is reached, \app{} takes over the control of the arm to output the rest of the plot. If necessary, the user can rotate the paper 180 degrees and plot the negative side of the desired line.
 
-    In the case of in the case of no zero crossing before the origin, \app{} signals a pen-up before first scanning starts. At this point the user knows that there isn't a zero crossing between 3rd and 4th quadrants. In the next step user should scan the y axis, to find any y-crossings. Ideally user starts from the minimum point of the minor axis and drags the tip of the pen to the maximum point of the axis. If there is a y-crossing of the plot, \app{} assigns a pen-down on the target position. From this point on the user follows parallel to the major axis to continue as a normal plot. The negative side of the function can be plotted by rotating the paper in a similar manner to the first case. This method of finding the starting point is illustrated in the following figure [[fig:axis-start]].
+    In the case of no zero crossing before the origin, \app{} signals a pen-up before first scanning starts. At this point the user knows that there isn't a zero crossing between 3rd and 4th quadrants. In the next step user should scan the y axis, to find any y-crossings. Ideally user starts from the minimum point of the minor axis and drags the tip of the pen to the maximum point of the axis. If there is a y-crossing of the plot, \app{} assigns a pen-down on the target position. From this point on the user follows parallel to the major axis to continue as a normal plot. The negative side of the function can be plotted by rotating the paper in a similar manner to the first case. This method of finding the starting point is illustrated in the following figure [[fig:axis-start]].
 
      #+CAPTION:    Finding the starting Point
      #+LABEL:      fig:axis-start
      #+ATTR_LaTeX: :width 132mm :float
      [[./images/implementation/axis-rotoscope-02.png]]
 
-    In the last case, when there is no zero crossing between 3rd and 4h quadrants and there is no y-axis intersection, the second axis find attempt of the user is interrupted by a pen-up as the tip of the pen is place on the minor-axis, (y-axis). The users follows over the major axis to find the crossing there. \app{} takes over control as the crossing is reached. The plot can be completed in a similar manner by rotating it as described in previous cases.
+    In the last case, when there is no zero crossing between 3rd and 4h quadrants and there is no y-axis intersection, the second axis find attempt of the user is interrupted by a pen-up as the tip of the pen is place on the minor-axis, (y-axis). The users follow over the major axis to find the crossing there. \App{} takes over control as the crossing is reached. The plot can be completed in a similar manner by rotating it as described in previous cases.
 
 *** Recognition System
 
@@ -538,7 +538,7 @@ In the case of a state where the keyword `plot' is properly recognized, \app{} e
 *** Application Specific Implementations
 **** Mathematical Applications
 
-     To solve the mathematical formula, \app{} invokes Octave through its Python bindings. Octave is mainly used for mathematics (derivatives, integrals, and so forth) and for plotting functions from formula. \app{} interfaces with Octave by: (1) converting user-notation to Octave notation – when the user writes “sin(x)” it is converted to “feval((sin(x), [range-of-plot])”; then, (2) sending the formula to Octave, sampling it into points and returning it to muscle-plotter; and, lastly, (3) transforming these points to the Anoto paper’s coordinates and projecting into the user-defined axis.
+     To solve the mathematical formula, \app{} invokes Octave through its Python bindings. Octave is mainly used for mathematics (derivatives, integrals, and so forth) and for plotting functions from formula. \app{} interfaces with Octave by: (1) converting user-notation to Octave notation – when the user writes “sin(x)” it is converted to “feval((sin(x), [range-of-plot])”; then, (2) sending the formula to Octave, sampling it into points and returning it to \app{}; and, lastly, (3) transforming these points to the Anoto paper’s coordinates and projecting into the user-defined axis.
 
 **** RC Filter Response
 
@@ -632,7 +632,7 @@ In the case of a state where the keyword `plot' is properly recognized, \app{} e
 
 *** Preservation of features
     
-    The plots in Figure [[fig:frequency-analysis]] illustrate in how far plots made through muscle-plotter preserved the original function. The plots show frequency histograms produced by means of Fourier Transformation. We see the original signal in green, as well as user-specific jitters—aka noise, in red. As the plots illustrate, jitters tends to revolve around frequencies higher than 0.5 cycles/cm.
+    The plots in Figure [[fig:frequency-analysis]] illustrate in how far plots made through app{} preserved the original function. The plots show frequency histograms produced by means of Fourier Transformation. We see the original signal in green, as well as user-specific jitters—aka noise, in red. As the plots illustrate, jitters tends to revolve around frequencies higher than 0.5 cycles/cm.
 
     #+CAPTION:    Frequency Analysis
     #+LABEL:      fig:frequency-analysis
@@ -670,7 +670,7 @@ In the case of a state where the keyword `plot' is properly recognized, \app{} e
     \App{} provides an interactive environment using user initiated components on paper. This approach differs from previous interactive systems as the user is expected to have a prior knowledge of the provided language. In many cases our interactions start with an empty sheet of paper. On the other hand screen based interactive systems provide discoverability as the system itself has a wider channel for output, such applications can start with a tutorial expecting the user to have zero prior knowledge. Designing applications for \app{} should consider this to provide an engaging experience. According to the domain of the application, command keywords could be flexible and adaptive, moreover similar to a natural language.
 
 *** Interactive Text Books
-    \app{} interactions require some input from the user side, in order to determine the domain and configure the output. In the simplest case, user has to accomplish a sequence of inputs to get a the first output. Predesigned worksheets would allow to simplify these steps, minimizing the learning curve as well as creating engaging interactions. Figure [[fig:optics-worksheet]] shows a sample prepared for testing. Combination of such examples could make up to interactive textbooks.
+    \App{} interactions require some input from the user side, in order to determine the domain and configure the output. In the simplest case, user has to accomplish a sequence of inputs to get a the first output. Predesigned worksheets would allow to simplify these steps, minimizing the learning curve as well as creating engaging interactions. Figure [[fig:optics-worksheet]] shows a sample prepared for testing. Combination of such examples could make up to interactive textbooks.
 
     #+CAPTION:    Optics Worksheet Example
     #+LABEL:      fig:optics-worksheet
@@ -696,7 +696,7 @@ In the case of a state where the keyword `plot' is properly recognized, \app{} e
 
   This thesis presented \app{}, an interactive system based on electrical muscle stimulation that offers more meaningful and expressive output. It is designed to assist users in cognitively demanding activities, such as designing an aerodynamically sound vehicle, by providing them with access to a computer system while they are sketching on pen and paper.
 
-  Muscle-plotter provides pen-on-paper interactions for both input and output. To interact, users input by writing, e.g., writing mathematical formulas or drawing shapes. The system outputs by actuating the user’s wrist so as to draw graphs, strokes, etc. In the thesis six simple applications have been demonstrated, including a wind-tunnel simulator, and RC circuit simulator, function plotting, as well as a set of generic widgets. To validate the accuracy wrist-actuation system, a user study has been conducted and presented.
+  \App{} provides pen-on-paper interactions for both input and output. To interact users input by writing, e.g., writing mathematical formulas or drawing shapes. The system outputs by actuating the user’s wrist so as to draw graphs, strokes, etc. In the thesis six simple applications have been demonstrated, including a wind-tunnel simulator, and RC circuit simulator, function plotting, as well as a set of generic widgets. To validate the accuracy wrist-actuation system, a user study has been conducted and presented.
 
 ** Future Work
 *** Evaluate applications
@@ -707,7 +707,7 @@ In the case of a state where the keyword `plot' is properly recognized, \app{} e
 
 *** Worksheet and Simulation Environments
 
-    As mentioned in the discussion section, a sound implementation of \app{} can be implemented using specifically designed worksheets. Such a combination, would allow interactive textbooks to be designed. These can further be improved with a pen version that allows the trace to be erased as a pencil. Such a combination should be implemented and investigated to improve usability of muscle plotter.
+    As mentioned in the discussion section, a sound implementation of \app{} can be implemented using specifically designed worksheets. Such a combination, would allow interactive textbooks to be designed. These can further be improved with a pen version that allows the trace to be erased as a pencil. Such a combination should be implemented and investigated to improve usability of \app{}.
 
 *** Improve recognition
 
