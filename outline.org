@@ -398,7 +398,7 @@ brakes are activated. This mode can be considered as the derivation component of
 
 ****** Tensing Up both sides
 
-       First braking strategy is based on the two channel implementation of \app{}. This mode has been used in the user study, while the findings pointed torwards a better implementation described in the next subsection. This strategy uses high intensity pulses on each side of the arm to achive and equilibrium point at a neutral angle. As mentioned in the [[*Model of the human wrist][model of the human wrist]] section, high instensities on both sides override previous motions to reach an neutral position. However observations during the study showed that this created a confusion for the users when in combination with them momentum of the plotting action itself, as they were confused with such impulses expecting a resulting motion on either sides.
+       First braking strategy is based on the two channel implementation of \app{}. This mode has been used in the user study, while the findings pointed torwards a better implementation described in the next subsection. This strategy uses high intensity pulses on each side of the arm to achive and equilibrium point at a neutral angle. As mentioned in the [[*Model of the Human Wrist][model of the human wrist]] section, high instensities on both sides override previous motions to reach an neutral position. However observations during the study showed that this created a confusion for the users when in combination with them momentum of the plotting action itself, as they were confused with such impulses expecting a resulting motion on either sides.
 
 ****** Additional channel pushing down
        
@@ -609,7 +609,11 @@ brakes are activated. This mode can be considered as the derivation component of
     This thesis approaches the user study in terms of understanding the accuracy and plotting capabilities of \app{}. The accuracy of the system should be considered when designing applications. Quality and the usability of the data outputed for application specific domains can be investigated.
 
     As mentioned in the discussion \app{} preserves low frequencies while adding relatively small amounts of noise to higher spectrum. The cognitive capabilities of human brain remains as a question as it is unknown when added noise would totally hide away the intended answer. As mentioned usability of \app{} output can be further studied in a broder perspective.
-    
+
+*** Worksheet and Simulation Environments
+
+    As mentioned in the discussion section, a sound implementation of \app{} can be implemented using specifially designed worksheets. Such a combination, would allow intractive textbooks to be designed. These can further be improved with a pen version that allows the trace to be erased as a pencil. Such a combination should be implemented and investigated to improve usability of muscle plotter.
+
 *** Improve recognition
 
     \App{} uses tesseract for character and keyword recognition. Tesseract is an excellent solution for optical character recognition, however hand-writing is a better task for classification using deep learning. Recent develelopments make it relatively easier to implement such a recognition system, which in return would significantly improve recognition performance of \app{}. Such an improvement would make more usable applications possible.
