@@ -1,7 +1,7 @@
 :SETUP:
 #+OPTIONS: toc:nil date:nil title:nil
 #+LATEX_CLASS: koma-book
-#+LATEX_CLASS_OPTIONS: [a4paper, 12pt, twoside]
+#+LATEX_CLASS_OPTIONS: [a4paper, 12pt, twoside, BCOR5mm]
 #+LATEX_HEADER: \usepackage[hmarginratio=1:1]{geometry}
 #+LATEX_HEADER: \usepackage{mathptmx}
 #+LATEX_HEADER: \usepackage[scaled=.90]{helvet}
@@ -117,77 +117,83 @@ This thesis explores creating an interactive pen and paper application using Ele
 * Applications
 ** Overview
 
-   Applications presented in the following section are all designed to be initiated by the user. User can start interacting with \app{} using an application keyword or continue with any of the pen and paper activities discussed earlier. To start an interaction user takes turns with the computer, describes a domain and gets the answers later by applying the required plotting motion. This thesis describes several applications implemented in this manner, within several domains and will further describe them as walkthroughs in the following section in detail.
+   This thesis presents six applications designed for \app{}. These applications all share some common building blocks are all designed to be initiated by the user on demand. The user can start interacting with \app{} using an application keyword or continue with any of the standard pen and paper activities discussed earlier. To start an interaction user takes turns with the computer, describes a domain and gets the answers later by applying the required plotting motion. Following chapter will describe these applications as walkthroughs to illustrate different interactions with \app{}.
 
 
 ** Wind-Tunnel Simulation
 
    Following walkthrough with \app{} showcases a designer analysing the aerodynamic properties of a car sketch. Walkthrough demonstrates the interaction principles of \app{} as it allows the designer to understand implications of the changes on the car form by sketching.
 
-   User starts the interaction by selecting a domain from \app{}. This entry and the following sequence of actions contitude as input and prepares \app{} for output. In this case user writes the keyword, 'windtunnel'. \App{} processes input for pottential for keywords to provide the transition. Tessarect \cite{tesser_ocr} classifies the input, later to match to a keyword in a dictionary.
+   User starts the interaction by selecting a domain from \app{}. This entry and the following sequence of actions contitude as input and prepares \app{} for output. In this case user writes the keyword, 'windtunnel'. \App{} processes input for pottential keywords to provide the transition. Tessarect \cite{tesser_ocr} classifies the input, later to match to a keyword in a dictionary. Windtunnel keyword is followed by the number '10', which signifies the wind speed in this context. This number configures the tunnel entry speed (in meters per second) of simulated particals. Windtunnel command optionally expects this configuration, otherwise default value is used. Input after the keyword is checked against spacial proximity, if in expected position, is sent to be classified by Tesseract.
 
-   #+CAPTION: Windtunnel Domain, Canvas Allocation
+   #+CAPTION: Start Windtunnel Application, Place Canvas
    #+NAME: fig:windtunnel1
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/windtunnel/IMG_9716.jpg]]
 
-   #+CAPTION: Windtunnel, Crop-Marks, Sketch
-   #+NAME: fig:windtunnel1
-   #+ATTR_LaTeX: :width 132mm :float
-   [[./images/windtunnel/IMG_9718.jpg]]
+   Once the keyword activates the domain, 'windtunnel, user proceeds to define the boundaries of the simulation area. As displayed in the figure [[fig:windtunnel1]] user defines this two dimentinal space with crop marks. At this stage \app{} stores windtunnel as an object with coordinates of the designated canvas. Input from Anoto Pen is further processed based on this context defined in the state. As the users sketch the car, points received from Anoto Pen are stored and contionusly processed to construct the outlines of the shape which later is used to create streamlines.
 
-   Once the keyword activates the domain, 'windtunnel, user procees to define the boundaries of the simulation area. As displayed in the figure [[fig:windtunnel1]] user defines this two dimentinal space with crop marks. At this stage the \app{} stores windtunnel as an object with the designated canvas. Input from Anoto Pen is further processed based on this context defined in the state. As the users sketch the car, points received from Anoto Pen are stored and contionusly processed to construct the outlines of the shape which later is used to create streamlines.
-
-   After minimum input requirements for the windtunnel object are satistified, users can interact with the canvas to receive an output. By design \app{}'s windtunnel defines left boundry to be the entry point of the wind particals for the simulation. To plot a streamline user puts the Anoto Pen on the left of the canvas and starts pulling the arm thus the pen tip perpendicular to the entry axis. During this motion, \app{} steers the wrist of the user to plot the trajectory of a particle in the windtunnel. After plotting several times starting from different locations on the vertical axis, user can see an overview of the sketch's aerodynamic behaivour through the field of streamlines. Figure [[fig:windtunnel2]] shows the interactions upto this point.
+   After minimum input requirements for the windtunnel object are satistified, user can interact with the canvas to receive an output. By design \app{}'s windtunnel defines left boundry to be the entry point of the wind particals for the simulation. To plot a streamline user puts the Anoto Pen on the left of the canvas and starts pulling the arm thus the pen tip perpendicular to the entry axis. During this motion, \app{} steers the wrist of the user to plot the trajectory of the simulated particle in the windtunnel. After plotting several times starting from different locations on the vertical axis, user can see an overview of the sketch's aerodynamic behaivour through the field of streamlines. Figure [[fig:windtunnel2]] shows user plotting streamlines.
 
    #+CAPTION: Plotting streamlines
    #+NAME: fig:windtunnel2
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/windtunnel/IMG_9749.jpg]]
 
-   As wintunnel object exists on a certain location of the paper, users can easily change the context by using an empty space on the paper. Moving to middle of the page and writing the keyword followed by the crop marks, another windtunnel object is defined with the associated canvas. User continues the interaction by making a new sketch for the second car form to be simulated. In proximity of the new canvas, starting from the entry point for the second simulation area, user plots the field for the windtunnel. Figure [[fig:windtunnel3]] shows 2 windtunnels plotted on paper.
+   As wintunnel object exists on a certain location of the paper, users can easily change the context by using an empty space on the paper. Moving to middle of the page and writing the keyword 'windtunnel' and wind speed followed by the crop marks, user creates another windtunnel object with the associated canvas. User continues the interaction by making a new sketch for the second car form to be simulated. In proximity of the new canvas, starting from the entry point for the second simulation area, user plots the field for the windtunnel. Figure [[fig:windtunnel3]] shows the user plotting the second  windtunnel.
 
    #+CAPTION: Plotting streamlines for the second car
    #+NAME: fig:windtunnel3
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/windtunnel/IMG_9762.jpg]]
 
-   At this point of the walkthrough user continues to dive deeper into the data generated by \app{}. In this case, uses a 'windtunnel' specific interation to select desired data set for detailing. As seen on figure [[fig:windtunnel4]] second car's streamlines look straigher which may suggest better aerodynamic performance. User writes 'crosssection' and names it 'sedan' reflecting the form of the first car sketch. 'sedan' is the variable name that allows later use. To select these variables, user draws a straight line on the streamlines just after the tail of the car, using the plotted canvas and the sketch as a reference. User repeats the same action on the second car to select another data set and names it 'hatchback' on the process. Two selected data sets are available for further analysis.
-
-   To compare stored datasets, user moves to an empty space on the paper and starts a new object with the keyword 'plot' followed by the variable name that refers to the data set stored earlier, in this case 'sedan'. Plot keyword also requires an axis to be specified as target. Users define such areas with two perpendicular lines, which are classified by the backend as axis objects. The region defined by the axis lines describe the canvas area for the plot object. Similar to a manner of plotting streamlines user plots for first car. User repeats the action with the same keyword 'plot' followed by a different variable, 'hatchback'. Plot keyword expects an axis, in this case user selects an exisiting axis on the paper. By plotting on to the existing axis two data sets can be visually compared. 
+   At this point of the walkthrough user continues to investigate and make sense of the data generated by \app{}. In order to take a deeper look at a specific location on the simulation area, user inputs a windtunnel application specific command, 'crosssection' to select a data set. Figure [[fig:windtunnel4]] shows that second car's streamlines look straigher, which in return may suggest better aerodynamic performance. User writes 'crosssection' and names it 'sedan' refering to the form of the first car sketch. 'sedan' is the variable name that allows later recall. To select these variables, user draws a straight line on the streamlines just after the tail of the car, using the plotted canvas and the sketch as a reference. User repeats the same action on the second car to select another data set and names it 'hatchback' on the process. Two selected data sets are now available for further analysis.
 
    #+CAPTION: Capturing Data for Line Graph
    #+NAME: fig:windtunnel4
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/windtunnel/IMG_9768.jpg]]
 
-   #+CAPTION: Plotting Captured Data
+   To compare stored datasets, user moves to an empty space on the paper and starts a new object with the keyword 'plot' followed by the variable name that refers to the data set stored earlier, in this case 'sedan'. Plot keyword also requires an axis to be specified as target. Users define such areas with two perpendicular lines, which are classified by the backend as axis objects. The region defined by the axis lines describe the canvas area for the plot object. Similar to a manner of plotting streamlines user plots for first car. User repeats the action with the same keyword 'plot' followed by the second variable, 'hatchback'. Plot keyword expects an axis, in this case user selects an exisiting axis on the paper. By plotting two data sets on the same axis, results can be visually compared in the respective spacial context. Figure [[fig:windtunnel-captured]] shows the user plotting the windspeed at the cross section defined for each windtunnel.
+
+   #+CAPTION: Plotting Selected Data Set
    #+NAME: fig:windtunnel-captured
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/windtunnel/IMG_9777.jpg]]
 
-   Walkthrough continues to demonstrate how the user takes a deeper look at the generated data, to better understand the diffence between the performance of two car forms. Two tail speed plots seem to significantly differ at the negative crossing. Figure [[fig:windtunnel5]] shows the user inputing a new keyword, 'zoom' and selecting an region using crop-marks. Selected area is assigned to a variable, in this case 'tail'. Tail is a modifier that refers to respective regions of both data sets stored earlier. With a similar fashion to plotting windspeeds, selected region is plotted again. With this interaction user takes a closer look at the area of interest on the previous analysis.
+   Walkthrough continues to demonstrate how the user dives deeper in to the generated data, to better understand the diffence between the performance of two car forms. Two tail speed plots seem to significantly differ at the negative crossing. Negative wind speeds would likely to be an indication of turbulent areas, thus could signify higher wind resistance. Figure [[fig:windtunnel5]] shows the user inputing a new keyword, 'zoom' and selecting a region using crop-marks. Selected area is assigned to a variable, in this case 'tail'. Tail is a modifier that refers to respective regions of both data sets stored earlier. With a similar fashion to plotting windspeeds, selected region is plotted again. With this interaction user takes a closer look at the area of interest on the previous analysis, result of the plot can be seen on figure [[fig:windtunnel5-1]].
 
    #+CAPTION: Zoom at data set
    #+NAME: fig:windtunnel5
-   #+ATTR_LaTeX: :width 61mm :float wrap
+   #+ATTR_LaTeX: :width 132mm :float
    [[./images/windtunnel/IMG_9785.jpg]]
 
+   #+CAPTION: Plot Zoomed region for the first sketch
+   #+NAME: fig:windtunnel5-1
+   #+ATTR_LaTeX: :width 61mm :float wrap
+   [[./images/windtunnel/IMG_9788.jpg]]
+
+   #+CAPTION: Zoom at data set
+   #+NAME: fig:windtunnel5-2
+   #+ATTR_LaTeX: :width 61mm :float wrap
+   [[./images/windtunnel/IMG_9790.jpg]]
+
+
+   On the final step of the walkthrough user decides to compare drag coefficients of two bodies in the windtunnel. Drag cooefficient is an aerodynimcs concept, a unitless ratio that is used as an indication of the aerodynamic performance of body in a fluid. \App{} windtunnel application allows calculation of this value on the sketch. This example illustrates how \app{} can output scalar values and perform sense making on them. User starts of by writing 'plot drag', which is a keyword followed by a domain specific modifier. Plot drag command requires an axis and a sketch inside a windtunnel canvas. \app{} provides the user some flexibiliy on how to configure the widget. User can either write the name of the windtunnel object, as of 'plot drag sedan' or directly select the car figure from the context of the windtunnel with a pig tail on the car body. After the selection, user draws a line and annotates '0' and '1' as the minimum and maximum values of the axis, which is the last configuration \app{} reqires to make an scalar value output.
+
    #+CAPTION: Scale widget comparison
-   #+NAME: fig:windtunnel6
+   #+NAME: fig:windtunnel6-1
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/windtunnel/IMG_9794.jpg]]
 
-   On the final step of the walkthrough user decides to compare drag coefficients of two bodies in the windtunnel. Drag cooefficient is an aerodynimcs concept, that can be calculated for a body in fluid. \App{} windtunnel application allows calculation of this value on the sketch. This example illustrates how \app{} can output scalar values and perform sense making on them. User starts of by writing 'plot drag', which is a keyword and a domain specific modifier. Plot drag calculation requires an axis and a sketch inside a windtunnel canvas. User can write the name of the windtunnel object, as of 'plot drag sedan' or directly select the car figure from the context of the windtunnel with a pig tail on the car body. Finally user draws a line and annotates '0' and '1' as the axis, which is the last configuration \app{} reqires to make an output.
-
    #+CAPTION: Plot second widget comparison
-   #+NAME: fig:windtunnel6
+   #+NAME: fig:windtunnel6-2
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/windtunnel/IMG_9799.jpg]]
 
-   After the input sequence, plot widget can be used for the output. To initiate, user drags the pen starting from the point annotated as '0' up and when tip is on the right point of the scale \app{} pushes the hand perpendicular to leave a tick mark and up moving pen away from the paper. Point of the tick is proportionally mapped to the axis defined and labeled on the paper. Same action is repeated for the second car, in this case same axis is used utilizing spacial properties of the paper. After plotting both values, user can compare the performance of both form based a scalar value calculated by the simulation.
+   After the input sequence, plot widget can be used for the output. To initiate, user drags the pen starting from the point annotated as '0' up and when tip is on the right point of the scale \app{} pushes the hand perpendicular to leave a tick mark and up moving pen away from the paper. Figure [[fig:windtunnel6-1]] shows this step of the interaction. Point of the tick is proportionally mapped to the size of the axis defined and annotated on the paper. Same action is repeated for the second car as seen in figure [[fig:windtunnel6-2]], which shows the use of the same axis from the previous plot. After plotting both values, user can compare the performance of both forms based a scalar value calculated by the simulation.
 
-   After this sequence of actions, user gains insight to aerodynamic properties of the forms put on paper as sketches, which would require complicated calculations or computer modeling otherwise.
+   After these sequence of actions, user gains insight to aerodynamic properties of the forms put on paper as sketches, which would require complicated calculations or computer modeling otherwise.
 
 
 ** Other Application Scenarios
@@ -468,8 +474,8 @@ This thesis explores creating an interactive pen and paper application using Ele
 
     #+CAPTION:    User Plotting
     #+LABEL:      fig:user-study-1
-    #+ATTR_LaTeX: :width 90mm :float
-    [[./images/intro.jpg]]
+    #+ATTR_LaTeX: :width 132mm :float
+    [[./images/studyresults/setup.png]]
    
     Each trial lasted for 16 centimeters from left to right. For each trial, target and measured points were recorded, as well as the duration pen tip was in contact with the paper. Eight targets randomly served to participants are shown in figure [[fig:target-functions]]. First six functions labeled as Sin1 to Sin6 were composed by adding offphased sine waves of increasing frequency up to 0.5 cycles/cm. Remaining two functions consist of a triangular wave (denoted as Tri) and a half sine wave followed by a flat section (denoted as Flat). These two functions aim to explore how the system behaves with regards to abrupt changes in slope and curvature as well as to prevent participants from getting used to sine wave patterns.
 
@@ -479,8 +485,8 @@ This thesis explores creating an interactive pen and paper application using Ele
 
     #+CAPTION:    User Plotting
     #+LABEL:      fig:aparatus-1
-    #+ATTR_LaTeX: :width 90mm :float
-    [[./images/intro.jpg]]
+    #+ATTR_LaTeX: :width 132mm :float
+    [[./images/studyresults/closeup.png]]
 
     Figure [[fig:aparatus-1]] shows apparatus for the user study. Participants wore \app{}’s electrodes on the wrist flexor and extensor muscles as described in [[*Pad Placement][pad placement section]]. Participants were seated with the dominant forearm rested on the table to reduce fatigue. Plots were made using the controller described in Implementation, which actuated flexors and extensors simultaneously but without brake channel, which was introduced as an outcome of this study. Brake effect was achieve via tensing both sides. During the \app{} software administered the respective functions to the user; all other functionality was disabled.
 
@@ -494,7 +500,7 @@ This thesis explores creating an interactive pen and paper application using Ele
 
     #+CAPTION:    Target Functions
     #+LABEL:      fig:target-functions
-    #+ATTR_LaTeX: :width 132mm :float
+    #+ATTR_LaTeX: :width 152mm :float
     [[./images/studyresults/figure_1.png]]
 
 *** Preservation of sine-based functions
