@@ -191,6 +191,8 @@ This thesis explores creating an interactive pen and paper application using Ele
    After these sequence of actions, user gains insight to aerodynamic properties of the forms put on paper as sketches, which would require complicated calculations or computer modeling otherwise.
 
 
+\newpage{}
+
 ** Other Application Scenarios
    \App{} allows users to accomplish complex sense making tasks with the help of an non intrusive backend. In order to further illustrate these capabilities following applications are implemented.
 
@@ -344,13 +346,22 @@ This thesis explores creating an interactive pen and paper application using Ele
 
 **** Output from Calibration
 
-     Following table shows calibration results for three users that have participated in the user study. Values has been iteratively measured and adjusted during the calibration process.
+     Following table [[tab:calibration-results]] shows calibration results for three users that have participated in the user study. Values has been iteratively measured and adjusted during the calibration process.
 
-|        | right  |         |         | left   |        |         | brake   |
-|        | weak   | middle  | strong  | weak   | middle | strong  |         |
-| User 1 | 70/110 | 110/180 | 120/240 | 110/70 | 190/90 | 220/110 | 180/190 |
-| User 2 | 70/110 | 110/180 | 120/240 | 110/70 | 190/90 | 220/110 | 180/190 |
-| User 3 | 70/110 | 110/180 | 120/240 | 110/70 | 190/90 | 220/110 | 110/130 |
+     #+CAPTION: Results of the calibration for a group of sample users.
+     #+NAME:   tab:calibration-results
+     #+ATTR_LATEX: :float
+     #+ATTR_LATEX: :align |c|ccc|ccc|c|
+     |--------+--------+---------+---------+--------+--------+---------+---------|
+     |        | right  |         |         | left   |        |         | brake   |
+     |--------+--------+---------+---------+--------+--------+---------+---------|
+     |        | weak   | middle  | strong  | weak   | middle | strong  |         |
+     |--------+--------+---------+---------+--------+--------+---------+---------|
+     | User 1 | 70/110 | 110/180 | 120/240 | 110/70 | 190/90 | 220/110 | 180/190 |
+     | User 2 | 70/110 | 110/180 | 120/240 | 110/70 | 190/90 | 220/110 | 180/190 |
+     | User 3 | 70/110 | 110/180 | 120/240 | 110/70 | 190/90 | 220/110 | 110/130 |
+     |--------+--------+---------+---------+--------+--------+---------+---------|
+
 
 *** Control Loop
     Control loop of \app{} uses a series of strategies based on the state of the user's hand motions and the target position. Possible situations and associated strategies are futher illustrated in the following section. Key principles are highlighted in the following figure [[fig:control-loop]].
