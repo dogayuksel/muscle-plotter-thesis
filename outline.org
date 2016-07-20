@@ -266,50 +266,63 @@ This thesis explores creating an interactive pen and paper application using Ele
 
 * Implementation
 ** Overview
-   Current implementation of \app{} uses an Anoto Digitizer Pen & Paper for input and a medically compliant 8-channel portable EMS simulator (from HASOMED \cite{hasomed}) for output. Tracking data from the Anoto pen is relayed through a windows machine to the python back-end running on a Mac OSX. Communication between the EMS machine and the python back end takes place through the custom serial protocol via USB. Current implementation only uses 4 channels of the EMS device. This setup can be miniaturized with a hardware similar to the one proposed in Proprioceptive Interaction \cite{lopes_proprioceptive}.
 
-   Following chapter will further describe the implementation in detail. First, the input module is going to be described, later output of the system will be detailed. Finally the back-end that orchestrates two will be extensively analyzed. Back-end system combines several modules, which will be demostrated in detail.
+   Current implementation of \app{} uses an Anoto Pen & Paper\cite{anoto} for input and a medically compliant 8-channel portable EMS simulator (from HASOMED \cite{hasomed}) for output. Tracking data from the Anoto pen is relayed through a windows machine to the python back-end running on a Mac OSX. Communication between the EMS machine and the python back end takes place through the custom serial protocol via USB. Current implementation only uses 4 channels of the EMS device. This setup can be miniaturized with a hardware similar to the one proposed in Proprioceptive Interaction \cite{lopes_proprioceptive}.
+
+  #+CAPTION:    System Overview
+  #+LABEL:      fig:muscle-plotter-overview
+  #+ATTR_LaTeX: :width 110mm
+  [[./images/teaser.JPG]]
+
+   Following chapter will further describe the implementation in detail. First, the input module is going to be described, later output of the system will be detailed. Finally the back-end that orchestrates two will be extensively analyzed. Back-end system consists of  several different modules specilizing in different tasks, which will all be demostrated in detail.
 
 ** System Input
 *** Tracking System
 
-    Input to the system is handled by the Anoto Pen & Paper that acts as a precise tracker \cite{anoto}. the Anoto paper has a patented dot pattern that encodes the location data for each point. The accuracy of the location is quite high where each millimeter encodes upto 30 unique points. The camera on the pen scans and returns the value of the coordinates as long as the pen is pushing on to the paper. The angle of the pen influences the quality of tracking. The users are advised to hold the pen at an upright angle. It is important to mention that there is constant delay as the pen captures and analyses this image. This delay has a detrimental effect on the performance of the control loop. It will be further discussed later in this chapter. In the current implementation of \app{}, there is a Windows server running the drives provided by the Anoto company relaying data to the back-end server. The details of these drivers (from the vendor we’inspire) is confined by a non-disclosure agreement.
+    Input to the system is handled by the Anoto Pen & Paper that acts as a precise tracker \cite{anoto}. the Anoto Paper has a patented dot pattern that encodes the location data for each point. The accuracy of the location is quite high where each millimeter encodes upto 30 unique points. The camera placed inside the pen tip scans and returns the value of the coordinates as long as the pen is pushing on to the paper. The angle of the pen influences the quality of tracking. The users are advised to hold the pen at an upright angle. This is importing using \app{} as a steady stream of observed points allows control loop to function properly. It is also important to mention that there is constant delay as the pen captures and analyses this image. This delay also has a detrimental effect on the performance of the control loop. The effect of the delay will be further be discussed later in the control loop section this chapter. In the current implementation of \app{}, there is a Windows server running the drives provided by the Anoto company, relaying data to the back-end server. The details of these drivers (from the vendor we’inspire) is confined by a non-disclosure agreement.
 
     #+CAPTION:    Anoto Pen and Paper
     #+LABEL:      fig:pad-placement-flexor
     #+ATTR_LaTeX: :width 90mm :float
     [[./images/flexor.jpg]]
 
-    The communitation from Anoto Window API and the python backend is done via Open Sound Control (OSC). Each observation of the Anoto Pen is packaged and contains a location, nature of the observation ( pen up, pen down and drag) and a timestamp. Time stamp receieved is used for speed calculations. OSC packets are relayed to the python server through Ethernet. Measurements show that communication delay is insignificant compared to processing delay introduced by the pen hardware.
+    The communitation from Anoto Window API and the python backend is done via Open Sound Control (OSC). Each observation of the Anoto Pen is packaged and contains a location, nature of the observation ( pen up, pen down and drag) and a timestamp. Time stamp receieved is used for speed calculations. OSC packets are relayed to the python server through Ethernet. Measurements show that communication delay through ethernet is insignificant compared to constant processing delay introduced by the pen hardware.
 
 ** System output
-*** EMS Machine
-    EMS machine by HASOMED is capable of generating a stimulation up to 400Hz. In our implementation at a given time two channels are active at most, as a result, each muscle shares the capacity where each is stimulated with 200Hz. Furthermore the machine allows to control the amplitude and duty cycle of the signal. The system uses amplitudes ranging from 6mA to 16mA based on calibration results. Duty cycle can range between 20\micro{}s to 500\micro{}s, which provides a very large dynamic range of modulation. \App{} mainly controls duty cycles to achieve its accuracy. The amplitude is temporarily raised to boost actuation in certain conditions that will be described in the control loop section.
 
+    \App{} output is communicated throught electric muscle situmulation in to the arm of the user. Hence configuration of the pads on the arm and the machine that sends the signals are analysed under the system output section of the thesis.
+
+*** EMS Machine
+
+    EMS machine by HASOMED is capable of generating single pulses of stimulations up to a frequency of 400Hz. In our implementation at a given time two channels are active at most, as a result, each muscle shares the capacity. When in a generic travel mode of the control loop, each side of the arm is stimulated with 200Hz. \App{} pushes the capacity of the signal generator to achieve a feeling of continuous actuation.
+
+    In addition to the frequency of pulses, the EMS machine allows to control the amplitude and duty cycle of each pulse. \App{} uses amplitudes ranging from 6mA to 18mA based on calibration results. Duty cycle ranges between 20\micro{}s to 500\micro{}s, which provides a very large dynamic range of modulation. \App{} mainly controls duty cycles to achieve gradients of actuations. At specific situations, the amplitude of the pulses are temporarily raised to boost actuation that will further be described in the control loop section.
 
 *** Pad Placement
-    Medical grade EMS Machine produced by HASOMED is used to stimulate the arm of the user. In the current implementation 4 channels of the machine is connected to the arm of the user. Each channel is responsible for a different axis of motion. For a right handed setup; flexor carpi radialis moves the pen left, extensor carpi radialis brevis and partially flexor digitorum moves the pen right. Flexor carpi ulnaris is used to push the pen onto the paper, which in return helps to reduce oscillations and slow down. Finally extensor carpi radialis longus lifts the pen up from the paper.
+
+    Medical grade EMS Machine produced by HASOMED is used to stimulate the arm of the user. In the current implementation 4 channels of the machine is connected to the arm of the user. Each channel is responsible for a different axis of motion. For a right handed setup; flexor carpi radialis moves the pen left, extensor carpi radialis brevis and partially flexor digitorum moves the pen right. Flexor carpi ulnaris is used to push the pen onto the paper, which in return helps to reduce oscillations and slow down. Finally extensor carpi radialis longus lifts the pen up from the paper. Following figures [[fig:pad-placement-flexor]] and [[fig:pad-placement-extensor]] illustrate the pad placements.
 
     #+CAPTION:    Pad Placement - Flexor
     #+LABEL:      fig:pad-placement-flexor
-    #+ATTR_LaTeX: :width 90mm :float
+    #+ATTR_LaTeX: :width 134mm :float
     [[./images/flexor.jpg]]
 
     #+CAPTION:    Pad Placement - Extensor
     #+LABEL:      fig:pad-placement-extensor
-    #+ATTR_LaTeX: :width 90mm :float
+    #+ATTR_LaTeX: :width 134mm :float
     [[./images/extensor.jpg]]
 
 ** Back-end System
 
-   A back-end manages handles the communication of the input from the Anoto Pen and the output to EMS machine. Input from the tracker is constantly analyzed to respond based on the state of the interaction. Output of the \app{} has to be adjusted based on the arm of the user, hence back-end system includes a calibration procedure, that is described in the following chapter. Calibration values aquired are used to drive the control-loop model, which is detailed later. This travel model is abstracted in the API presented that is initiate and control wide range of widgets possible. Finally recognition system and application specific modules are described.
+   A back-end system handles the communication of the input from the Anoto Pen to the output of the EMS machine. Output of \app{} has to be specificly adjusted according to the physiology of the user's arm, as a result back-end system implements a calibration procedure. Calibration values acquired are used to drive the control loop model, which is extensivly described in the following sections. Input from the tracker is constantly analyzed to respond based on the state of the interactions, these include state transitions and input classifications. Management of the control-loop and state-transitions with the context changes on the paper is abstracted in an API. This API allows to initiate and controls custom widgets described in this section. Finally application specific implementations are touched upon.
 
 *** Calibration Process
-    Calibration is an important aspect of current EMS applications. \App{} requires meticulus calibration to be adjusted for the user, since for each user pen holding posture and arm phisology is unique. Calibration generally takes place in three steps, with iterations and repeations if necessary, based on the skills and the comfort level of the user. Back-end system implements several methods to make calibration observations possible.
+
+    Calibration is an important aspect of current EMS applications. \App{} requires meticulus calibration to be adjusted specifically for each user, since for each user pen holding posture and arm psyhisology is unique. Values collected may need to be adjusted for long sessions as muscle fatigue and getting used to the plotting action may change the reaction of the arm to the actuations from the control loop. \App{} calibration generally takes place in three steps, with iterations and repeations if necessary, based on the skills and the comfort levels of the user. Back-end system implements several methods to make calibration observations possible, each illustrated in the following section.
 
 **** Comfortable actuation current
 
-     The throughput of the motion created by EMS changes dramatically based on the anathomy of the user's arm. Several factors, such as muscle size, skin thickness and hair density causes these variations. The implemantation includes a script that step by step sweeps up the intensity of the milliamps applied to each side of the arm (left and right). The experimenter observes the minimum current that starts the motion and a the maximum current that results in a significant motion but still is not painfull. These values determine the range of values that can be used on the next step.
+     The throughput of the motion created by EMS changes dramatically based on the anathomy of the user's arm. Several factors, such as muscle size, skin thickness and hair density causes these variations. For the first step of calibration \app{} implements a script that step by step sweeps up the intensity of the milliamps applied to each side of the arm (left and right). The experimenter observes the minimum current that starts the motion and a the maximum current that results in a significant motion but still is not painfull. Duty cycles of the signals used in this step are kept at 200\micro{}S to allow finding a suitable dynamic range that can be can be used on the next step.
 
 **** Slope gradients
 
