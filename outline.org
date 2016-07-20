@@ -326,10 +326,10 @@ This thesis explores creating an interactive pen and paper application using Ele
 
 **** Slope gradients
 
-     After the comfortable EMS range for the user is determined, user is asked to draw straight lines along the paper in the posture required to use \app{}. At this calibration step, calibration script actuates user's arm with random pairs of currents on each side. The script records the resulting angle after each actuation. After a desired number of trial pairs, averages of the plots observed on a two dimentional plot. To conclude this step, three pairs that result in maximum variation between resulting slopes are chosen for each side. Pairs that consistently result in similar results are desired. EMS is efficient in creating jerky motions, however slow controlled motions are harder to generate. Actuation of both sides, using both opposing muscles, allows \app{} to increase control on the wrist. Following figure shows the visualisation of these slopes on a single user.
+     After the comfortable range of instensities for the EMS is determined, user is asked to draw straight lines along the paper in the posture required to plot with \app{}. At this calibration step, calibration script actuates user's arm with random pairs of currents on each side. The script records the resulting angle after each actuation. Figure [[fig:angle-overview-sheet]] at the end of this chapter showcases the marks on the paper after such a trial. In this case all actuations take place on the same horizontal axis for visualization purposes, however this location is random on normal trials to avoid users expecting a signal at a certain point. After a desired number of trial pairs, averages of the slopes are observed on a two dimentional visualization. Figure [[fig:angle-overview]] showcases this interface. Lighter collors correspond to smaller slops, while darker colors signifies pairs resulted in a higher slop. To conclude this step, three pairs that result in maximum variation between resulting slopes are chosen for each side. Pairs that consistently result in similar results are desired. It is easier to create jerky motions with EMS, however slow controlled actuations are harder to generate. Actuation of both sides, using both opposing muscles, allows \app{} to increase control on the wrist.
 
     #+CAPTION:    Sample trials on paper
-    #+LABEL:      fig:angle-overview
+    #+LABEL:      fig:angle-overview-sheet
     #+ATTR_LaTeX: :width 132mm
     [[./images/calibration/foto_scratch.jpg]]
 
@@ -340,9 +340,10 @@ This thesis explores creating an interactive pen and paper application using Ele
 
 **** Brake Calibration
 
-     \App{} has two modes for brakes, following section will further detail each. Which ever mode is active, the intensity of the brake has to be adjusted for the specific user. Back-end sytem, uses an extentiation of slope-gradients calculation presented earlier to enable adjustments. In brake calibration, users draw lines similar to the last step, but this time after a random time after actuation brakes are initiated. \App{} observes how efficiently wrist motion stabilizes again to select most stable brake intensity for the user.   
+     \App{} has two modes for brakes, following section on control loop will further detail each. Which ever mode is active, the intensity of the brake has to be adjusted for the specific user. Back-end sytem, uses an extentiation of slope-gradients calculation presented earlier to enable these adjustments. In brake calibration step, users draw lines similar to the last step, but this time after a random time after actuation brakes are initiated. \App{} and the calibration asistant observes how efficiently wrist motion stabilizes to select the most comfortable brake intensity for the user.
 
 **** Output from Calibration
+
      Following table shows calibration results for three users that have participated in the user study. Values has been iteratively measured and adjusted during the calibration process.
 
 |        | right  |         |         | left   |        |         | brake   |
@@ -352,7 +353,7 @@ This thesis explores creating an interactive pen and paper application using Ele
 | User 3 | 70/110 | 110/180 | 120/240 | 110/70 | 190/90 | 220/110 | 110/130 |
 
 *** Control Loop
-    Control loop of \app{} uses a series of strategies based on the state of the user's hand motions and the target position. Possible situations and associated strategies are futher illustrated in the following section. Key principles are highlighted  in the following figure [[fig:control-loop]].
+    Control loop of \app{} uses a series of strategies based on the state of the user's hand motions and the target position. Possible situations and associated strategies are futher illustrated in the following section. Key principles are highlighted in the following figure [[fig:control-loop]].
 
     #+CAPTION:    Key Aspects of the Control Loop
     #+LABEL:      fig:control-loop
@@ -361,38 +362,52 @@ This thesis explores creating an interactive pen and paper application using Ele
 
 **** Model of the Human Wrist
 
-     \App{} uses a simple model of the human arm to manage the motion of the wrist. The wrist is assumed to be a level attached to two strings. When the wrist is stationary, tension on both sides are equal, hence forming an equilibrium. Wrist motion takes place when tension on one of the strings changes as described by the `equilibrium point model' \cite{schmidt_motorcontrol}. Situmulation through nerves and muscle fibers result in contractions stronger on one side of the wrist. When on side is  contracted more then the opposing side, motion occurs to tenser side. As a result same target position can be reached with different configurations of contractions on opposing muscles. When the wrist position changes, the length of the muscle fibers also change, perhaps to find another equilibrium point when forces are again equal on each side. Any given static position of the wrist is an equilibrium of forces caused by tension on opposing muscles. \cite{schmidt_motorcontrol}. \App{} relies on these principles to achieve the accuracy it needs as both muscles on opposing sides are sequentially situmulated in rapid successions. In other words intended position of the arm can be reached by applying different pairs of impulses to flexor and extensor muscles. This observation can also be deferred from the data collection step of the slope calibration process.
+     \App{} uses a simple model of the human arm to manage the motion of the wrist. The wrist is assumed to be a level attached to two strings. When the wrist is stationary, tension on both sides are equal, hence forming an equilibrium. Wrist motion takes place when tension on one of the strings changes as described by the `equilibrium point model' \cite{schmidt_motorcontrol}. Situmulation through nerves and muscle fibers result in contractions stronger on one side of the wrist. When one side is contracted more then the opposing side, motion occurs in direction of the tenser side. As a result same target position can be reached with different configurations of contractions on opposing muscles. When the wrist position changes, the length of the muscle fibers also change, perhaps to find another equilibrium point when forces are again equal on each side again. Figure [[fig:equilibrium-point-model]] showcases this principle. Any given static position of the wrist is an equilibrium of forces caused by tension on opposing muscles. \cite{schmidt_motorcontrol}. \App{} relies on these principles to achieve the accuracy it needs as both muscles on opposing sides are sequentially situmulated in rapid successions. In other words intended position of the arm can be reached by applying different pairs of impulses to flexor and extensor muscles.  Moreover increasing the tension on both sides allow to override the tension naturally applied by the user. This observation can also be deferred from the data collection step of the slope calibration process.
 
-     #+CAPTION:    Equilibrium point model
-     #+LABEL:      fig:Equilibrium point model
-     #+ATTR_LaTeX: :width 132mm :float
+     #+CAPTION:    Equilibrium point model for the User's Arm
+     #+LABEL:      fig:equilibrium-point-model
+     #+ATTR_LaTeX: :width 91mm :float
      [[./images/spring-mass-model.png]]
 
 **** Targeting and travel
 ***** Control Cycles
-      Control-loop of \app{} consists of control cycles exacuted consequtively. Each cycle makes observations and acts based on the respective state against the target. At a given point, when a control cycle begins expected trajectory of the pen tip is calculated based on the tranmission and processing delay of the Anoto Pen. In other words when the back-end reads the observation, the user is actually at a later point of the plot. This delay has been measured to be around 0.1s. 
 
-     #+CAPTION:    Control Loop in Action
-     #+LABEL:      fig:control-loop
+      Control-loop of \app{} consists of control cycles exacuted consequtively. Each cycle makes observations and acts based on the respective state relative to the target. Figure [[fig:control-loop-fast]] illustrates consequtive decision cycles on the give curve. At a given point, when a control cycle begins expected trajectory of the pen tip is calculated keeping in mind the tranmission and processing delay of the Anoto Pen. In other words when the back-end reads the observation, the user is actually at a later point of the plot. This delay has been measured to be around 0.1s. As seen On figure [[fig:control-loop-fast]] each green dot is the calculated trajectory, where blue points represent the respective targets for that specific cycle.
+
+     #+CAPTION:    Observed and Target Points Visualized
+     #+LABEL:      fig:control-loop-fast
      #+ATTR_LaTeX: :width 132mm :float
      [[./images/implementation/loop_in_action.png]]
 
-     #+CAPTION:    Control Loop in Action
+***** Dynamic Adjustments
+
+      If the user is lagging behind the target, the signal intensity applied to muscle that that causes the delay is increased by 1 mA. The lag is constantly stored on each control cycle. When the cummulative lag in previous cycles is above 0.6mm, boost is applied. Moreoever if the next cycle still lags above the 0.6mm threshold, the boost is increased 2 mA. Such an increase causes the arm to respond faster then the duty cycle changes using in the normal mode. This adjustment can be considered as the integral part of a classical PID controller.  
+
+***** Modes of Braking
+
+      As mentioned earlier \app{} uses two modes of braking strategies. What ever the strategy is brakes are activated at same certain situations during the control loop. At the observation and estimation state, \app{} calculates the expected location and later the expected trajectory. If this trajectrory:
+ - is pointing torwards the target
+ - the user has been away from the target for a certain distance
+ - and expected trajectory is is measured to have an intersection with the target
+brakes are activated. This mode can be considered as the derivation component of a traditional PID controller. Main aim is to reduce the oscillations occuring while the plotting takes place. Figure [[fig:control-loop]] shows the brake activation cycles with cyan circles on the top curve. Buttom curve showcases observed and target points as in the previous figure. Following sections will identify two modes of braking.
+
+     #+CAPTION:    Brakes applied during the plot 
      #+LABEL:      fig:control-loop
      #+ATTR_LaTeX: :width 132mm :float
      [[./images/implementation/crazy_fast.png]]
 
-***** Dynamic Adjustments
-      If the user is lagging behind the target, the signal intensity applied to muscle that that causes the delay is increased by 1 mA. 
-     
-**** Braking strategy
-
-***** Modes of Braking
 ****** Tensing Up both sides
-****** Additional channel pushing down
 
+       First braking strategy is based on the two channel implementation of \app{}. This mode has been used in the user study, while the findings pointed torwards a better implementation described in the next subsection. This strategy uses high intensity pulses on each side of the arm to achive and equilibrium point at a neutral angle. As mentioned in the [[*Model of the human wrist][model of the human wrist]] section, high instensities on both sides override previous motions to reach an neutral position. However observations during the study showed that this created a confusion for the users when in combination with them momentum of the plotting action itself, as they were confused with such impulses expecting a resulting motion on either sides.
+
+****** Additional channel pushing down
+       
+       Second mode of braking uses an additional channel thrusting towards the paper, as mentioned in the pad placement section. This enables \app{} to utilize the power of arm muscles that are not activated by the steering motion. As a result the intent of the system is also percieved more clearly avoiding confusions.
 
 **** Ending an interaction
+
+     Control loop also implements a feature to signify when a plot is over. This consists of a strong single pulse in the direction away from the paper. When a certain position is reached, \app{} issues pen-up command, which in return lifts the arm away from the paper.
+
 
 *** Higher level API for Flow Control
 
