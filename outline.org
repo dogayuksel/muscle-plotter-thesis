@@ -67,7 +67,7 @@ This thesis explores creating an interactive pen and paper application using Ele
 
 ** Motivation
 
-   Pen and paper is an important activity for concerning human creativity and productivity. The medium of pen paper is familiar for many people. Developing technologies that could enhance the capabilities of this medium can be beneficial to many. \App{} builds upon this idea and imagines possibility of a future interface without screens, an interface that could be miniaturized and integrated.
+   Pen and paper is an important activity for concerning human creativity and productivity. The medium of pen and paper is familiar for many people. Developing technologies that could enhance the capabilities of this medium can be beneficial to many. \App{} builds upon this idea and imagines possibility of a future interface without screens, an interface that could be miniaturized and integrated.
 
 ** Contribution
 
@@ -82,7 +82,7 @@ This thesis explores creating an interactive pen and paper application using Ele
 
 ** Fundamentals
 
-   \App{} builds upon pen and paper interactions, activities such as writing, note taking, sketching that is essential for human intellect. These activities form the pillars for developing own ideas, communicating and building upon them. Ullman et al. have investigated how mechanical designers used drawings, and observed that it 'acts as an extended memory', helps analyzing and simulating forms, and enables communication of ideas \cite{ullman_importancedrawing}.
+   \App{} builds upon pen and paper interactions, activities such as writing, note taking, sketching that is essential for human intellect. These activities form the pillars for developing own ideas, communicating and building upon them. Ullman et al. have investigated how mechanical designers used drawings, and observed that it `acts as an extended memory', helps analyzing and simulating forms in return enables communication of ideas \cite{ullman_importancedrawing}.
 
    This thesis is further related to interactive pen-based interfaces, interactive systems based on exoskeletons or electrical muscle simulators. Following chapter will further investigate examples from the state of the art research.
 
@@ -124,14 +124,14 @@ This thesis explores creating an interactive pen and paper application using Ele
 
    Following walkthrough with \app{} showcases a designer analyzing the aerodynamic properties of a car sketch. Walkthrough demonstrates the interaction principles of \app{} as it allows the designer to understand implications of the changes on the car form by sketching.
 
-   User starts the interaction by selecting a domain from \app{}. This entry and the following sequence of actions constitute as input and prepares \app{} for output. In this case user writes the keyword, 'windtunnel'. \App{} processes input for potential keywords to provide the transition. Tesseract \cite{tesser_ocr} classifies the input, later to match to a keyword in a dictionary. `Windtunnel' keyword is followed by the number '10', which signifies the wind speed in this context. This number configures the tunnel entry speed (in meters per second) of simulated particles. `Windtunnel' command optionally expects this configuration, otherwise default value is used. Input after the keyword is checked against spacial proximity, if in expected position, is sent to be classified by Tesseract.
+   User starts the interaction by selecting a domain from \app{}. This entry and the following sequence of actions constitute as input and prepares \app{} for output. In this case user writes the keyword, `windtunnel'. \App{} processes input for potential keywords to provide the transition. Tesseract \cite{tesser_ocr} classifies the input, later to match to a keyword in a dictionary. `Windtunnel' keyword is followed by the number `10', which signifies the wind speed in this context. This number configures the tunnel entry speed (in meters per second) of simulated particles. `Windtunnel' command optionally expects this configuration, otherwise default value is used. Input after the keyword is checked against spacial proximity, if in expected position, is sent to be classified by Tesseract.
 
    #+CAPTION: Start Wind Tunnel Application, Place Canvas
    #+NAME: fig:windtunnel1
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/windtunnel/IMG_9716.jpg]]
 
-   Once the keyword activates the domain, 'windtunnel', user proceeds to define the boundaries of the simulation area. As displayed in the figure [[fig:windtunnel1]] user defines this two dimensional space with crop marks. At this stage \app{} stores windtunnel as an object with coordinates of the designated canvas. Input from Anoto Pen is further processed based on this context defined in the state. As the users sketch the car, points received from Anoto Pen are stored and continuously processed to construct the outlines of the shape which later is used to create streamlines.
+   Once the keyword activates the domain, `windtunnel', user proceeds to define the boundaries of the simulation area. As displayed in the figure [[fig:windtunnel1]] user defines this two dimensional space with crop marks. At this stage \app{} stores windtunnel as an object with coordinates of the designated canvas. Input from Anoto Pen is further processed based on this context defined in the state. As the users sketch the car, points received from Anoto Pen are stored and continuously processed to construct the outlines of the shape which later is used to create streamlines.
 
    After minimum input requirements for the wind tunnel object are satisfied, user can interact with the canvas to receive an output. By design \app{}'s wind tunnel defines left boundary to be the entry point of the wind particles for the simulation. To plot a streamline user puts the Anoto Pen on the left of the canvas and starts pulling the arm thus the pen tip perpendicular to the entry axis. During this motion, \app{} steers the wrist of the user to plot the trajectory of the simulated particle in the wind tunnel. After plotting several times starting from different locations on the vertical axis, user can see an overview of the sketch's aerodynamic behavior through the field of streamlines. Figure [[fig:windtunnel2]] shows user plotting streamlines.
 
@@ -140,28 +140,28 @@ This thesis explores creating an interactive pen and paper application using Ele
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/windtunnel/IMG_9749.jpg]]
 
-   As wind tunnel object exists on a certain location of the paper, users can easily change the context by using an empty space on the paper. Moving to middle of the page and writing the keyword 'windtunnel' and wind speed followed by the crop marks, user creates another windtunnel object with the associated canvas. User continues the interaction by making a new sketch for the second car form to be simulated. In proximity of the new canvas, starting from the entry point for the second simulation area, user plots the field for the windtunnel. Figure [[fig:windtunnel3]] shows the user plotting the second  windtunnel.
+   As wind tunnel object exists on a certain location of the paper, users can easily change the context by using an empty space on the paper. Moving to middle of the page and writing the keyword `windtunnel' and wind speed followed by the crop marks, user creates another windtunnel object with the associated canvas. User continues the interaction by making a new sketch for the second car form to be simulated. In proximity of the new canvas, starting from the entry point for the second simulation area, user plots the field for the windtunnel. Figure [[fig:windtunnel3]] shows the user plotting the second  windtunnel.
 
    #+CAPTION: Plotting streamlines for the second car
    #+NAME: fig:windtunnel3
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/windtunnel/IMG_9762.jpg]]
 
-   At this point of the walkthrough user continues to investigate and make sense of the data generated by \app{}. In order to take a deeper look at a specific location on the simulation area, user inputs a wind tunnel application specific command, 'crosssection' to select a data set. Figure [[fig:windtunnel4]] shows that second car's streamlines look straighter, which in return may suggest better aerodynamic performance. User writes 'crosssection' and names it 'sedan' referring to the form of the first car sketch. 'sedan' is the variable name that allows later recall. To select these variables, user draws a straight line on the streamlines just after the tail of the car, using the plotted canvas and the sketch as a reference. User repeats the same action on the second car to select another data set and names it 'hatchback' on the process. Two selected data sets are now available for further analysis.
+   At this point of the walkthrough user continues to investigate and make sense of the data generated by \app{}. In order to take a deeper look at a specific location on the simulation area, user inputs a wind tunnel application specific command, `crosssection' to select a data set. Figure [[fig:windtunnel4]] shows that second car's streamlines look straighter, which in return may suggest better aerodynamic performance. User writes `crosssection' and names it `sedan' referring to the form of the first car sketch. `sedan' is the variable name that allows later recall. To select these variables, user draws a straight line on the streamlines just after the tail of the car, using the plotted canvas and the sketch as a reference. User repeats the same action on the second car to select another data set and names it `hatchback' on the process. Two selected data sets are now available for further analysis.
 
    #+CAPTION: Capturing Data for Line Graph
    #+NAME: fig:windtunnel4
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/windtunnel/IMG_9768.jpg]]
 
-   To compare stored data sets, user moves to an empty space on the paper and starts a new object with the keyword 'plot' followed by the variable name that refers to the data set stored earlier, in this case 'sedan'. Plot keyword also requires an axis to be specified as target. Users define such areas with two perpendicular lines, which are classified by the back-end as axis objects. The region defined by the axis lines describe the canvas area for the plot object. Similar to a manner of plotting streamlines user plots for first car. User repeats the action with the same keyword 'plot' followed by the second variable, 'hatchback'. Plot keyword expects an axis, in this case user selects an existing axis on the paper. By plotting two data sets on the same axis, results can be visually compared in the respective spacial context. Figure [[fig:windtunnel-captured]] shows the user plotting the wind speed at the cross section defined for each windtunnel.
+   To compare stored data sets, user moves to an empty space on the paper and starts a new object with the keyword `plot' followed by the variable name that refers to the data set stored earlier, in this case `sedan'. Plot keyword also requires an axis to be specified as target. Users define such areas with two perpendicular lines, which are classified by the back-end as axis objects. The region defined by the axis lines describe the canvas area for the plot object. Similar to a manner of plotting streamlines user plots for first car. User repeats the action with the same keyword `plot' followed by the second variable, `hatchback'. Plot keyword expects an axis, in this case user selects an existing axis on the paper. By plotting two data sets on the same axis, results can be visually compared in the respective spacial context. Figure [[fig:windtunnel-captured]] shows the user plotting the wind speed at the cross section defined for each windtunnel.
 
    #+CAPTION: Plotting Selected Data Set
    #+NAME: fig:windtunnel-captured
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/windtunnel/IMG_9777.jpg]]
 
-   Walkthrough continues to demonstrate how the user dives deeper in to the generated data, to better understand the difference between the performance of two car forms. Two tail speed plots seem to significantly differ at the negative crossing. Negative wind speeds would likely to be an indication of turbulent areas, thus could signify higher wind resistance. Figure [[fig:windtunnel5]] shows the user inputting a new keyword, 'zoom' and selecting a region using crop-marks. Selected area is assigned to a variable, in this case 'tail'. Tail is a modifier that refers to respective regions of both data sets stored earlier. With a similar fashion to plotting wind speeds, selected region is plotted again. With this interaction user takes a closer look at the area of interest on the previous analysis, result of the plot can be seen on figure [[fig:windtunnel5-1]].
+   Walkthrough continues to demonstrate how the user dives deeper in to the generated data, to better understand the difference between the performance of two car forms. Two tail speed plots seem to significantly differ at the negative crossing. Negative wind speeds would likely to be an indication of turbulent areas, thus could signify higher wind resistance. Figure [[fig:windtunnel5]] shows the user inputting a new keyword, `zoom' and selecting a region using crop-marks. Selected area is assigned to a variable, in this case `tail'. Tail is a modifier that refers to respective regions of both data sets stored earlier. With a similar fashion to plotting wind speeds, selected region is plotted again. With this interaction user takes a closer look at the area of interest on the previous analysis, result of the plot can be seen on figure [[fig:windtunnel5-1]].
 
    #+CAPTION: Zoom at data set
    #+NAME: fig:windtunnel5
@@ -174,7 +174,7 @@ This thesis explores creating an interactive pen and paper application using Ele
    [[./images/windtunnel/IMG_9788.jpg]]
 
 
-   On the final step of the walkthrough user decides to compare drag coefficients of two bodies in the wind tunnel. Drag coefficient is an aerodynamics concept, a unit-less ratio that is used as an indication of the aerodynamic performance of body in a fluid. \App{} wind tunnel application allows calculation of this value on the sketch. This example illustrates how \app{} can output scalar values and perform sense making on them. User starts of by writing 'plot drag', which is a keyword followed by a domain specific modifier. Plot drag command requires an axis and a sketch inside a wind tunnel canvas. \app{} provides the user some flexibility on how to configure the widget. User can either write the name of the wind tunnel object, as of 'plot drag sedan' or directly select the car figure from the context of the wind tunnel with a pig tail on the car body. After the selection, user draws a line and annotates '0' and '1' as the minimum and maximum values of the axis, which is the last configuration \app{} requires to make an scalar value output.
+   On the final step of the walkthrough user decides to compare drag coefficients of two bodies in the wind tunnel. Drag coefficient is an aerodynamics concept, a unit-less ratio that is used as an indication of the aerodynamic performance of body in a fluid. \App{} wind tunnel application allows calculation of this value on the sketch. This example illustrates how \app{} can output scalar values and perform sense making on them. User starts of by writing `plot drag', which is a keyword followed by a domain specific modifier. Plot drag command requires an axis and a sketch inside a wind tunnel canvas. \app{} provides the user some flexibility on how to configure the widget. User can either write the name of the wind tunnel object, as of `plot drag sedan' or directly select the car figure from the context of the wind tunnel with a pig tail on the car body. After the selection, user draws a line and annotates `0' and `1' as the minimum and maximum values of the axis, which is the last configuration \app{} requires to make an scalar value output.
 
    #+CAPTION: Scale widget comparison
    #+NAME: fig:windtunnel6-1
@@ -186,7 +186,7 @@ This thesis explores creating an interactive pen and paper application using Ele
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/windtunnel/IMG_9799.jpg]]
 
-   After the input sequence, plot widget can be used for the output. To initiate, user drags the pen starting from the point annotated as '0' up and when tip is on the right point of the scale \app{} pushes the hand perpendicular to leave a tick mark and up moving pen away from the paper. Figure [[fig:windtunnel6-1]] shows this step of the interaction. Point of the tick is proportionally mapped to the size of the axis defined and annotated on the paper. Same action is repeated for the second car as seen in figure [[fig:windtunnel6-2]], which shows the use of the same axis from the previous plot. After plotting both values, user can compare the performance of both forms based a scalar value calculated by the simulation.
+   After the input sequence, plot widget can be used for the output. To initiate, user drags the pen starting from the point annotated as `0' up and when tip is on the right point of the scale \app{} pushes the hand perpendicular to leave a tick mark and up moving pen away from the paper. Figure [[fig:windtunnel6-1]] shows this step of the interaction. Point of the tick is proportionally mapped to the size of the axis defined and annotated on the paper. Same action is repeated for the second car as seen in figure [[fig:windtunnel6-2]], which shows the use of the same axis from the previous plot. After plotting both values, user can compare the performance of both forms based a scalar value calculated by the simulation.
 
    After these sequence of actions, user gains insight to aerodynamic properties of the forms put on paper as sketches, which would require complicated calculations or computer modeling otherwise.
 
@@ -205,7 +205,7 @@ This thesis explores creating an interactive pen and paper application using Ele
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/otherapps/rcfilter.jpg]]
 
-   Filter design application is used for understanding different filter designs by observing their frequency response. The domain is selected by writing the keyword 'RCfilter' followed by a variable name in this case 'highpass'. User further inputs required parameters as in keyword, variable sequence, as shown on figure [[fig:rcfilter]] as 'RCFILTER CAP 47\micro{}F'. After the environment is initialized, user plots the the frequency response to observe the design of the RC filter. At this step user changes the variables and re-plots the response, which allows to iteratively design filters with adjusting components.
+   Filter design application is used for understanding different filter designs by observing their frequency response. The domain is selected by writing the keyword `RCfilter' followed by a variable name in this case `highpass'. User further inputs required parameters as in keyword, variable sequence, as shown on figure [[fig:rcfilter]] as `RCFILTER CAP 47\micro{}F'. After the environment is initialized, user plots the the frequency response to observe the design of the RC filter. At this step user changes the variables and re-plots the response, which allows to iteratively design filters with adjusting components.
 
 *** Solving Math Equations
 
@@ -216,14 +216,14 @@ This thesis explores creating an interactive pen and paper application using Ele
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/otherapps/IMG_9697.jpg]]
 
-   Figure [[fig:mathequations]] shows user plotting a fifth degree polynomial. Using the keyword 'F(X)=' user stores parameters of the polynomial in to the state. User later recall this variable with the 'plot' keyword, followed by axis definition
+   Figure [[fig:mathequations]] shows user plotting a fifth degree polynomial. Using the keyword `F(X)=' user stores parameters of the polynomial in to the state. User later recall this variable with the `plot' keyword, followed by axis definition
 
    #+CAPTION: Calculating the integral of a function
    #+NAME: fig:mathequations2
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/otherapps/IMG_9698.jpg]]
 
-   After the plot action, user calls 'integral' keyword, specifies the input and a target value. Which in return allows to spatially observe the output, where area under the curve reaches the target value. Figure [[fig:mathequations2]] shows the user getting the output of the 'integral' command query.
+   After the plot action, user calls `integral' keyword, specifies the input and a target value. Which in return allows to spatially observe the output, where area under the curve reaches the target value. Figure [[fig:mathequations2]] shows the user getting the output of the `integral' command query.
 
 *** Forms and Menus
 
@@ -234,7 +234,7 @@ This thesis explores creating an interactive pen and paper application using Ele
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/otherapps/IMG_9706.jpg]]
 
-   Figure [[fig:formsandmenus]] demonstrates a widget to configure \app{}. It displays a multiple checkbox example on top and a radio button below. Multiple checkboxes are initiated by the user with the keyword 'channel', followed by '?'. User then defines the list of possible values separated by square brackets. After the widget is configured, user traces the horizontal axis, \app{} draws tick marks on active channels. 
+   Figure [[fig:formsandmenus]] demonstrates a widget to configure \app{}. It displays a multiple checkbox example on top and a radio button below. Multiple checkboxes are initiated by the user with the keyword `channel', followed by `?'. User then defines the list of possible values separated by square brackets. After the widget is configured, user traces the horizontal axis, \app{} draws tick marks on active channels. 
 
    #+CAPTION: Input to a form widget
    #+NAME: fig:formsandmenus2
@@ -252,9 +252,9 @@ This thesis explores creating an interactive pen and paper application using Ele
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/otherapps/bar_IMG_9675.jpg]]
 
-   In fitting trend lines scenario user is exploring a data set concerning sales arranged by months. User starts this interaction with the keyword 'barchart' followed by the variable 'sales'. Bar chart requires an axis, which is defined by the user after keyword is invoked. A set of discrete values are mapped on the x-axis through the tick-marks drawn by \app{} as the user scans the axis. In this case user chooses to annotate the x-axis with the months. Muscle plotter is not outputting as the user is writing on an inactive area. When user decides to output a value, starts with a pen-down in proximity of the intersection between the peak of the tick mark and the x-axis and scans vertically, finally \app{} outputs a dash to the left followed by a pen up which signifies the column. 
+   In fitting trend lines scenario user is exploring a data set concerning sales arranged by months. User starts this interaction with the keyword `barchart' followed by the variable `sales'. Bar chart requires an axis, which is defined by the user after keyword is invoked. A set of discrete values are mapped on the x-axis through the tick-marks drawn by \app{} as the user scans the axis. In this case user chooses to annotate the x-axis with the months. \App{} is not outputting as the user is writing on an inactive area. When user decides to output a value, starts with a pen-down in proximity of the intersection between the peak of the tick mark and the x-axis and scans vertically, finally \app{} outputs a dash to the left followed by a pen up which signifies the column. 
 
-   This scenario further extends as user applies 'plot' with 'linearfit' on to the bar chart object. User starts dragging the pen from the starting point on to the y-axis and \App{} outputs linear regression as a line.
+   This scenario further extends as user applies `plot' with `linearfit' on to the bar chart object. User starts dragging the pen from the starting point on to the y-axis and \App{} outputs linear regression as a line.
 
 *** Optics Simulator
 
@@ -263,7 +263,7 @@ This thesis explores creating an interactive pen and paper application using Ele
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/otherapps/optics_IMG_9671.jpg]]
 
-   Optics simulator allows exploring how rays of light refract in convex and concave lenses using \app{}. In Figure [[fig:optics]], user sketches a convex lens and explores how light rays refract through it. The application is initiated with writing a keyword, 'optics' followed by defining a region with crop marks. When the user drags the pen through the lens, \app{} deviates the wrist based on the properties of the lens being simulated.
+   Optics simulator allows exploring how rays of light refract in convex and concave lenses using \app{}. In Figure [[fig:optics]], user sketches a convex lens and explores how light rays refract through it. The application is initiated with writing a keyword, `optics' followed by defining a region with crop marks. When the user drags the pen through the lens, \app{} deviates the wrist based on the properties of the lens being simulated.
 
 
 * Implementation
@@ -324,11 +324,47 @@ This thesis explores creating an interactive pen and paper application using Ele
 
 **** Comfortable actuation current
 
-     The throughput of the motion created by EMS changes dramatically based on the anatomy of the user's arm. Several factors, such as muscle size, skin thickness and hair density causes these variations. For the first step of calibration \app{} implements a script that step by step sweeps up the intensity of the milliamps applied to each side of the arm (left and right). The experimenter observes the minimum current that starts the motion and a the maximum current that results in a significant motion but still is not painful. Duty cycles of the signals used in this step are kept at 200\micro{}S to allow finding a suitable dynamic range that can be can be used on the next step.
+     The throughput of the motion created by EMS changes dramatically based on the anatomy of the user's arm. Several factors, such as muscle size, skin thickness and hair density causes these variations. For the first step of calibration \app{} implements a script that step by step sweeps up the intensity of the milliamps applied to each side of the arm (left and right). The experimenter observes the minimum current that starts the motion and a the maximum current that results in a significant motion but still is not painful. Duty cycles of the signals used in this step are kept at 200\micro{}S to allow finding a suitable dynamic range that can be can be used on the next step. Table [[tab:calibration-results-amps]] shows comfortable signal intensities for each participant, that were used as the starting point of the calibration.
+
+     #+CAPTION: Signal intensities for Participants in milliamps
+     #+NAME:   tab:calibration-results-amps
+     #+ATTR_LATEX: :float
+     #+ATTR_LATEX: :align |c|c|c|
+     |--------+----------+--------|
+     |        | extensor | flexor |
+     |--------+----------+--------|
+     | User 1 |       11 |      8 |
+     | User 2 |       12 |      8 |
+     | User 3 |       10 |      8 |
+     | User 4 |        8 |      8 |
+     | User 5 |        9 |      7 |
+     | User 6 |       10 |      8 |
+     | User 7 |       11 |      9 |
+     | User 8 |       11 |      8 |
+     |--------+----------+--------|
 
 **** Slope gradients
 
-     After the comfortable range of intensities for the EMS is determined, user is asked to draw straight lines along the paper in the posture required to plot with \app{}. At this calibration step, calibration script actuates user's arm with random pairs of currents on each side. The script records the resulting angle after each actuation. Figure [[fig:angle-overview-sheet]] at the end of this chapter showcases the marks on the paper after such a trial. In this case all actuations take place on the same horizontal axis for visualization purposes, however this location is random on normal trials to avoid users expecting a signal at a certain point. After a desired number of trial pairs, averages of the slopes are observed on a two dimensional visualization. Figure [[fig:angle-overview]] showcases this interface. Lighter colors correspond to smaller slops, while darker colors signifies pairs resulted in a higher slop. To conclude this step, three pairs that result in maximum variation between resulting slopes are chosen for each side. Pairs that consistently result in similar results are desired. It is easier to create jerky motions with EMS, however slow controlled actuations are harder to generate. Actuation of both sides, using both opposing muscles, allows \app{} to increase control on the wrist.
+     After the comfortable range of intensities for the EMS is determined, user is asked to draw straight lines along the paper in the posture required to plot with \app{}. At this calibration step, calibration script actuates user's arm with random pairs of currents on each side. The script records the resulting angle after each actuation. Figure [[fig:angle-overview-sheet]] at the end of this chapter showcases the marks on the paper after such a trial. In this case all actuations take place on the same horizontal axis for visualization purposes, however this location is random on normal trials to avoid users expecting a signal at a certain point. After a desired number of trial pairs, averages of the slopes are observed on a two dimensional visualization. Figure [[fig:angle-overview]] showcases this interface. Lighter colors correspond to smaller slops, while darker colors signifies pairs resulted in a higher slop. To conclude this step, three pairs that result in maximum variation between resulting slopes are chosen for each side. Pairs that consistently result in similar results are desired. It is easier to create jerky motions with EMS, however slow controlled actuations are harder to generate. Actuation of both sides, using both opposing muscles, allows \app{} to increase control on the wrist. Table [[tab:calibration-results]] shows the pairs used for each participant during the user study.
+
+     #+CAPTION: Results of the slope calibration for the User Study Participants
+     #+NAME:   tab:calibration-results
+     #+ATTR_LATEX: :float
+     #+ATTR_LATEX: :align |c|ccc|ccc|
+     |--------+----------+--------+--------+---------+---------+--------|
+     |        | extensor |        |        | flexor  |         |        |
+     |--------+----------+--------+--------+---------+---------+--------|
+     |        | weak     | middle | strong | weak    | middle  | strong |
+     |--------+----------+--------+--------+---------+---------+--------|
+     | User 1 | 100/185  | 80/190 | 0/220  | 170/130 | 180/110 | 240/50 |
+     | User 2 | 80/160   | 80/200 | 0/220  | 150/90  | 180/90  | 210/60 |
+     | User 3 | 60/260   | 50/290 | 40/330 | 130/130 | 150/110 | 190/50 |
+     | User 4 | 100/165  | 80/200 | 0/230  | 170/130 | 215/110 | 240/50 |
+     | User 5 | 100/175  | 80/200 | 0/230  | 190/110 | 215/90  | 240/50 |
+     | User 6 | 100/175  | 80/200 | 0/230  | 180/100 | 210/90  | 240/50 |
+     | User 7 | 100/185  | 80/200 | 0/220  | 170/130 | 210/110 | 240/50 |
+     | User 8 | 100/185  | 80/200 | 60/210 | 170/130 | 210/110 | 240/50 |
+     |--------+----------+--------+--------+---------+---------+--------|
 
     #+CAPTION:    Sample trials on paper
     #+LABEL:      fig:angle-overview-sheet
@@ -342,25 +378,24 @@ This thesis explores creating an interactive pen and paper application using Ele
 
 **** Brake Calibration
 
-     \App{} has two modes for brakes, following section on control loop will further detail each. Which ever mode is active, the intensity of the brake has to be adjusted for the specific user. Back-end system, uses an extension of slope-gradients calculation presented earlier to enable these adjustments. In brake calibration step, users draw lines similar to the last step, but this time after a random time after actuation brakes are initiated. \App{} and the calibration assistant observes how efficiently wrist motion stabilizes to select the most comfortable brake intensity for the user.
+     \App{} has two modes for brakes, following section on control loop will further detail each. Which ever mode is active, the intensity of the brake has to be adjusted for the specific user. Back-end system, uses an extension of slope-gradients calculation presented earlier to enable these adjustments. In brake calibration step, users draw lines similar to the last step, but this time after a random time after actuation brakes are initiated. \App{} and the calibration assistant observes how efficiently wrist motion stabilizes to select the most comfortable brake intensity for the user. Following table [[tab:calibration-brake-results]] shows all the brake values used for the participants of the user study.
 
-**** Output from Calibration
-
-     Following table [[tab:calibration-results]] shows calibration results for three users that have participated in the user study. Values has been iteratively measured and adjusted during the calibration process.
-
-     #+CAPTION: Results of the calibration for a group of sample users
-     #+NAME:   tab:calibration-results
+     #+CAPTION: Results of Brake and neutral parameters
+     #+NAME:   tab:calibration-brake-results
      #+ATTR_LATEX: :float
-     #+ATTR_LATEX: :align |c|ccc|ccc|c|
-     |--------+--------+---------+---------+--------+--------+---------+---------|
-     |        | right  |         |         | left   |        |         | brake   |
-     |--------+--------+---------+---------+--------+--------+---------+---------|
-     |        | weak   | middle  | strong  | weak   | middle | strong  |         |
-     |--------+--------+---------+---------+--------+--------+---------+---------|
-     | User 1 | 70/110 | 110/180 | 120/240 | 110/70 | 190/90 | 220/110 | 180/190 |
-     | User 2 | 70/110 | 110/180 | 120/240 | 110/70 | 190/90 | 220/110 | 180/190 |
-     | User 3 | 70/110 | 110/180 | 120/240 | 110/70 | 190/90 | 220/110 | 110/130 |
-     |--------+--------+---------+---------+--------+--------+---------+---------|
+     #+ATTR_LATEX: :align |c|c|c|
+     |--------+---------+---------|
+     |        | neutral | brake   |
+     |--------+---------+---------|
+     | User 1 | 60/110  | 140/200 |
+     | User 2 | 120/120 | 140/180 |
+     | User 3 | 60/110  | 155/210 |
+     | User 4 | 60/110  | 160/200 |
+     | User 5 | 100/80  | 160/130 |
+     | User 6 | 100/80  | 140/120 |
+     | User 7 | 60/110  | 160/160 |
+     | User 8 | 60/90   | 120/160 |
+     |--------+---------+---------|
 
 
 *** Control Loop
@@ -495,7 +530,7 @@ brakes are activated. This mode can be considered as the derivation component of
 4. If the recognition fails, \app{} continues to observe following strokes as long as their center is not further away then 10mm. The buffer that allocates the keyword candidate is discarded when user starts writing in an other location on the paper.
 
 
-In the case of a state where the keyword 'plot' is properly recognized, \app{} expects a function entry. Hence recognition is handled at the character level, skipping the second step described above. Each character, formed of combinations of strokes are delivered to the Tesseract. This format allows this allows the entry of "F(X)=SIN(X)” after the 'plot' keyword.
+In the case of a state where the keyword `plot' is properly recognized, \app{} expects a function entry. Hence recognition is handled at the character level, skipping the second step described above. Each character, formed of combinations of strokes are delivered to the Tesseract. This format allows this allows the entry of "F(X)=SIN(X)” after the `plot' keyword.
 
      In order to improve performance of Tesseract in keyword recognition mode, the output is matched to the closest word using the Levenshtein distance (edit distance). This is essential for usability as many characters tend to result in false positives, such as “L” and “(“ or “X” and “K”. With the help of edit distance comparison, when Tesseract recognizes “P(OT” instead of “PLOT”, \app{} makes the comparison against a dictionary of keywords, since in the previous case the Levenshtein-distance is 1 (i.e., replacing one character gives a positive match). Maximum edit-distance accepted \app{} is the half of  the input word’s length rounded down.
 
