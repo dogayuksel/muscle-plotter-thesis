@@ -411,48 +411,53 @@ brakes are activated. This mode can be considered as the derivation component of
 
 *** Higher level API for Flow Control
 
-    \App{} interactions are implemented in the form of a widget. These widgets leverage pen-input techniques such as crossing to select 1D primitives (CrossY \cite{Apitz_crossy}), underline and crop marks (Papiercraft \cite{liao_papiercraft}), and a pigtail gesture to select 2D primitives (Scriboli \cite{Hinckley_delemiters}). All widgets output when the user crosses into its’ boundaries on the paper context. The output ends when \app{} stimulates the muscles that cause the user to lift the pen’s tip from the paper.
+    \App{} interactions are built upon several types of widgets designed. These widgets leverage pen-input techniques such as crossing to select 1D primitives (CrossY \cite{Apitz_crossy}), underline and crop marks (Papiercraft \cite{liao_papiercraft}), and a pigtail gesture to select 2D primitives (Scriboli \cite{Hinckley_delemiters}). All widgets output when the user starts the interaction from the dedicated locations in its’ boundaries on the paper context. The output ends when \app{} stimulates the muscles that cause the user to lift the pen’s tip from the paper.
 
-   Canvas elements enable the user to control the flow and structure of \app{}'s output. We have designed several widgets for different data structures. Scalar values are represented on a line, they consist of a single axis. Functions are represented in a two dimensional area, as they exist on two axes. These widgets on paper, what ever the underlying data structure is, have some characteristics in common. All the canvas elements define an actual space on the paper with designated areas for interaction. These elements have essentials to be initialized, as well as optional modifications to shape and control the output. These widgets determine where electronic muscle stimulation is going to active, which in return serves as starting point for the plots. In the following chapter, we introduce the widgets based on their underlying data structure, describing the methods of initiation and use. All elements are drawn onto the paper, it is important to remind that they persist in an inactive state even when the user is working on an other part of the paper. They can be reused with appropriate commands.
+   Canvas elements in forms of widgets enable the user to control the flow and structure of \app{}'s output. We have designed several widgets for different data structures and plotting intentions. Scalar values are represented along a line, they consist of a single axis. Functions are represented in a two dimensional area, as they exist on two axes. These widgets on paper, what ever the underlying data structure is, have some characteristics in common. All the canvas elements define an actual space on the paper with designated areas for interaction. These elements have essentials to be initialized, as well as optional modifications to shape and control the output. Widgets determine where electronic muscle stimulation is going to be active, which in return serves as starting point for the plots. In the following section widgets are described based on their underlying data structure, describing the methods of initiation and use. All elements are drawn onto the paper, it is important to remind that they persist in an inactive state even when the user is working on an other part of the paper. They can be reused with appropriate commands.
 
 **** Single axis elements
 
-    These widgets are designed to output scalar values that are projected onto a line. Resulting value is represented in spacial reference to the domain of the axis draw for the widget. These can be used for the output of a single class as well as to compare different classes in the same domain. Output domain can range between Boolean to real numbers. Limitations imposed by \app{} determines the sense making possibilities and the fidelity of the output. We have some design principles that allows the user to modify the axis to achieve reasonable outputs.
+    Single axis elements are designed to output scalar and boolean values that are projected onto a line. Resulting value is represented in spacial reference to the domain of the axis drawn for the widget. These can be used for the output of a single class as well as to compare different classes in the same spacial context. Output domain can range from boolean to real numbers. Limitations imposed by \app{} determines the sense making possibilities and the fidelity of the output. In the discussion section the design principles that allows the users to modify the axis to achieve reasonable outputs.
 
-    To initiate a single axis element, after writing the designated command to initiate, user draws a line in any orientation on the paper. By default, south-west facing edge of the line is assigned to the minimum value, while north-east facing edge is assigned to the maximum value. If the minimum and maximum values are not defined in the next optional step, default values for the specific domain is used. For example 0 to 1 in drag coefficient comparison, or the x value of the maximum of a plot would be projected on to the domain represented by the plot itself in maximum analysis of a function. The axis can be scaled by the user simply by annotating the maximum and/or the minimum value.
+    To initiate a single axis element, after writing the designated keyword to initiate, user draws a line in any orientation on the paper. By default, south-west facing edge of the line is assigned to the minimum value, while north-east facing edge is assigned to the maximum value. If the minimum and maximum values are not defined in the next optional step, default values for the specific domain is used. For example 0 to 1 in drag coefficient comparison, or the x value of the maximum of a plot would be projected on to the domain represented by the plot itself in maximum analysis of a function. The axis can be scaled by the user simply by reannotating the maximum and/or the minimum value.
 
-    After all the essentials are placed on the paper, the scale component is ready to use. It starts of by user placing the tip of the pen at the beginning of the scale. If the pen lands in the accepted proximity of the origin, ems channels on both sides (left and right presented earlier) of the arm are activated at a tactile feedback level that doesn't actuate the user. This output only signifies that an output interaction is taking place. At this point, user starts dragging the pen keeping the tip on the paper to the end of the axis line. The back-end system, tracks user's motion and triggers a quick nudge followed by a pulse on the upper channel. This gesture leaves a visible trace behind on the axis, where desired value is projected on the the axis on the paper. The user can observe and annotate the value, as the widget is not active after a successful output procedure.
+    After all the essentials are placed on the paper, the scale component is ready to use. It starts of by user placing the tip of the pen at the beginning of the scale. If the pen lands in the accepted proximity of the origin, ems channels on both sides (left and right presented earlier) of the arm are activated at a tactile feedback level that doesn't actuate the user. This output only signifies that an output interaction is taking place, gives the feedback to the user that output is activated. At this point, user starts dragging the pen keeping the tip on the paper aligned with the drawn axis to the end of the axis. The back-end system, tracks user's motion and triggers a quick nudge followed by a pulse on the upper channel that lifts the hand up. This gesture leaves a visible trace behind on the axis, where desired value is projected on the the axis on the paper. The user can observe and annotate the value, as the widget output is not active unless drag initiates from the origin of the axis. 
+
+    Following subsections highlight application specific types of single axis elements.
 
 ***** Scale Widget 
-      The scale widget outputs a single value per interaction, useful for comparing values. In case of clus- tered values in the same scale, muscle-plotter will output them by alternating the tick-marks to the left/right. In the walkthrough and scenarios, we featured the scale widget in: finding the drag-coefficient, finding an integral of a func- tion and plotting individual bars in a chart. Just as with the axes of a plot, the scale widget allows to redefine its axis for zoom in/out.
+
+      The scale widget outputs a single value per interaction, useful for comparing scaler values. In case of clustered values in the same scale, muscle-plotter will output them by alternating the tick-marks to the left and right where the tick make is placed when desired value is reached. In the previous walkthrough and scenarios, scale widget is presented in: finding the drag-coefficient, finding an integral of a function and plotting individual bars in a chart. Just as with the axes of a plot, the scale widget allows to redefine its axis for zoom in/out that allows higher fidelity output.
 
 ***** Radio button
-      The radio button allows selecting one option out of a range or receiving output from one option, which is active. This can also be used for a yes/no dialog, useful when asking simple yes/no questions to muscle-plotter (e.g., to check if a number is prime). In the examples above, we demonstrated this widget at the example of a user configuring the intensity of an EMS channel.
+      The radio button is a symmetric widget that allows both enabling a disabled option or disabling an active option and receiving the status of that option. This can also be used for a yes/no dialogs, or make simple queries to app{} (e.g., to check if a number is prime). Radio button widget is presented in the form example scenario where the user configurs the intensity of an the brake channel.
 
 ***** Checkbox
-      The checkbox is an extension of the radio button that allows for multiple choices to be active. This widget is useful for finding elements in lists such as options in a combo box. We demonstrated at the example of a user querying which EMS channels are currently active.
+      The checkbox is an extension of the radio button that allows for multiple choices to be active. This widget is useful for finding elements in lists such as options in a form. This example is illustrated in the form scenario where user queryies which EMS channels are currently active.
 
-**** Double axis elements - Parametric values / functions
+**** Double Axis Elements
 
-    Double axis elements have a major and a minor axis. The user drags the pen along the major axis, while the system takes the tip of the pen to the value corresponding on the minor axis with respect to the specific location on the major axis.
+    Double axis elements have a major and a minor axis, they are usefull to plot parametric values as well as functions. As previously illustrated user drags the pen along the major axis, while the system takes the tip of the pen to the corresponing minor axis value with respect to the specific location on the major axis.
+
+    The walkthrough section displayed 3 specialized instances of the line chart widget, i.e., wind tunnel, the tail profile plots and the zoomed plots. It is important to mention that the line chart widget supports the following interactions through context specific commands: zoom in/out by relabeling the axes, zooming in by selecting a region inside with crop marks, fitting a line through existing data points, performing operations on data traces and re-plotting the results as a trace (e.g., derivative of a function). Figure [[fig:axis-roto]] showcases the anatomy of a generic plot.
+
+     #+CAPTION:    A Generic Canvas with Axes
+     #+LABEL:      fig:axis-roto
+     #+ATTR_LaTeX: :width 132mm :float
+     [[./images/implementation/axis-rotoscope-01.png]]
+
+    As we have presented in the walkthrough, our main contribution comes from the spatial expressivity of plotting one-to-functions, such as streamlines of the wind tunnel or the speed values for a selected cross-section. For both use cases the space defined on the paper is same in nature, while the tools to define are domain dependent. In the wind-tunnel case, there exists a line for every point on the vertical start axis as stream lines emerge from a single solution of a vector field. The anatomy of the windtunnel canvas is presented in [[fig:windtunnel-roto]]. On the other hand for the speed values line example, there exists one unique line, that the user can plot. An example of such an axis is shown in the figure [[fig:axis-roto]]
 
      #+CAPTION:    A Windtunnel Object
      #+LABEL:      fig:windtunnel-roto
      #+ATTR_LaTeX: :width 132mm :float
      [[./images/implementation/canvas-rotoscope-01.png]]
 
-    As we have presented on the walk-through, our main contribution comes from the spatial expressivity of plotting one-to-functions, such as streamlines of the wind-tunnel or the speed values for a defined cross-section. For both use cases the space defined on the paper is same in nature, while the tools to define are domain dependent. In the wind-tunnel case, there exists a line for every point on the vertical start axis as stream lines result from a single solution of a vector field. On the other hand for the speed values line example, there exists one unique line, that the user can plot.
-
-    In order to initiate a multiple axis plot, the user has to define a space on the paper. This is done by drawing two perpendicular lines representing the axes or crop-marks that encompasses the area. In case of a function plot, after defining axis lines user can optionally update the domain. Otherwise, defaults for the specific example is used just as defined in single axis examples.
-
-     #+CAPTION:    A Generic Canvas with Axes
-     #+LABEL:      fig:axis-roto
-     #+ATTR_LaTeX: :width 132mm :float
-     [[./images/implementation/axis-rotoscope-01.png]]
+    In order to initiate a multiple axis plot, the user has to define a space on the paper. This is done by drawing two perpendicular lines representing the axes or crop-marks that encompasses the area. In case of a function plot, after defining axis lines user can optionally update the domain. Otherwise, defaults for the specific example is used just as mentioned in single axis examples.
    
     In a similar fashion to scales, the user should start at a specific position to instantiate the plotting procedure. In a generic plot, the output can be located in different quadrants. We have defined a method for the user to locate it to start plotting. Following interactions to find plot starting points are similar in nature to the scalar interactions described above. In the first case, where there is a zero crossing on the negative side of the major axis, user places the tip of the pen to the far left (negative, west) of the horizontal, major, dragging axis. The paper should have been rotated to a comfortable angle for a convenient plot. Then the user follows the axis, when zero crossing is reached, \app{} takes over the control of the arm to output the rest of the plot. If necessary, the user can rotate the paper 180 degrees and plot the negative side of the desired line.
 
-    In the case of in the case of no zero crossing before the origin, \app{} signals a pen-up before first scanning starts. At this point the user knows that there isn't a zero crossing between 3rd and 4th quadrants. The step  user should do is to scan the y axis, to find any y-crossings. Ideally user starts from the minimum point of the minor axis and drags the tip of the pen to the maximum point of the axis. If there is a y-crossing of the plot, \app{} assigns a pen-down on the target location. From this point on the user follows parallel to the major axis to continue as a normal plot. The negative side of the function can be plotted by rotating the paper in a similar manner to the first case.
+    In the case of in the case of no zero crossing before the origin, \app{} signals a pen-up before first scanning starts. At this point the user knows that there isn't a zero crossing between 3rd and 4th quadrants. In the next step user should scan the y axis, to find any y-crossings. Ideally user starts from the minimum point of the minor axis and drags the tip of the pen to the maximum point of the axis. If there is a y-crossing of the plot, \app{} assigns a pen-down on the target positon. From this point on the user follows parallel to the major axis to continue as a normal plot. The negative side of the function can be plotted by rotating the paper in a similar manner to the first case. This method of finding the starting point is illustrated in the following figure [[fig:axis-start]].
 
      #+CAPTION:    Finding the starting Point
      #+LABEL:      fig:axis-start
@@ -461,34 +466,49 @@ brakes are activated. This mode can be considered as the derivation component of
 
     In the last case, when there is no zero crossing between 3rd and 4h quadrants and there is no y-axis intersection, the second axis find attempt of the user is interrupted by a pen-up as the tip of the pen is place on the minor-axis, (y-axis). The users follows over the major axis to find the crossing there. \app{} takes over control as the crossing is reached. The plot can be completed in a similar manner by rotating it as described in previous cases.
 
-***** Line chart
-      The walkthrough contained 3 specialized in- stances of the line chart widget, i.e., wind tunnel, the tail profile plots and the zoomed plots. The line chart widget supports the following interactions: zoom in/out by relabel- ing the axes, zoom in by selecting with crop marks, fitting a line through existing data points, performing operations on data traces and re-plotting the results as a trace (e.g., deriv- ative of a function. The line chart widget affords zoom- in/out by relabeling the axes of the plot.
-
-
 *** Recognition System
 
 **** Handwriting Recognition using Tesseract
 
-     To recognize hand-written input we integrated Tesseract \cite{tesser_ocr}, a trained recognizer with several languages and likely the most robust open-source OCR \cite{compar_open_sourc_ocr}. In Tesseract \app{} only loads the English language and common symbols such as “?”, “(“, etc. Before executing Tesseract on the user’s strokes we: (1) append all strokes that are less than 3mm apart from their center to form a character (enables multi-stroke writing). (2) Interpolate the points from Anoto to complete a line based on pen up and downs. (3) Convert to a black and white image for OCR. (4) If the next stroke is more than 1cm apart, the previous strokes are grouped into a command keyword and evaluated with the OCR. (5) After a command keyword is detected \app{} evaluates the incoming strokes character by character, this allows to directly write commands such as “PLOT F(X)=SIN(X)”.
+     To recognize hand-written input \app{} uses Tesseract \cite{tesser_ocr}, a trained recognizer with several languages. It is likely to be the most robust open-source optical character recognizer \cite{compar_open_sourc_ocr}. While using Tesseract, \app{} only loads the training data for the English language and common symbols such as “?”, “(“, etc. 
 
-     Once the output of Tesseract is returned to muscle-plotter, we find the closest word using the Levenshtein distance (edit distance). We do so because many characters tend to create false positives with Tesseract, such as “L” and “(“ or “X” and “K”). Thus, when Tesseract recognizes “P(OT” instead of “PLOT”, muscle-plotter recognizes it from our set of keywords, since the Levenshtein-distance is 1 (i.e., by replacing one character we find a positive match). We allow a maximum edit-distance of a third the input word’s length (rounded down).
+     Recognition of \app{} takes place in two diffrent modes based on the state and the expected commands. In the state where no application is initilized, \app{} looks for keywords. In order to accomplish that, the input from Anoto Pen is:
+
+1. appended as an array of strokes as long as the center of those strokes are 3mm apart. This allows multi-stroke characters.
+2. The center is futher then 3mm but is 10mm range, strokes are appended in to a new array that signifies the second character.
+3. When three characters are reached:
+   - Points that belong to the same stroke are interpolated to complete a line.
+   - Strokes belonging to the same characters are combined to form character
+   - Finally each character is combined to form the observed word.
+   - Final combinatain is converted to black and white and is sent to Tesseract.
+4. If the recognition fails, \app{} continues to observe following strokes as long as their center is not futher away then 10mm. The buffer that allocates the keyword candidate is discarded when user starts writing in an other location on the paper.
+
+
+In the case of a state where the keyword 'plot' is properly recognized, \app{} expects a function entry. Hence recognition is handled at the character level, skipping the second step described above. Each character, formed of combinations of strokes are delivered to the Tesseract. This format allows this allows the entry of "F(X)=SIN(X)” after the 'plot' keyword.
+
+     In order to improve performance of Tesseract in keyword recognition mode, the output is matched to the closest word using the Levenshtein distance (edit distance). This is essential for usability as many characters tend to result in false positives, such as “L” and “(“ or “X” and “K”. With the help of edit distance comparison, when Tesseract recognizes “P(OT” instead of “PLOT”, \app{} makes the comparison against a dictionary of keywords, since in the previous case the Levenshtein-distance is 1 (i.e., replacing one character gives a positive match). Maximum edit-distance accepted \app{} is the half of  the input word’s length rounded down.
 
 
 *** Application Specific Implementations
 **** Mathematical Applications
-     To solve the mathematical formulae we invoke Octave through its Py- thon bindings. We use it for mathematics (derivatives, integrals, and so forth) and for plotting functions from formulae. We interface muscle-plotter and Octave by: (1) converting user-notation to Octave notation – when the user writes “sin(x)” we convert it to “feval((sin(x), range-of- plot)”; then, (2) send the formulae to Octave, sample it into points and return it to muscle-plotter; and, lastly, (3) transform these points to the Anoto paper’s coordinates and into the user-defined axis.
+
+     To solve the mathematical formulae, \app{} invokes Octave through its Python bindings. Octave is mainly used for mathematics (derivatives, integrals, and so forth) and for plotting functions from formulae. \app{} interfaces with Octave by: (1) converting user-notation to Octave notation – when the user writes “sin(x)” it is converted to “feval((sin(x), [range-of-plot])”; then, (2) sending the formulae to Octave, sampling it into points and returning it to muscle-plotter; and, lastly, (3) transforming these points to the Anoto paper’s coordinates and projecting into the user-defined axis.
 
 **** RC Filter Response
-     We implemented a simple solver for high and low pass RC circuit filters. It works by solving the filter equations directly in the frequency domain. The val- ues for R and C are read from the users’ input when they write down “cap 10UF” (i.e., 10μF) and “resistor 330” (in Ohms).
+
+     \App{} includes a simple solver for high and low pass RC circuit filters. It works by solving the filter equations directly in the frequency domain. The values for R and C are read from the users’ input through the domain specific language defined by the application, as in “cap 10UF” (i.e., 10μF) and “resistor 330” (in Ohms).
 
 **** Statistic Applications
-     To perform statistics operations we utilize the Python’s Scipy Stats package. This allows us to invoke operations such as computing a standard deviation or a regression, which was demonstrated at the example of a linear regression through the bar chart data.
+
+     To perform statistics operations we utilize Python’s Scipy Stats package. This allows us to invoke operations such as computing a standard deviation or a regression, which has been demonstrated at the example of a linear regression through the bar chart data.
 
 **** Optical Ray Casting
-     The optics demonstration is a simple 2D ray casting based on \cite{thin_python} that deals exclusively with concave and convex lenses. The lenses focal points are simply proportional to the width of the drawn lenses bounding box.
+
+     The optics demonstration is a simple 2D ray casting based on \cite{thin_python} that deals exclusively with concave and convex lenses. The lenses' focal points are simply proportional to the width of the drawn lenses bounding box.
 
 **** Wind-tunnel Simulation
-     The wind tunnel simulation is based on the Lattice-Boltzmann equations and adapted from Schroeder’s implementation \cite{lattic_boltz_simul_fluid}. To run a wind-tunnel simulation (i.e., to compute the wind speed streamlines) we: (1) rotate the model accordingly to the rotation of the wind-tunnel boundaries; (2) extract the shapes drawn in- side; (3) down-sample these shapes (e.g., the car) into a binary matrix of 200px height; this matrix contains the obstacles to the wind flow; (4) for 30 steps we execute the Lattice Boltzmann by always moving the wind-lines one more step and re-evaluating the collisions to compute the velocity flow; (5) once the user draws a line to get the wind streamline as output, we use Matplotlib’s streamlines function to obtain the streamline as a curve from the user’s pen down position.
+
+     The wind tunnel simulation is based on the Lattice-Boltzmann equations and adapted from Schroeder’s implementation \cite{lattic_boltz_simul_fluid}. To run a wind-tunnel simulation (i.e., to compute the wind speed streamlines) \app{} extracts the shapes drawn inside the windtunnel application canvas. Later down-samples these shapes (e.g., the car) into a binary matrix of 200px height which contains the obstacles to the wind flow. After the sketch is transformed into the suitable format for the simulation imput, Lattice Boltzmann equations are exacuted 30 times by always moving the wind-lines one more step and re-evaluating the collisions to compute the velocity flow. Finally once the user draws a line to get the wind streamline as output, \app{} uses Matplotlib’s streamlines function to obtain the streamline as a curve from the user’s pen down position as a starting point.
 
 
 * User Study
@@ -559,6 +579,7 @@ brakes are activated. This mode can be considered as the derivation component of
     #+LABEL:      fig:frequency-analysis
     #+ATTR_LaTeX: :width 132mm :float
     [[./images/studyresults/Fig5.png]]
+
 
 * Discussion
 
