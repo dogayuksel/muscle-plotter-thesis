@@ -570,7 +570,7 @@ In the case of a state where the keyword `plot' is properly recognized, \app{} e
 
 
 * User Study
-  A user study has been conducted to understand spacial output production capabilities of \app{}. Participants repeatedly plotted a collection of preselected curves using \app{} in a random order. After the study target curves were compared to actuals on paper.
+  A user study has been conducted to understand spacial output production capabilities of \app{}. Participants repeatedly plotted a collection of preselected curves in a random order using \app{}. After the study target curves were compared to actuals on paper.
 
 ** Study design
 
@@ -612,7 +612,7 @@ In the case of a state where the keyword `plot' is properly recognized, \app{} e
 
     Figure [[fig:target-functions]] also shows the average error per by function. As expected, there was an increase in error with the increase in the function’s highest frequency. Table [[tab:sine-based-results]] confirmed by a linear regression through f1 to f6 with R2=0.64. To provide an estimation of how much each trial differed to the next, the reported standard deviations (SD) are between the averages of all trials for that specific function.
 
-     #+CAPTION: Average error for a sine-based functions
+     #+CAPTION: Average error for sine-based functions
      #+NAME:   tab:sine-based-results
      #+ATTR_LATEX: :float
      #+ATTR_LATEX: :align |c|c|c|
@@ -629,7 +629,7 @@ In the case of a state where the keyword `plot' is properly recognized, \app{} e
 
 *** Plotting functions with abrupt changes
 
-    When plotting the two functions that contained abrupt changes in slope and curvature participants performed similarly to the ones made of sine waves. The results are summarized in the table [[tab:non-sine-results]]. Standard deviation is calculated against the averages of all users for the same curve as in the previous step. The results show that abrupt changes of curvature generate a similar error profile to smooth curvatures. The error increases when the rate of change of the target function is higher.
+    When plotting the two functions that contained abrupt changes in slope and curvature participants performed similarly to the ones made of sine waves. The results are summarized in table [[tab:non-sine-results]]. Standard deviation is calculated against the averages of all users for the same curve as in the previous step. The results show that abrupt changes of curvature generate a similar error profile to smooth curvatures. The error increases when the rate of change of the target function is higher.
 
      #+CAPTION: Average error for functions with abrupt changes
      #+NAME:   tab:non-sine-results
@@ -644,14 +644,14 @@ In the case of a state where the keyword `plot' is properly recognized, \app{} e
 
 *** Preservation of features
     
-    The plots in Figure [[fig:frequency-analysis]] illustrate in how far plots made with app{} preserved the original function. The plots show frequency histograms produced by means of Fourier Transformation. We see coefficients the original signal in green, as well as user-specific jitters—aka noise, in red. As the plots illustrate, jitters tends to revolve around frequencies higher than 0.5 cycles/cm.
+    The plots in Figure [[fig:frequency-analysis]] illustrate in how far plots made with \app{} preserved the original function. The plots show frequency histograms produced by means of Fourier Transformation. Coefficients of the original signal is displayed in green, user plots are shown in red. As the plots illustrate, jitters tends to revolve around frequencies higher than 0.5 cycles/cm.
 
     #+CAPTION:    Frequency analysis
     #+LABEL:      fig:frequency-analysis
     #+ATTR_LaTeX: :width 132mm :float
     [[./images/studyresults/fft_2.png]]
 
-    Jitters in f2 and f3 (labeled as Sin2 and Sin3) has very little impact on the signal (the same as observed in f1 and f4). This gets more challenging with f5 (labeled as Sin5), which has its highest partial at a wavelength of around 0.23 cycles/cm. Still, signal and jitters are clearly distinct, which means that the original function still stands out clearly, so that awareness of one’s jitters may allow users to visually filter out the noise. It is observed that distance between jitters and the signal gets smaller with increasing signal frequency until they start to overlap as in f6 (labeled as Sin6), suggesting that an essential part of this signal has been shadowed by the noise and thus has become unrecognizable.
+    Jitters in f2 and f3 (labeled as Sin2 and Sin3) has very little impact on the signal (the same observation in f1 and f4). This gets more challenging with f5 (labeled as Sin5), which has its highest partial at a wavelength of around 0.23 cycles/cm. Still, signal and jitters are clearly distinct, which means that the original function stands out clearly, so that awareness of one’s jitters may allow users to visually filter out the noise. It is observed that distance between jitters and the signal gets smaller with increasing signal frequency until they start to overlap as in f6 (labeled as Sin6), suggesting that an essential part of this signal has been shadowed by the noise and thus has become unrecognizable.
 
     We conclude that \app{} is suitable for communicating signals of up to the frequency of 0.3 cycles/cm, but should not be used for frequencies higher than this. This limitation should be always kept in mind while designing applications for \app{}.
 
@@ -659,7 +659,7 @@ In the case of a state where the keyword `plot' is properly recognized, \app{} e
 
     During the user study for the \app{} plotting speed was not controlled. Participants during the training were recommended to go faster or slower to achieve optimal control-loop performance. As participants picked their own pace when the actual trials has started, the results presented a wide range of speeds. This allowed to understand ideal completion times by comparing the results of each user.
 
-    Participants of the study plotted 16 cm-wide functions in between 7.98 s and 29.5 s (M=16.17 s, SD=4.90 s). Figure [[fig:duration-accuracy]] demonstrates the resulting speed/accuracy trade off. Results showed that plots lasting shorter 11 seconds were worse then their longer counterparts. Also taking significantly more time then 11s didn't improve the results as trials above 11s had a steady average error around 4 mm.
+    Participants of the study plotted 16 cm-wide functions in between 7.98 s and 29.5 s (M=16.17 s, SD=4.90 s). Figure [[fig:duration-accuracy]] demonstrates the resulting speed/accuracy trade off. Each color respresents a different user. Results showed that plots lasting shorter than 11 seconds were worse than their longer counterparts. Also taking significantly more time than 11s didn't improve the results as trials above 11s had a steady average error around 4 mm.
 
     #+CAPTION:    Plot duration vs. plot accuracy
     #+LABEL:      fig:duration-accuracy
@@ -682,7 +682,7 @@ In the case of a state where the keyword `plot' is properly recognized, \app{} e
     \App{} provides an interactive environment using user initiated components on paper. This approach differs from previous interactive systems as the user is expected to have a prior knowledge of the provided language. In many cases our interactions start with an empty sheet of paper. On the other hand screen based interactive systems provide discoverability as the system itself has a wider channel for output, such applications can start with a tutorial expecting the user to have zero prior knowledge. Designing applications for \app{} should consider this to provide an engaging experience. According to the domain of the application, command keywords could be flexible and adaptive, moreover similar to a natural language.
 
 *** Interactive Text Books
-    \App{} interactions require some input from the user side, in order to determine the domain and configure the output. In the simplest case, user has to accomplish a sequence of inputs to get the first output. Predesigned worksheets would allow to simplify these steps, minimizing the learning curve as well as creating engaging interactions. Figure [[fig:optics-worksheet]] shows a sample prepared for testing. Combination of such examples could make up to interactive textbooks.
+    \App{} interactions require some input from the user side, in order to determine the domain and configure the output. In the simplest case, user has to accomplish a sequence of inputs to get the first output. Predesigned worksheets would allow to simplify these steps, minimizing the learning curve as well as creating engaging interactions. Figures [[fig:optics-worksheet]] and [[fig:optics-worksheet2]] show a sample prepared for prototyping. Combination of such examples could make up to interactive textbooks.
 
     #+CAPTION:    Optics worksheet example
     #+LABEL:      fig:optics-worksheet
@@ -701,21 +701,21 @@ In the case of a state where the keyword `plot' is properly recognized, \app{} e
     \App{} has a limited accuracy due to the limitations of \acrshort{ems}. Interactive elements on paper should be scaled at a size greater that leaves the expected error insignificant. For example, a continuous scale described previously should verify that the output will provide a significant answer.
 
 *** Output Persistence and clutter on paper
-    The output of \app{} is persistent on paper. When the user draws a certain plot on a given axis, the output stays on the paper way longer then the length of the interaction. In an example of function plotting if the outputs were made and their essential characteristics are not different enough, the answers can be mixed up. As a solution, the user has the flexibility to annotate the output. This would allow the number of distinct traces that can be recalled later on. However, after a certain number of plots, the intelligibility would diminish. This is an inherent problem with writing on the paper, where the user would extend to the empty space below or to the next page. \App{} widgets are reusable, however they are also easy to initiate.
+    The output of \app{} is persistent on paper. When the user draws a certain plot on a given axis, the output stays on the paper way longer then the length of the interaction. In an example of function plotting if the outputs were made and their essential characteristics are not different enough, the answers can be mixed up. As a solution, the user has the flexibility to annotate the output. This would allow to increase the number of distinct traces that can be recalled later on. However, after a certain number of plots, the intelligibility would diminish. This is an inherent problem with writing on the paper, where the user would extend to the empty space below or to the next page. \App{} widgets should be reusable, as well as easy to initiate.
 
 
 * Conclusion
 
   This thesis presented \app{}, an interactive system based on electrical muscle stimulation that offers more meaningful and expressive output. It is designed to assist users in cognitively demanding activities, such as designing an aerodynamically sound vehicle, by providing them with access to a computer system while they are sketching on pen and paper.
 
-  \App{} provides pen-on-paper interactions for both input and output. To interact users input by writing, e.g., writing mathematical formulas or drawing shapes. The system outputs by actuating the user’s wrist so as to draw graphs, strokes, etc. In the thesis six simple applications have been demonstrated, including a wind-tunnel simulator, and RC circuit simulator, function plotting, as well as a set of generic widgets. To validate the accuracy wrist-actuation system, a user study has been conducted and presented.
+  \App{} provides pen-on-paper interactions for both input and output. To interact users input by writing, e.g., writing mathematical formulas or drawing shapes. The system outputs by actuating the user’s wrist so as to draw graphs, strokes, etc. In the thesis six simple applications have been demonstrated, including a wind tunnel simulator, and RC circuit simulator, function plotting, as well as a set of generic widgets. To validate the accuracy of the wrist actuation system, a user study has been conducted and presented.
 
 ** Future Work
 *** Evaluate applications
 
     This thesis approaches the user study in terms of understanding the accuracy and plotting capabilities of \app{}. The accuracy of the system should be considered when designing applications. Quality and the usability of the data outputted for application specific domains can be investigated.
 
-    As mentioned in the discussion \app{} preserves low frequencies while adding relatively small amounts of noise to higher spectrum. The cognitive capabilities of human brain remains as a question as it is unknown when added noise would totally hide away the intended answer. As mentioned usability of \app{} output can be further studied in a broader perspective.
+    As mentioned in the discussion \app{} preserves low frequencies while adding relatively small amounts of noise to higher spectrum. The cognitive capabilities of human brain remains as a question as it is unknown when added noise would totally hide away the intended answer. As mentioned usability of \app{} output can be further studied through this perspective.
 
 *** Worksheet and Simulation Environments
 
