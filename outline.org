@@ -189,12 +189,12 @@ This thesis wouldn't be possible without the vision of Patrick Baudish, and the 
 
    On the final step of the walkthrough user decides to compare drag coefficients of two bodies in the wind tunnel. Drag coefficient is an aerodynamics concept, a unit-less ratio that is used as an indication of the aerodynamic performance of body in a fluid. \App{} wind tunnel application allows calculation of this value on the sketch. This example illustrates how \app{} can output scalar values and perform sense making on them. User starts of by writing `plot drag', which is a keyword followed by a domain specific modifier. Plot drag command requires an axis and a sketch inside a wind tunnel canvas. \app{} provides the user some flexibility on how to configure the widget. User can either write the name of the wind tunnel object, as of `plot drag sedan' or directly select the car figure from the context of the wind tunnel with a pig tail on the car body. After the selection, user draws a line and annotates `0' and `1' as the minimum and maximum values of the axis, which is the last configuration \app{} requires to make an scalar value output.
 
-   #+CAPTION: Scale widget comparison
+   #+CAPTION: Plotting to scale widget
    #+NAME: fig:windtunnel6-1
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/windtunnel/IMG_9794.jpg]]
 
-   #+CAPTION: Plot second widget comparison
+   #+CAPTION: Plotting to widget for comparison
    #+NAME: fig:windtunnel6-2
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/windtunnel/IMG_9799.jpg]]
@@ -534,10 +534,10 @@ brakes are activated. This mode can be considered as the derivation component of
 1. appended as an array of strokes as long as the center of those strokes are 3mm apart. This allows multi-stroke characters.
 2. The center is further then 3mm but is 10mm range, strokes are appended in to a new array that signifies the second character.
 3. When three characters are reached:
-   - Points that belong to the same stroke are interpolated to complete a line.
+   - Points that belong to the same stroke are interpolated to complete a line
    - Strokes belonging to the same characters are combined to form character
-   - Finally each character is combined to form the observed word.
-   - Final combination is converted to black and white and is sent to Tesseract.
+   - Finally each character is combined to form the observed word
+   - Final combination is converted to black and white and is sent to Tesseract
 4. If the recognition fails, \app{} continues to observe following strokes as long as their center is not further away then 10mm. The buffer that allocates the keyword candidate is discarded when user starts writing in an other location on the paper.
 
 
