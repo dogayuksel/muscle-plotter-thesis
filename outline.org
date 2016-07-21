@@ -6,6 +6,8 @@
 #+LATEX_HEADER: \usepackage{mathptmx}
 #+LATEX_HEADER: \usepackage[scaled=.90]{helvet}
 #+LATEX_HEADER: \usepackage{courier}
+#+LATEX_HEADER: \usepackage[toc,acronym]{glossaries}
+#+LATEX_HEADER: \makeglossaries{}
 #+LATEX_HEADER: \setkomafont{disposition}{\sffamily}
 #+LATEX_HEADER: \setkomafont{subtitle}{\sffamily\Large}
 #+LaTeX_HEADER: \usepackage[backend=bibtex,sorting=none]{biblatex}
@@ -22,37 +24,44 @@
 #+LATEX_HEADER: \ihead{Doğa Yüksel}
 #+LATEX_HEADER: \ofoot[]{\thepage}
 :END:
+:ACRONYMS:
+#+LATEX: \newacronym{ems}{EMS}{Electrical Muscle Stimulation}
+#+LATEX: \newacronym{api}{API}{Application Programming Interface}
+:END:
 :INTRO:
 #+LATEX: \frontmatter{}
 #+LATEX: \begin{titlepage}
 #+LATEX: \end{titlepage}
+#+LATEX: \cleardoublepage{}
 #+LATEX: \begin{hpititle}
 #+LATEX: \end{hpititle}
+#+LATEX: \cleardoublepage{}
 #+LATEX: \begin{declaration}
 #+LATEX: \end{declaration}
+#+LATEX: \cleardoublepage{}
 #+LATEX: \begin{abstract}
 This thesis explores creating an interactive pen and paper application using Electrical Muscle Stimulation. Using this application users can input and get meaningful expressive output from a computer system in a mobile context. Using pen and paper allows the user to engage in cognitively demanding tasks, such as solving math problems. In the simplest case user inputs the a math function and later \app{} uses user's hand to plot the function. This example is further expanded into fitting lines through points, finding points of interests etc. These core components are demonstrated in six different applications from different domains.
 
 \App{} is the first EMS system that produces spacial output, hence is more expressive then earlier systems proposed. In our user study, participants drew random plots within 4mm accuracy and preserved accuracy up to 3 cycles per cm.
 #+LATEX: \end{abstract}
 #+LATEX: \thispagestyle{empty}
-#+LATEX: \newpage{}
+#+LATEX: \cleardoublepage{}
+#+LATEX: \begin{acknowledgments}
+This thesis wouldn't be possible without the vision of Patrick Baudish, and the creative drive of Pedro Lopes. I would also like thank to the rest of HPI HCI group for their eminent support. Last but not least, thanks to my family for always being by my side.
+#+LATEX: \end{acknowledgments}
 
 #+LATEX: \renewcommand{\contentsname}{Table of Contents}
 #+TOC: headlines 2
 #+LATEX: \thispagestyle{empty}
-#+LATEX: \newpage{}
-
 #+LATEX: \listoffigures{}
 #+LATEX: \listoftables{}
 #+LATEX: \thispagestyle{empty}
-#+LATEX: \newpage{}
 :END:
 
 #+LATEX: \mainmatter{}
 * Introduction
 
-  Interactive systems based on electrical muscle stimulation (EMS) actuate users by sending an electric signal to muscle fibers and motor neurons through electrodes attached to the skin. The possessed hand \cite{tamaki_possessedhand}, for example, used this technique to assist users while learning the finger poses required to play an instrument.
+  Interactive systems based on \acrfull{ems} actuate users by sending an electric signal to muscle fibers and motor neurons through electrodes attached to the skin. The possessed hand \cite{tamaki_possessedhand}, for example, used this technique to assist users while learning the finger poses required to play an instrument.
 
   #+CAPTION:    Muscle Plotter - Teaser
   #+LABEL:      fig:muscle-plotter-teaser
@@ -294,7 +303,7 @@ This thesis explores creating an interactive pen and paper application using Ele
 
     #+CAPTION:    EMS Machine
     #+LABEL:      fig:ems-machine
-    #+ATTR_LaTeX: :width 61mm :float wrap
+    #+ATTR_LaTeX: :width 58mm :float wrap
     [[./images/rehastim.png]]
 
     In addition to the frequency of pulses, the EMS machine allows to control the amplitude and duty cycle of each pulse. \App{} uses amplitudes ranging from 6mA to 18mA based on calibration results. Duty cycle ranges between 20\micro{}s to 500\micro{}s, which provides a very large dynamic range of modulation. \App{} mainly controls duty cycles to achieve gradients of actuations. At specific situations, the amplitude of the pulses are temporarily raised to boost actuation that will further be described in the control loop section.
@@ -346,6 +355,11 @@ This thesis explores creating an interactive pen and paper application using Ele
 
      After the comfortable range of intensities for the EMS is determined, user is asked to draw straight lines along the paper in the posture required to plot with \app{}. At this calibration step, calibration script actuates user's arm with random pairs of currents on each side. The script records the resulting angle after each actuation. Figure [[fig:angle-overview-sheet]] at the end of this chapter showcases the marks on the paper after such a trial. In this case all actuations take place on the same horizontal axis for visualization purposes, however this location is random on normal trials to avoid users expecting a signal at a certain point. After a desired number of trial pairs, averages of the slopes are observed on a two dimensional visualization. Figure [[fig:angle-overview]] showcases this interface. Lighter colors correspond to smaller slops, while darker colors signifies pairs resulted in a higher slop. To conclude this step, three pairs that result in maximum variation between resulting slopes are chosen for each side. Pairs that consistently result in similar results are desired. It is easier to create jerky motions with EMS, however slow controlled actuations are harder to generate. Actuation of both sides, using both opposing muscles, allows \app{} to increase control on the wrist. Table [[tab:calibration-results]] shows the pairs used for each participant during the user study.
 
+    #+CAPTION:    Angle visualization
+    #+LABEL:      fig:angle-overview
+    #+ATTR_LaTeX: :width 132mm :float
+    [[./images/calibration/web-viz.png]]
+
      #+CAPTION: Results of the slope calibration for the User Study Participants
      #+NAME:   tab:calibration-results
      #+ATTR_LATEX: :float
@@ -369,11 +383,6 @@ This thesis explores creating an interactive pen and paper application using Ele
     #+LABEL:      fig:angle-overview-sheet
     #+ATTR_LaTeX: :width 132mm
     [[./images/calibration/foto_scratch.jpg]]
-
-    #+CAPTION:    Angle visualization
-    #+LABEL:      fig:angle-overview
-    #+ATTR_LaTeX: :width 132mm :float
-    [[./images/calibration/web-viz.png]]
 
 **** Brake Calibration
 
@@ -441,13 +450,13 @@ brakes are activated. This mode can be considered as the derivation component of
      #+ATTR_LaTeX: :width 132mm :float
      [[./images/implementation/crazy_fast.png]]
 
-****** Tensing Up both sides
 
+****** Tensing Up both sides
        First braking strategy is based on the two channel implementation of \app{}. This mode has been used in the user study, while the findings pointed towards a better implementation described in the next subsection. This strategy uses high intensity pulses on each side of the arm to achieve and equilibrium point at a neutral angle. As mentioned in the [[*Model of the Human Wrist][model of the human wrist]] section, high intensities on both sides override previous motions to reach an neutral position. However observations during the study showed that this created a confusion for the users when in combination with them momentum of the plotting action itself, as they were confused with such impulses expecting a resulting motion on either sides.
 
 ****** Additional channel pushing down
-       
        Second mode of braking uses an additional channel thrusting towards the paper, as mentioned in the pad placement section. This enables \app{} to utilize the power of arm muscles that are not activated by the steering motion. As a result the intent of the system is also perceived more clearly avoiding confusions.
+
 
 **** Ending an interaction
 
@@ -459,6 +468,7 @@ brakes are activated. This mode can be considered as the derivation component of
     \App{} interactions are built upon several types of widgets designed. These widgets leverage pen-input techniques such as crossing to select 1D primitives (CrossY \cite{Apitz_crossy}), underline and crop marks (Papiercraft \cite{liao_papiercraft}), and a pigtail gesture to select 2D primitives (Scriboli \cite{Hinckley_delemiters}). All widgets output when the user starts the interaction from the dedicated locations in its’ boundaries on the paper context. The output ends when \app{} stimulates the muscles that cause the user to lift the pen’s tip from the paper.
 
    Canvas elements in forms of widgets enable the user to control the flow and structure of \app{}'s output. We have designed several widgets for different data structures and plotting intentions. Scalar values are represented along a line, they consist of a single axis. Functions are represented in a two dimensional area, as they exist on two axes. These widgets on paper, what ever the underlying data structure is, have some characteristics in common. All the canvas elements define an actual space on the paper with designated areas for interaction. These elements have essentials to be initialized, as well as optional modifications to shape and control the output. Widgets determine where electronic muscle stimulation is going to be active, which in return serves as starting point for the plots. In the following section widgets are described based on their underlying data structure, describing the methods of initiation and use. All elements are drawn onto the paper, it is important to remind that they persist in an inactive state even when the user is working on an other part of the paper. They can be reused with appropriate commands.
+
 
 **** Single axis elements
 
@@ -479,6 +489,7 @@ brakes are activated. This mode can be considered as the derivation component of
 
 ***** Checkbox
       The checkbox is an extension of the radio button that allows for multiple choices to be active. This widget is useful for finding elements in lists such as options in a form. This example is illustrated in the form scenario where user queries which EMS channels are currently active.
+
 
 **** Double Axis Elements
 
@@ -505,6 +516,7 @@ brakes are activated. This mode can be considered as the derivation component of
      [[./images/implementation/axis-rotoscope-02.png]]
 
     In the last case, when there is no zero crossing between 3rd and 4h quadrants and there is no y-axis intersection, the second axis find attempt of the user is interrupted by a pen-up as the tip of the pen is place on the minor-axis, (y-axis). The users follow over the major axis to find the crossing there. \App{} takes over control as the crossing is reached. The plot can be completed in a similar manner by rotating it as described in previous cases.
+
 
 *** Recognition System
 
@@ -536,7 +548,7 @@ In the case of a state where the keyword `plot' is properly recognized, \app{} e
 
 **** RC Filter Response
 
-     \App{} includes a simple solver for high and low pass RC circuit filters. It works by solving the filter equations directly in the frequency domain. The values for R and C are read from the users’ input through the domain specific language defined by the application, as in “cap 10UF” (i.e., 10μF) and “resistor 330” (in Ohms).
+     \App{} includes a simple solver for high and low pass RC circuit filters. It works by solving the filter equations directly in the frequency domain. The values for R and C are read from the users’ input through the domain specific language defined by the application, as in “cap 10UF” (i.e., 10\micro{}F) and “resistor 330” (in Ohms).
 
 **** Statistic Applications
 
@@ -709,6 +721,9 @@ In the case of a state where the keyword `plot' is properly recognized, \app{} e
 
 
 #+LATEX: \backmatter{}
-#+LATEX: \newpage{}
+#+LATEX: \cleardoublepage{}
+#+LATEX: \printglossary[type=\acronymtype]{}
+#+LATEX: \printglossary[title=Acronyms, toctitle=Acronyms]{}
+#+LATEX: \cleardoublepage{}
 #+LATEX: \printbibliography{}
 
