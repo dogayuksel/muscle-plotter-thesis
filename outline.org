@@ -67,11 +67,11 @@ This thesis explores creating an interactive pen and paper application using Ele
 
 ** Motivation
 
-   Pen and paper is an important activity for concerning human creativity and productivity. The medium of pen and paper is familiar for many people. Developing technologies that could enhance the capabilities of this medium can be beneficial to many. \App{} builds upon this idea and imagines possibility of a future interface without screens, an interface that could be miniaturized and integrated.
+   Pen and paper is an important activity that plays an important role in human creativity and productivity. The medium of pen and paper is familiar to many people. Developing technologies that enhance the capabilities of this medium could be beneficial to many. \App{} builds upon this idea and imagines possibility of a future interface without screens, an interface that could be miniaturized and integrated.
 
 ** Contribution
 
-   \App{} extends on this line of work by providing a more expressive EMS-based system, which is attained by persisting the EMS output onto the paper. Older systems communicate via discrete poses of the users’ body, resulting with a single value any given time. \App actuates user's wrist while dragging the pen to lay down a curve. Since the curve persists on the paper, users can refer or get back to interact even after making several other interactions on the page. These characteristics lend itself to more expressive and longer interactions with the ability to communicate series of values, which later can be used to solve complex problems. 
+   \App{} builds up on previous work by providing a more expressive EMS-based system, which is attained by persisting the EMS output onto the paper. Older systems communicate via discrete poses of the users’ body, resulting with a single value any given time. \App actuates user's wrist while dragging the pen to lay down a curve. Since the curve persists on the paper, users can refer or get back to interact even after making several other interactions on the page. These characteristics lend itself to more expressive and long lasting interactions with the ability to communicate series of values, which later can be used to solve complex problems. 
 
 ** Thesis overview
 
@@ -82,7 +82,7 @@ This thesis explores creating an interactive pen and paper application using Ele
 
 ** Fundamentals
 
-   \App{} builds upon pen and paper interactions, activities such as writing, note taking, sketching that is essential for human intellect. These activities form the pillars for developing own ideas, communicating and building upon them. Ullman et al. have investigated how mechanical designers used drawings, and observed that it `acts as an extended memory', helps analyzing and simulating forms in return enables communication of ideas \cite{ullman_importancedrawing}.
+   \App{} builds upon pen and paper interactions, activities such as writing, note taking and sketching which are essential for human intellect. These activities form the pillars for developing ideas, communicating and building upon them. Ullman et al. have investigated how mechanical designers used drawings, and observed that it `acts as an extended memory', helps analyzing and simulating forms in return enables communication of ideas \cite{ullman_importancedrawing}.
 
    This thesis is further related to interactive pen-based interfaces, interactive systems based on exoskeletons or electrical muscle simulators. Following chapter will further investigate examples from the state of the art research.
 
@@ -90,34 +90,34 @@ This thesis explores creating an interactive pen and paper application using Ele
 
 *** Pen-based Interaction Techniques
 
-    Interactive systems based on pen and paper has existed since the dawn of HCI. Already competent capabilities of pen and paper is further enhanced by intelligent systems and interaction techniques. Holding a pen is traditionally unimanual and that allows cooperative unimanual interactions through these interaction techniques \cite{Hinckley_coopbimanual, Guiard_asymetricbimanual}.
+    Interactive systems based on pen and paper have existed since the dawn of HCI. Already competent capabilities of pen and paper have been further enhanced by intelligent systems and interaction techniques. Holding a pen is traditionally unimanual and that allows cooperative unimanual interactions through these interaction techniques \cite{Hinckley_coopbimanual, Guiard_asymetricbimanual}.
 
-    Based of the principles mentioned above, interaction techniques developed of pen-based systems are as follows, canonically SketchPad \cite{sutherland_sketch}. Another example is `Teddy' which is a system that allows 3D modeling based on 2D sketching \cite{igarashi_teddy}. CrossY tackles the problem of interacting with GUI elements on a paper with a pen \cite{Apitz_crossy}. PapierCraft is another example where users can interact with the elements on paper using gestures such as pigtails, crop marks or underlines to accomplish actions such as copy & paste, linking, etc. \cite{liao_papiercraft}.
+    Based of the principles mentioned above, interaction techniques developed for pen-based systems are as follows, canonically SketchPad \cite{sutherland_sketch}. Another example is `Teddy' which is a system that allows 3D modeling based on 2D sketching \cite{igarashi_teddy}. CrossY tackles the problem of interacting with GUI elements on a paper with a pen \cite{Apitz_crossy}. PapierCraft is another example where users can interact with the elements on paper using gestures such as pigtails, crop marks or underlines to accomplish actions such as copy & paste, linking, etc. \cite{liao_papiercraft}.
 
-    Several other studies extend the use of pen and paper to an other domain in particular to mathematics. Flatland \cite{mynatt_flatland}, for example, is a pen-based interface for whiteboards that supports basic math and map drawing. Also, both MathPad \cite{laviola_mathpad} and Hands-on Math \cite{zeleznik_hands} are systems that provide deeper support for understanding of mathematics.
+    Several other studies extend the use of pen and paper to domains such as mathematics. Flatland \cite{mynatt_flatland}, for example, is a pen-based interface for whiteboards that supports basic math and map drawing. Also, both MathPad \cite{laviola_mathpad} and Hands-on Math \cite{zeleznik_hands} are systems that provide deeper support for understanding of mathematics.
 
 *** Haptic Output Systems
 
     Some researchers have taken tangible input further by using it not only for input but also for output. Notably the Actuated Workbench closed the loop for a tangible tabletop system by actuating the pucks using magnetic forces \cite{pangaro_actuated}. Another example for closing the loop comes from Gesture Output \cite{roudaut_gesture} in which the loop of touch gestures on a mobile phone is closed by actuating the user’s finger.
 
-    Most haptic systems with sufficient force to actuate users transmit forces from a motor to the user’s body via pulleys \cite{murayama_spidar} or exoskeletons \cite{tsetserukou_exointerfaces}. An exemplary device is the Phantom, a desktop sized robotic arm featuring a pen as its’ ending. Phantom or comparable systems have been used for pen-based menu interaction \cite{oakley_solving}, for rendering bar charts for visually impaired users \cite{wall_assessing}, and so forth.
+    Most haptic systems with sufficient force to actuate users transmit forces from a motor to the user’s body via pulleys \cite{murayama_spidar} or exoskeletons \cite{tsetserukou_exointerfaces}. An exemplary device is the Phantom, a desktop sized robotic arm featuring a pen as an extention. Phantom or comparable systems have been used for pen-based menu interaction \cite{oakley_solving}, for rendering bar charts for visually impaired users \cite{wall_assessing}, and so forth.
 
     Also using Actuated Workbench’s principle of magnetic forces as guides, Depend is a sketching system that uses a custom ferromagnetic surface to actuate a ballpoint pen \cite{yamaoka_depend}. The system is unfortunately stationary but in turn provides 2D actuation across the surface. A re-iteration of this interface, Depend 2.0 \cite{yamaoka_pen}, mitigates the mobility issue by using asymmetric vibration patterns to generate a virtual traction force which the user must respond to and turn in that direction voluntarily; this is based on the same underlying principle as Traxion \cite{rekimoto_traxion}.
 
 *** Interactive EMS Systems
-    EMS has been around for over half a century. It is mainly used for medical applications. Over several years HCI community has grown interest. Following are several implementations related, worth mentioning.
+    EMS has been around for over half a century. It has been mainly used for medical applications. Over several years HCI community has grown interest. Following are several implementations related, worth mentioning.
 
-    EMS is a technique originated in the field of medical rehabilitation that applies electrical impulses to involuntarily contact muscle fibers; these impulses are delivered to the user’s muscles via electrodes attached to the skin \cite{Kruijff_hapticfeedback, strojnik_programmed}.
+    EMS is a technique originated in the field of medical rehabilitation that applies electrical impulses to involuntarily contact muscle fibers; these impulses are delivered to user’s muscles via electrodes attached to the skin \cite{Kruijff_hapticfeedback, strojnik_programmed}.
 
-    Recently, researchers in HCI started to build interactive systems based on EMS. The Possessed Hand \cite{tamaki_possessedhand}, for example, is a guidance device that helps users learn for example how to play a new instrument. Pedestrian Cruise Control informs the user’s leg muscles when to turn \cite{pfeiffer_cruise}. In contrast, \app{} actuates muscles directly, thereby eliminates the cognitive load involved by systems that merely inform users when to turn.
+    Recently, researchers in HCI started to build interactive systems based on EMS. The Possessed Hand \cite{tamaki_possessedhand}, for example, is a guidance device that helps users learn how to play a new instrument. Pedestrian Cruise Control informs the user’s leg muscles when to turn \cite{pfeiffer_cruise}. In contrast, \app{} actuates muscles directly, thereby eliminates the cognitive load involved by systems that merely inform users when to turn.
 
-    One motivation for the use of EMS in interactive system is that it allows replacing motors, thereby resulting in much smaller, even mobile form factors. Muscle-propelled force feedback, for example, uses EMS to provide directional force-feedback (left & right) in mobile gaming \cite{lopes_musclepropell}. Pose-IO is an interactive wearable system that allows for eyes-free input output with a computer system \cite{lopes_proprioceptive}. Affordance++ extends on this concept by allowing objects to actuate the user’s hand in order to make it manipulate the object properly \cite{lopes_affordance++}.
+    One motivation for the use of EMS in interactive system is that it allows replacing mechanical actuators, thereby resulting in much smaller, even mobile form factors. Muscle-propelled force feedback, for example, uses EMS to provide directional force-feedback (left & right) in mobile gaming \cite{lopes_musclepropell}. Pose-IO is an interactive wearable system that allows for eyes-free input output with a computer system \cite{lopes_proprioceptive}. Affordance++ extends on this concept by allowing objects to actuate the user’s hand in order to make it manipulate the object properly \cite{lopes_affordance++}.
 
 
 * Applications
 ** Overview
 
-   This thesis presents six applications designed for \app{}. These applications all share some common building blocks are all designed to be initiated by the user on demand. The user can start interacting with \app{} using an application keyword or continue with any of the standard pen and paper activities discussed earlier. To start an interaction user takes turns with the computer, describes a domain and gets the answers later by applying the required plotting motion. Following chapter will describe these applications as walkthroughs to illustrate different interactions with \app{}.
+   This thesis presents six applications designed for \app{}. These applications all share some common building blocks designed to be initiated by the user on demand. The user can start interacting with \app{} using an application keyword or continue with any of the standard pen and paper activities discussed earlier. To start an interaction user takes turns with the computer, describes a domain and gets the answers in a form of plotting motion. Following chapter will describe these applications as walkthroughs to illustrate different interactions with \app{}.
 
 
 ** Wind-Tunnel Simulation
@@ -173,6 +173,7 @@ This thesis explores creating an interactive pen and paper application using Ele
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/windtunnel/IMG_9788.jpg]]
 
+#+LATEX: \newpage{}
 
    On the final step of the walkthrough user decides to compare drag coefficients of two bodies in the wind tunnel. Drag coefficient is an aerodynamics concept, a unit-less ratio that is used as an indication of the aerodynamic performance of body in a fluid. \App{} wind tunnel application allows calculation of this value on the sketch. This example illustrates how \app{} can output scalar values and perform sense making on them. User starts of by writing `plot drag', which is a keyword followed by a domain specific modifier. Plot drag command requires an axis and a sketch inside a wind tunnel canvas. \app{} provides the user some flexibility on how to configure the widget. User can either write the name of the wind tunnel object, as of `plot drag sedan' or directly select the car figure from the context of the wind tunnel with a pig tail on the car body. After the selection, user draws a line and annotates `0' and `1' as the minimum and maximum values of the axis, which is the last configuration \app{} requires to make an scalar value output.
 
@@ -190,9 +191,7 @@ This thesis explores creating an interactive pen and paper application using Ele
 
    After these sequence of actions, user gains insight to aerodynamic properties of the forms put on paper as sketches, which would require complicated calculations or computer modeling otherwise.
 
-
-\newpage{}
-
+#+LATEX: \newpage{}
 ** Other Application Scenarios
    \App{} allows users to accomplish complex sense making tasks with the help of an non intrusive back-end. In order to further illustrate these capabilities following applications are implemented.
 
@@ -283,12 +282,7 @@ This thesis explores creating an interactive pen and paper application using Ele
 
     Input to the system is handled by the Anoto Pen & Paper that acts as a precise tracker \cite{anoto}. the Anoto Paper has a patented dot pattern that encodes the location data for each point. The accuracy of the location is quite high where each millimeter encodes up to 30 unique points. The camera placed inside the pen tip scans and returns the value of the coordinates as long as the pen is pushing on to the paper. The angle of the pen influences the quality of tracking. The users are advised to hold the pen at an upright angle. This is importing using \app{} as a steady stream of observed points allows control loop to function properly. It is also important to mention that there is constant delay as the pen captures and analyses this image. This delay also has a detrimental effect on the performance of the control loop. The effect of the delay will further be discussed later in the control loop section this chapter. In the current implementation of \app{}, there is a Windows server running the drives provided by the Anoto company, relaying data to the back-end server. The details of these drivers (from the vendor we’inspire) is confined by a non-disclosure agreement.
 
-    #+CAPTION:    Anoto Pen and Paper
-    #+LABEL:      fig:pad-placement-flexor
-    #+ATTR_LaTeX: :width 90mm :float
-    [[./images/flexor.jpg]]
-
-    The communication from Anoto Window API and the python back-end is done via Open Sound Control (OSC). Each observation of the Anoto Pen is packaged and contains a location, nature of the observation ( pen up, pen down and drag) and a time-stamp. Time stamp received is used for speed calculations. OSC packets are relayed to the python server through Ethernet. Measurements show that communication delay through Ethernet is insignificant compared to constant processing delay introduced by the pen hardware.
+    The communication from Anoto Window API and the python back-end is done via Open Sound Control (OSC). Each observation of the Anoto Pen is packaged and contains a location, nature of the observation (pen up, pen down and drag) and a time-stamp. Time stamp received is used for speed calculations. OSC packets are relayed to the python server through Ethernet. Measurements show that communication delay through Ethernet is insignificant compared to constant processing delay introduced by the pen hardware.
 
 ** System output
 
@@ -298,6 +292,11 @@ This thesis explores creating an interactive pen and paper application using Ele
 
     EMS machine by HASOMED is capable of generating single pulses of stimulations up to a frequency of 400Hz. In our implementation at a given time two channels are active at most, as a result, each muscle shares the capacity. When in a generic travel mode of the control loop, each side of the arm is stimulated with 200Hz. \App{} pushes the capacity of the signal generator to achieve a feeling of continuous actuation.
 
+    #+CAPTION:    EMS Machine
+    #+LABEL:      fig:ems-machine
+    #+ATTR_LaTeX: :width 61mm :float wrap
+    [[./images/rehastim.png]]
+
     In addition to the frequency of pulses, the EMS machine allows to control the amplitude and duty cycle of each pulse. \App{} uses amplitudes ranging from 6mA to 18mA based on calibration results. Duty cycle ranges between 20\micro{}s to 500\micro{}s, which provides a very large dynamic range of modulation. \App{} mainly controls duty cycles to achieve gradients of actuations. At specific situations, the amplitude of the pulses are temporarily raised to boost actuation that will further be described in the control loop section.
 
 *** Pad Placement
@@ -306,12 +305,12 @@ This thesis explores creating an interactive pen and paper application using Ele
 
     #+CAPTION:    Pad Placement - Flexor
     #+LABEL:      fig:pad-placement-flexor
-    #+ATTR_LaTeX: :width 134mm :float
+    #+ATTR_LaTeX: :width 110mm :float
     [[./images/flexor.jpg]]
 
     #+CAPTION:    Pad Placement - Extensor
     #+LABEL:      fig:pad-placement-extensor
-    #+ATTR_LaTeX: :width 134mm :float
+    #+ATTR_LaTeX: :width 110mm :float
     [[./images/extensor.jpg]]
 
 ** Back-end System
@@ -418,7 +417,7 @@ This thesis explores creating an interactive pen and paper application using Ele
 **** Targeting and travel
 ***** Control Cycles
 
-      Control-loop of \app{} consists of control cycles executed consecutively. Each cycle makes observations and acts based on the respective state relative to the target. Figure [[fig:control-loop-fast]] illustrates consecutive decision cycles on the give curve. At a given point, when a control cycle begins expected trajectory of the pen tip is calculated keeping in mind the transmission and processing delay of the Anoto Pen. In other words when the back-end reads the observation, the user is actually at a later point of the plot. This delay has been measured to be around 0.1s. As seen on figure [[fig:control-loop-fast]] each green dot is the calculated trajectory, where blue points represent the respective targets for that specific cycle.
+      Control-loop of \app{} consists of control cycles executed consecutively. Each cycle makes observations and acts based on the respective state relative to the target. Figure [[fig:control-loop-fast]] illustrates consecutive decision cycles on the given curve. At a given point, when a control cycle begins expected trajectory of the pen tip is calculated keeping in mind the transmission and processing delay of the Anoto Pen. In other words when the back-end reads the observation, the user is actually at a later point of the plot. This delay has been measured to be around 0.1s. As seen on figure [[fig:control-loop-fast]] each green dot is the calculated trajectory, where blue points represent the respective targets for that specific cycle.
 
      #+CAPTION:    Observed and Target Points Visualized
      #+LABEL:      fig:control-loop-fast
@@ -435,10 +434,10 @@ This thesis explores creating an interactive pen and paper application using Ele
  - is pointing towards the target
  - the user has been away from the target for a certain distance
  - and expected trajectory is is measured to have an intersection with the target
-brakes are activated. This mode can be considered as the derivation component of a traditional PID controller. Main aim is to reduce the oscillations occurring while the plotting takes place. Figure [[fig:control-loop]] shows the brake activation cycles with cyan circles on the top curve. Bottom curve showcases observed and target points as in the previous figure. Following sections will identify two modes of braking.
+brakes are activated. This mode can be considered as the derivation component of a traditional PID controller. Main aim is to reduce the oscillations occurring while the plotting takes place. Figure [[fig:crazy-fast]] shows the brake activation cycles with cyan circles on the top curve. Bottom curve showcases observed and target points as in the previous figure. Following sections will identify two modes of braking.
 
      #+CAPTION:    Brakes applied during the plot 
-     #+LABEL:      fig:control-loop
+     #+LABEL:      fig:crazy-fast
      #+ATTR_LaTeX: :width 132mm :float
      [[./images/implementation/crazy_fast.png]]
 
@@ -489,15 +488,10 @@ brakes are activated. This mode can be considered as the derivation component of
 
      #+CAPTION:    A Generic Canvas with Axes
      #+LABEL:      fig:axis-roto
-     #+ATTR_LaTeX: :width 132mm :float
+     #+ATTR_LaTeX: :width 91mm :float
      [[./images/implementation/axis-rotoscope-01.png]]
 
-    As we have presented in the walkthrough, our main contribution comes from the spatial expressively of plotting one-to-functions, such as streamlines of the wind tunnel or the speed values for a selected cross-section. For both use cases the space defined on the paper is same in nature, while the tools to define are domain dependent. In the wind-tunnel case, there exists a line for every point on the vertical start axis as stream lines emerge from a single solution of a vector field. The anatomy of the wind tunnel canvas is presented in [[fig:windtunnel-roto]]. On the other hand for the speed values line example, there exists one unique line, that the user can plot. An example of such an axis is shown in the figure [[fig:axis-roto]]
-
-     #+CAPTION:    A Windtunnel Object
-     #+LABEL:      fig:windtunnel-roto
-     #+ATTR_LaTeX: :width 132mm :float
-     [[./images/implementation/canvas-rotoscope-01.png]]
+    As we have presented in the walkthrough, our main contribution comes from the spatial expressively of plotting one-to-functions, such as streamlines of the wind tunnel or the speed values for a selected cross-section. For both use cases the space defined on the paper is same in nature, while the tools to define are domain dependent. In the wind-tunnel case, there exists a line for every point on the vertical start axis as stream lines emerge from a single solution of a vector field. On the other hand for the speed values line example, there exists one unique line, that the user can plot. An example of such an axis is shown in the figure [[fig:axis-roto]]
 
     In order to initiate a multiple axis plot, the user has to define a space on the paper. This is done by drawing two perpendicular lines representing the axes or crop-marks that encompasses the area. In case of a function plot, after defining axis lines user can optionally update the domain. Otherwise, defaults for the specific example is used just as mentioned in single axis examples.
    
@@ -565,7 +559,7 @@ In the case of a state where the keyword `plot' is properly recognized, \app{} e
 *** Task
     For each trial, participants plotted one function onto paper using \app{} as displayed in figure [[fig:user-study-1]]. Participants were instructed to place the pen tip hence their hands on a starting marker to the left side of the paper. Later they dragged their hands towards the right side of the page, at a comfortable speed they desired. While dragging, \app{} has actuated the wrist to plot the target.
 
-    #+CAPTION:    User Plotting
+    #+CAPTION:    User plotting a target curve
     #+LABEL:      fig:user-study-1
     #+ATTR_LaTeX: :width 132mm :float
     [[./images/studyresults/setup.png]]
@@ -576,7 +570,7 @@ In the case of a state where the keyword `plot' is properly recognized, \app{} e
 
 *** Apparatus
 
-    #+CAPTION:    User Plotting
+    #+CAPTION:    Close up of user plotting
     #+LABEL:      fig:aparatus-1
     #+ATTR_LaTeX: :width 132mm :float
     [[./images/studyresults/closeup.png]]
