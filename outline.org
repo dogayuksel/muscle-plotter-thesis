@@ -27,6 +27,9 @@
 :ACRONYMS:
 #+LATEX: \newacronym{ems}{EMS}{Electrical Muscle Stimulation}
 #+LATEX: \newacronym{api}{API}{Application Programming Interface}
+#+LATEX: \newacronym{gui}{GUI}{Graphical User Interface}
+#+LATEX: \newacronym{hci}{HCI}{Human-computer interaction}
+#+LATEX: \newacronym{usb}{USB}{Universal Serial Bus}
 :END:
 :INTRO:
 #+LATEX: \frontmatter{}
@@ -99,9 +102,9 @@ This thesis wouldn't be possible without the vision of Patrick Baudish, and the 
 
 *** Pen-based Interaction Techniques
 
-    Interactive systems based on pen and paper have existed since the dawn of HCI. Already competent capabilities of pen and paper have been further enhanced by intelligent systems and interaction techniques. Holding a pen is traditionally unimanual and that allows cooperative unimanual interactions through these interaction techniques \cite{Hinckley_coopbimanual, Guiard_asymetricbimanual}.
+    Interactive systems based on pen and paper have existed since the dawn of \acrshort{HCI}. Already competent capabilities of pen and paper have been further enhanced by intelligent systems and interaction techniques. Holding a pen is traditionally unimanual and that allows cooperative unimanual interactions through these interaction techniques \cite{Hinckley_coopbimanual, Guiard_asymetricbimanual}.
 
-    Based of the principles mentioned above, interaction techniques developed for pen-based systems are as follows, canonically SketchPad \cite{sutherland_sketch}. Another example is `Teddy' which is a system that allows 3D modeling based on 2D sketching \cite{igarashi_teddy}. CrossY tackles the problem of interacting with GUI elements on a paper with a pen \cite{Apitz_crossy}. PapierCraft is another example where users can interact with the elements on paper using gestures such as pigtails, crop marks or underlines to accomplish actions such as copy & paste, linking, etc. \cite{liao_papiercraft}.
+    Based of the principles mentioned above, interaction techniques developed for pen-based systems are as follows, canonically SketchPad \cite{sutherland_sketch}. Another example is `Teddy' which is a system that allows 3D modeling based on 2D sketching \cite{igarashi_teddy}. CrossY tackles the problem of interacting with \acrshort{gui} elements on a paper with a pen \cite{Apitz_crossy}. PapierCraft is another example where users can interact with the elements on paper using gestures such as pigtails, crop marks or underlines to accomplish actions such as copy & paste, linking, etc. \cite{liao_papiercraft}.
 
     Several other studies extend the use of pen and paper to domains such as mathematics. Flatland \cite{mynatt_flatland}, for example, is a pen-based interface for whiteboards that supports basic math and map drawing. Also, both MathPad \cite{laviola_mathpad} and Hands-on Math \cite{zeleznik_hands} are systems that provide deeper support for understanding of mathematics.
 
@@ -114,11 +117,11 @@ This thesis wouldn't be possible without the vision of Patrick Baudish, and the 
     Also using Actuated Workbench’s principle of magnetic forces as guides, Depend is a sketching system that uses a custom ferromagnetic surface to actuate a ballpoint pen \cite{yamaoka_depend}. The system is unfortunately stationary but in turn provides 2D actuation across the surface. A re-iteration of this interface, Depend 2.0 \cite{yamaoka_pen}, mitigates the mobility issue by using asymmetric vibration patterns to generate a virtual traction force which the user must respond to and turn in that direction voluntarily; this is based on the same underlying principle as Traxion \cite{rekimoto_traxion}.
 
 *** Interactive \acrshort{ems} Systems
-    \acrshort{ems} has been around for over half a century. It has been mainly used for medical applications. Over several years HCI community has grown interest. Following are several implementations related, worth mentioning.
+    \acrshort{ems} has been around for over half a century. It has been mainly used for medical applications. Over several years \acrshort{HCI} community has grown interest. Following are several implementations related, worth mentioning.
 
     \acrshort{ems} is a technique originated in the field of medical rehabilitation that applies electrical impulses to involuntarily contact muscle fibers; these impulses are delivered to user’s muscles via electrodes attached to the skin \cite{Kruijff_hapticfeedback, strojnik_programmed}.
 
-    Recently, researchers in HCI started to build interactive systems based on \acrshort{ems}. The Possessed Hand \cite{tamaki_possessedhand}, for example, is a guidance device that helps users learn how to play a new instrument. Pedestrian Cruise Control informs the user’s leg muscles when to turn \cite{pfeiffer_cruise}. In contrast, \app{} actuates muscles directly, thereby eliminates the cognitive load involved by systems that merely inform users when to turn.
+    Recently, researchers in \acrshort{HCI} started to build interactive systems based on \acrshort{ems}. The Possessed Hand \cite{tamaki_possessedhand}, for example, is a guidance device that helps users learn how to play a new instrument. Pedestrian Cruise Control informs the user’s leg muscles when to turn \cite{pfeiffer_cruise}. In contrast, \app{} actuates muscles directly, thereby eliminates the cognitive load involved by systems that merely inform users when to turn.
 
     One motivation for the use of \acrshort{ems} in interactive system is that it allows replacing mechanical actuators, thereby resulting in much smaller, even mobile form factors. Muscle-propelled force feedback, for example, uses \acrshort{ems} to provide directional force-feedback (left & right) in mobile gaming \cite{lopes_musclepropell}. Pose-IO is an interactive wearable system that allows for eyes-free input output with a computer system \cite{lopes_proprioceptive}. Affordance++ extends on this concept by allowing objects to actuate the user’s hand in order to make it manipulate the object properly \cite{lopes_affordance++}.
 
@@ -277,7 +280,7 @@ This thesis wouldn't be possible without the vision of Patrick Baudish, and the 
 * Implementation
 ** Overview
 
-   Current implementation of \app{} uses an Anoto Pen & Paper\cite{anoto} for input and a medically compliant 8-channel portable \acrshort{ems} simulator (from HASOMED \cite{hasomed}) for output. Tracking data from the Anoto pen is relayed through a windows machine to the python back-end running on a Mac OSX. Communication between the \acrshort{ems} machine and the python back end takes place through the custom serial protocol via USB. Current implementation only uses 4 channels of the \acrshort{ems} device. This setup can be miniaturized with a hardware similar to the one proposed in Proprioceptive Interaction \cite{lopes_proprioceptive}.
+   Current implementation of \app{} uses an Anoto Pen & Paper\cite{anoto} for input and a medically compliant 8-channel portable \acrshort{ems} simulator (from HASOMED \cite{hasomed}) for output. Tracking data from the Anoto pen is relayed through a windows machine to the python back-end running on a Mac OSX. Communication between the \acrshort{ems} machine and the python back end takes place through the custom serial protocol via \acrshort{usb}. Current implementation only uses 4 channels of the \acrshort{ems} device. This setup can be miniaturized with a hardware similar to the one proposed in Proprioceptive Interaction \cite{lopes_proprioceptive}.
 
   #+CAPTION:    System Overview
   #+LABEL:      fig:muscle-plotter-overview
@@ -669,7 +672,7 @@ In the case of a state where the keyword `plot' is properly recognized, \app{} e
    Working principles of \app{} limits drawing capabilities to a single axis, which can't be considered as a 2D drawing activity. More complicated data is plotted with repeating the same motion in different spacial contexts as seen in streamlines of the wind tunnel. Plotting with \app{} is based on a steering motion as pen draws a curve. Expanding these limitations to a two dimensional surface would require coordination of multiple muscles on the human body, arm, and wrist. Controlling such a complex motion with \acrshort{ems} would require extensive control over each possible channel, perhaps with some levels of abstraction. 
 
 ** Considering User study
-   \App{} is a novel interface that has different limitations and strengths compared to traditional GUI based systems. User study we have introduced tries to understand the plotting capabilities of the system, to better understand applications possible. However usability of those applications are left out from the user study.
+   \App{} is a novel interface that has different limitations and strengths compared to traditional \acrshort{gui} based systems. User study we have introduced tries to understand the plotting capabilities of the system, to better understand applications possible. However usability of those applications are left out from the user study.
 
 ** Design Considerations
    Based on the findings of designing applications for \app{}, this theses points to a couple of principles that are important to consider to create usable applications.
