@@ -168,7 +168,7 @@ This thesis wouldn't be possible without the vision of Patrick Baudisch, and the
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/windtunnel/IMG_9768.jpg]]
 
-   To compare stored data sets, user moves to an empty space on the paper and starts a new object with the keyword `plot' followed by the variable name that refers to the data set stored earlier, in this case `sedan'. Plot keyword also requires an axis to be specified as target. Users define such areas with two perpendicular lines, which are classified by the back-end as axis objects. The region defined by the axis lines describe the canvas area for the plot object. Similar to a manner of plotting streamlines user plots for first car. User repeats the action with the same keyword `plot' followed by the second variable, `hatchback'. Plot keyword expects an axis, in this case user selects an existing axis on the paper. By plotting two data sets on the same axis, results can be visually compared in the respective spacial context. Figure [[fig:windtunnel-captured]] shows the user plotting the wind speed at the cross section defined for each wind tunnel.
+   To compare stored data sets, user moves to an empty space on the paper and starts a new object with the keyword `plot' followed by the variable name that refers to the data set stored earlier, in this case `sedan'. Plot keyword also requires an axis to be specified as target. Users define such areas with two perpendicular lines, which are classified by the back-end as axis objects. The region defined by the axis lines describe the canvas area for the plot object. Similar to a manner of plotting streamlines user plots for first car. User repeats the action with the same keyword `plot' followed by the second variable, `hatchback'. Plot keyword expects an axis, in this case user selects an existing axis on the paper. By plotting two data sets on the same axis, results can be visually compared in the respective spacial context. Figure [[fig:windtunnel-captured]] shows the user plotting the wind speed at the cross section defined for the first wind tunnel, annotated as 'sedan'.
 
    #+CAPTION: Plotting selected data set
    #+NAME: fig:windtunnel-captured
@@ -189,7 +189,7 @@ This thesis wouldn't be possible without the vision of Patrick Baudisch, and the
 
 #+LATEX: \newpage{}
 
-   On the final step of the walkthrough user decides to compare drag coefficients of two bodies in the wind tunnel. Drag coefficient is an aerodynamics concept, a unit-less ratio that is used as an indication of the aerodynamic performance of body in a fluid. \App{} wind tunnel application allows calculation of this value on the sketch. This example illustrates how \app{} can output scalar values and perform sense making on them. User starts of by writing `plot drag', which is a keyword followed by a domain specific modifier. Plot drag command requires an axis and a sketch inside a wind tunnel canvas. \app{} provides the user some flexibility on how to configure the widget. User can either write the name of the wind tunnel object, as of `plot drag sedan' or directly select the car figure from the context of the wind tunnel with a pig tail on the car body. After the selection, user draws a line and annotates `0' and `1' as the minimum and maximum values of the axis, which is the last configuration \app{} requires to make an scalar value output.
+   On the final step of the walkthrough user decides to compare drag coefficients of two bodies in the wind tunnel. Drag coefficient is an aerodynamics concept, a dimensionless quantity that is used as an indication of the aerodynamic performance of body in a fluid. \App{} wind tunnel application allows calculation of this value on the sketch. This example illustrates how \app{} can output scalar values and perform sense making on them. User starts of by writing `plot drag', which is a keyword followed by a domain specific modifier. Plot drag command requires an axis and selection of a sketch inside a wind tunnel canvas. \App{} provides the user some flexibility on how to configure the widget. User can either write the name of the wind tunnel object, as of `plot drag sedan' or directly select the car figure from the context of the wind tunnel with a pig tail on the car body. After the selection, user draws a line and annotates `0' and `1' as the minimum and maximum values of the axis, which is the last configuration \app{} requires to make an scalar value output.
 
    #+CAPTION: Plotting to scale widget
    #+NAME: fig:windtunnel6-1
@@ -201,13 +201,13 @@ This thesis wouldn't be possible without the vision of Patrick Baudisch, and the
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/windtunnel/IMG_9799.jpg]]
 
-   After the input sequence, plot widget can be used for the output. To initiate, user drags the pen starting from the point annotated as `0' up and when tip is on the right point of the scale \app{} pushes the hand perpendicular to leave a tick mark and up moving pen away from the paper. Figure [[fig:windtunnel6-1]] shows this step of the interaction. Point of the tick is proportionally mapped to the size of the axis defined and annotated on the paper. Same action is repeated for the second car as seen in figure [[fig:windtunnel6-2]], which shows the use of the same axis from the previous plot. After plotting both values, user can compare the performance of both forms based a scalar value calculated by the simulation.
+   After the input sequence, plot widget can be used for the output. To initiate, user drags the pen upwards starting from the point annotated as `0' and when tip is on the right point of the scale \app{} pushes the hand perpendicular to leave a tick mark and up moving pen away from the paper. Figure [[fig:windtunnel6-1]] shows this step of the interaction. Location of the tick is proportionally mapped to the size of the axis defined and annotated on the paper. Same action is repeated for the second car as seen in figure [[fig:windtunnel6-2]], which shows the use of the same axis from the previous plot. After plotting both values, user can compare the performance of both forms based a scalar value calculated by the simulation.
 
    After these sequence of actions, user gains insight to aerodynamic properties of the forms put on paper as sketches, which would require complicated calculations or computer modeling otherwise.
 
 #+LATEX: \newpage{}
 ** Other Application Scenarios
-   \App{} allows users to accomplish complex sense making tasks with the help of an non intrusive back-end. In order to further illustrate these capabilities following applications are implemented.
+   \App{} allows users to accomplish complex sense making tasks with the help of a computer operating at the back-end. In order to further illustrate these capabilities following applications are implemented.
 
 *** RC Filter
 
@@ -218,25 +218,25 @@ This thesis wouldn't be possible without the vision of Patrick Baudisch, and the
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/otherapps/rcfilter.jpg]]
 
-   Filter design application is used for understanding different filter designs by observing their frequency response. The domain is selected by writing the keyword `RCfilter' followed by a variable name in this case `highpass'. User further inputs required parameters as in keyword, variable sequence, as shown on figure [[fig:rcfilter]] as `RCFILTER CAP 47\micro{}F'. After the environment is initialized, user plots the the frequency response to observe the design of the RC filter. At this step user changes the variables and re-plots the response, which allows to iteratively design filters with adjusting components.
+   Filter design application is used for understanding different filter designs by observing their frequency response. The domain is selected by writing the keyword `RCFILTER' followed by a modifier command, in this case `highpass'. User further inputs required parameters as in keyword, variable, value sequence, as shown on figure [[fig:rcfilter]] as `RCFILTER CAP 47\micro{}F'. After the environment is initialized, user plots the the frequency response to observe the design of the RC filter. At of this step user changes the variables and re-plots the response, which allows to iteratively design for the desired filter characteristics with adjusting component parameters.
 
 *** Solving Math Equations
 
-    Figure [[fig:mathequations]] show how \app{} interfaces with Octave to enable user to accomplish complex mathematical problems.
+    Figure [[fig:mathequations]] show how \app{} interfaces with Octave to enable user to solve complex mathematical problems.
 
    #+CAPTION: Plotting math functions
    #+NAME: fig:mathequations
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/otherapps/IMG_9697.jpg]]
 
-   Figure [[fig:mathequations]] shows user plotting a fifth degree polynomial. Using the keyword `F(X)=' user stores parameters of the polynomial in to the state. User later recall this variable with the `plot' keyword, followed by axis definition
+   Figure [[fig:mathequations]] shows user plotting a fifth degree polynomial. Using the keyword `F(X)=' user stores parameters of the polynomial in to the state. User later recalls this variable in combination with the `plot' keyword. As other plot instances, the keyword is followed by the axis definition.
 
    #+CAPTION: Calculating the integral of a function
    #+NAME: fig:mathequations2
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/otherapps/IMG_9698.jpg]]
 
-   After the plot action, user calls `integral' keyword, specifies the input and a target value. Which in return allows to spatially observe the output, where area under the curve reaches the target value. Figure [[fig:mathequations2]] shows the user getting the output of the `integral' command query.
+   After the plot action, user calls `integral' keyword, specifies the input and a target value. This command allows the user to spatially observe the output, where area under the curve reaches the target value using the same plotting principles of the scale widget. Figure [[fig:mathequations2]] shows the user getting the answer as described.
 
 *** Forms and Menus
 
@@ -247,27 +247,27 @@ This thesis wouldn't be possible without the vision of Patrick Baudisch, and the
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/otherapps/IMG_9706.jpg]]
 
-   Figure [[fig:formsandmenus]] demonstrates a widget to configure \app{}. It displays a multiple checkbox example on top and a radio button below. Multiple checkboxes are initiated by the user with the keyword `channel', followed by `?'. User then defines the list of possible values separated by square brackets. After the widget is configured, user traces the horizontal axis, \app{} draws tick marks on active channels. 
+   Figure [[fig:formsandmenus]] demonstrates a widget to configure \app{}. It displays a multiple checkbox example. Multiple checkboxes are initiated by the user with the keyword `channel', followed by `?'. User then defines the list of possible values separated by square brackets. After the widget is configured, user traces the horizontal axis, \app{} draws tick marks on active channels. 
 
    #+CAPTION: Input to a form widget
    #+NAME: fig:formsandmenus2
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/otherapps/IMG_9707.jpg]]
 
-   As mentioned earlier, this widget is symmetric as user draws a cross on brake channel to activate it. Figure [[fig:formsandmenus2]] shows the input sequence. This is a simple application of the radio button.
+   As mentioned earlier, this widget is symmetric. This is illustrated as user draws a cross on brake channel to activate it. Figure [[fig:formsandmenus2]] shows the input action.
 
 *** Fitting Trend Lines
  
-    In Figure [[fig:formsandmenus]] illustrates the use of statistical functions with \app{}. In this example user accesses and plots a data set, further plots a trend line to better understand the set.
+    Figure [[fig:fit-trend-lines]] illustrates the use of statistical functions with \app{}. In this example user accesses and plots a data set, further plots a trend line to better understand the set.
 
    #+CAPTION: Fitting trend lines
-   #+NAME: fig:formsandmenus
+   #+NAME: fig:fit-trend-lines
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/otherapps/bar_IMG_9675.jpg]]
 
-   In fitting trend lines scenario user is exploring a data set concerning sales arranged by months. User starts this interaction with the keyword `barchart' followed by the variable `sales'. Bar chart requires an axis, which is defined by the user after keyword is invoked. A set of discrete values are mapped on the x-axis through the tick-marks drawn by \app{} as the user scans the axis. In this case user chooses to annotate the x-axis with the months. \App{} is not outputting as the user is writing on an inactive area. When user decides to output a value, starts with a pen-down in proximity of the intersection between the peak of the tick mark and the x-axis and scans vertically, finally \app{} outputs a dash to the left followed by a pen up which signifies the column. 
+   In fitting trend lines scenario user is exploring a data set concerning sales arranged by months. User starts this interaction with the keyword `barchart' followed by the variable `sales'. Bar chart requires an axis, which is defined by the user after keyword is invoked. A set of discrete values are mapped on the x-axis through the tick-marks drawn by \app{} as the user scans the axis. In this case user chooses to annotate the x-axis with the months, which is optional. \App{} is not outputting as the user is writing on an inactive area. When user decides to output a value, starts with a pen-down in proximity of the intersection between the peak of the tick mark and the x-axis and scans vertically, finally \app{} outputs a dash to the left followed by a pen up which signifies the column that represents the associated value of the scanned month. 
 
-   This scenario further extends as user applies `plot' with `linearfit' on to the bar chart object. User starts dragging the pen from the starting point on to the y-axis and \App{} outputs linear regression as a line.
+   This scenario further extends as user applies `plot' with `linearfit' on to the bar chart object. User starts dragging the pen from the starting point on the y-axis and \App{} outputs linear regression as a line.
 
 *** Optics Simulator
 
@@ -677,13 +677,13 @@ In the case of a state where the keyword `plot' is properly recognized, \app{} e
    \App{} is a novel interface that has different limitations and strengths compared to traditional \acrshort{gui} based systems. User study we have introduced tries to understand the plotting capabilities of the system, to better understand applications possible. However usability of those applications are left out from the user study.
 
 ** Design Considerations
-   Based on the findings of designing applications for \app{}, this theses points to a couple of principles that are important to consider to create usable applications.
+   Based on the findings of designing applications for \app{}, this thesis points to a couple of principles that are important to consider to create usable applications.
    
 *** Discoverability
     \App{} provides an interactive environment using user initiated components on paper. This approach differs from previous interactive systems as the user is expected to have a prior knowledge of the provided language. In many cases our interactions start with an empty sheet of paper. On the other hand screen based interactive systems provide discoverability as the system itself has a wider channel for output, such applications can start with a tutorial expecting the user to have zero prior knowledge. Designing applications for \app{} should consider this to provide an engaging experience. According to the domain of the application, command keywords could be flexible and adaptive, moreover similar to a natural language.
 
 *** Interactive Text Books
-    \App{} interactions require some input from the user side, in order to determine the domain and configure the output. In the simplest case, user has to accomplish a sequence of inputs to get a the first output. Predesigned worksheets would allow to simplify these steps, minimizing the learning curve as well as creating engaging interactions. Figure [[fig:optics-worksheet]] shows a sample prepared for testing. Combination of such examples could make up to interactive textbooks.
+    \App{} interactions require some input from the user side, in order to determine the domain and configure the output. In the simplest case, user has to accomplish a sequence of inputs to get the first output. Predesigned worksheets would allow to simplify these steps, minimizing the learning curve as well as creating engaging interactions. Figure [[fig:optics-worksheet]] shows a sample prepared for testing. Combination of such examples could make up to interactive textbooks.
 
     #+CAPTION:    Optics worksheet example
     #+LABEL:      fig:optics-worksheet
