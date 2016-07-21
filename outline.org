@@ -98,7 +98,7 @@ This thesis wouldn't be possible without the vision of Patrick Baudisch, and the
 
    \App{} builds upon pen and paper interactions, activities such as writing, note taking and sketching which are essential for human intellect. These activities form the pillars for developing ideas, communicating and building upon them. Ullman et al. have investigated how mechanical designers used drawings, and observed that it `acts as an extended memory', helps analyzing and simulating mechanical forms and enables communication of ideas \cite{ullman_importancedrawing}. Holding a pen may be traditionally considered unimanual, however non-dominant hand is shown to play a role during sketching activities acting as a point of reference \cite{Hinckley_coopbimanual, Guiard_asymetricbimanual}.
 
-   This thesis is further related to interactive pen-based interfaces, interactive systems based on exoskeletons or \acrlong{ems}. Following chapter will further investigate examples from the state of the art research.
+   This thesis is further related to interactive pen-based interfaces, interactive systems based on exoskeletons or electrical muscle stimulation. Following chapter will further investigate examples from the state of the art research.
 
 ** Related Work
 
@@ -271,13 +271,12 @@ This thesis wouldn't be possible without the vision of Patrick Baudisch, and the
 
 *** Optics Simulator
 
+   Optics simulator allows exploring how rays of light refract in convex and concave lenses using \app{}. In Figure [[fig:optics]], user sketches a convex lens and explores how light rays refract through it. The application is initiated with writing a keyword, `optics' followed by defining a region with crop marks. When the user drags the pen through the lens, \app{} deviates the wrist based on the properties of the lens being simulated.
+
    #+CAPTION: Ray tracing simulation using convex and concave lenses
    #+NAME: fig:optics
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/otherapps/optics_IMG_9671.jpg]]
-
-   Optics simulator allows exploring how rays of light refract in convex and concave lenses using \app{}. In Figure [[fig:optics]], user sketches a convex lens and explores how light rays refract through it. The application is initiated with writing a keyword, `optics' followed by defining a region with crop marks. When the user drags the pen through the lens, \app{} deviates the wrist based on the properties of the lens being simulated.
-
 
 * Implementation
 ** Overview
@@ -581,9 +580,9 @@ In the case of a state where the keyword `plot' is properly recognized, \app{} e
     #+CAPTION:    User plotting a target curve
     #+LABEL:      fig:user-study-1
     #+ATTR_LaTeX: :width 132mm :float
-    [[./images/studyresults/setup.png]]
+    [[./images/studyresults/closeup.png]]
    
-    Each trial lasted for 16 centimeters from left to right. For each trial, target and measured points were recorded, as well as the duration pen tip was in contact with the paper. Eight target functions that were randomly served to participants are shown in figure [[fig:target-functions]]. First six functions labeled as Sin1 to Sin6 were composed by adding off phased sine waves of increasing frequency up to 0.5 cycles/cm. Remaining two functions consist of a triangular wave (denoted as Tri) and a half sine wave followed by a flat section (denoted as Flat). These two functions aim to explore how the system behaves with regards to abrupt changes in slope and curvature as well as to prevent participants from getting used to sine wave patterns.
+    Each trial lasted for 16 centimeters from left to right. For each trial, target and measured points were recorded, as well as the duration pen tip was in contact with the paper. Eight target functions that were randomly served to participants are shown in figure [[fig:target-functions]]. First six functions labeled as f1 to f6 were composed by adding phased and off phased sine waves of increasing frequency up to 0.5 cycles/cm. Remaining two functions consist of a triangular wave (denoted as f7) and a half sine wave followed by a flat section (denoted as f8). These two functions aim to explore how the system behaves with regards to abrupt changes in slope and curvature as well as to prevent participants from getting used to repeating sine wave patterns.
 
     As every participant performed each function twice, total of 128 trials (8 functions x 2 repetitions x 8 participants) have been conducted over the course of a week.
 
@@ -592,15 +591,15 @@ In the case of a state where the keyword `plot' is properly recognized, \app{} e
     #+CAPTION:    Close up of user plotting
     #+LABEL:      fig:aparatus-1
     #+ATTR_LaTeX: :width 132mm :float
-    [[./images/studyresults/closeup.png]]
+    [[./images/studyresults/setup.png]]
 
-    Figure [[fig:aparatus-1]] shows apparatus for the user study. Participants wore \app{}’s electrodes on the wrist flexor and extensor muscles as described in detail in [[*Pad Placement][pad placement section]]. Participants were seated with the dominant forearm rested on the table to reduce fatigue. Plots were made using the controller described in implementation, which actuated flexors and extensors simultaneously but without brake channel, which was introduced as an outcome of the study. Brake effect was achieve via tensing both sides as described in the earlier section. During the study \app{} software administered the respective functions to the user; all other functionality was disabled. Study assistants, made sure change the Anoto Paper for each plot to avoid negative effects of repetition. 
+    Figure [[fig:aparatus-1]] shows apparatus for the user study. Participants wore \app{}’s electrodes on the wrist flexor and extensor muscles as described in detail in [[*Pad Placement][pad placement section]]. Participants were seated with the dominant forearm resting on the table to reduce fatigue. Plots were made using the controller described in implementation, which actuated flexors and extensors simultaneously but without brake channel, which was introduced as an outcome of the study. Brake effect was achieved via tensing both sides as described in the earlier implementation section. During the study \app{} software administered the respective functions to each user; all other functionality was disabled. Study assistants, made sure to change the Anoto Paper for each plot to avoid sequential effects of repetition. 
 
 *** Participants
 
-    8 participants were recruited (1 female), between 22 and 26 years old (M = 23.9 years) from the local university. With consent of the participants trials were videotaped. Participants calibrated with the procedure described in Implementation section. Participants that were not comfortable with the \acrshort{ems} were not accepted for the trials as the purpose of the study was not to test usability of \acrshort{ems} itself.
-
-
+    8 participants were recruited (1 female), between 22 and 26 years old (M = 23.9 years) from the local university. With consent of the participants trials were videotaped. Participants calibrated with the procedure described in implementation section. The results of the calibration can also be seen in the implementation section. Participants that were not comfortable with the \acrshort{ems} were not accepted for the trials as the purpose of the study was not to test usability of \acrshort{ems} itself.
+    
+    
 ** Study Results
    Raw data measured in Figure [[fig:target-functions]] shows all the curves drawn by each participant. The average error from respective targets across all 128 trials was 4.07 mm (SD=3.03 mm).
 
@@ -609,58 +608,58 @@ In the case of a state where the keyword `plot' is properly recognized, \app{} e
     #+ATTR_LaTeX: :width 152mm :float
     [[./images/studyresults/figure_1.png]]
 
-*** Preservation of sine-based functions
+*** Plotting sine-based functions
 
-    Figure [[fig:target-functions]] also shows the average error per by function. As expected, there was an increase in error with the increase in the function’s highest frequency. Table [[tab:sine-based-results]] confirmed by a linear regression through Sin1-Sin6 with R2=0.64. To provide an estimation of how much each trial differed to the next, the reported standard deviations (SD) are between the averages of all trials for that specific function.
+    Figure [[fig:target-functions]] also shows the average error per by function. As expected, there was an increase in error with the increase in the function’s highest frequency. Table [[tab:sine-based-results]] confirmed by a linear regression through f1 to f6 with R2=0.64. To provide an estimation of how much each trial differed to the next, the reported standard deviations (SD) are between the averages of all trials for that specific function.
 
      #+CAPTION: Average error for a sine-based functions
      #+NAME:   tab:sine-based-results
      #+ATTR_LATEX: :float
      #+ATTR_LATEX: :align |c|c|c|
-     |------+-----------------+--------------------|
-     |      | mean error (mm) | standard deviation |
-     |------+-----------------+--------------------|
-     | Sin1 |            2.45 |               1.42 |
-     | Sin2 |            2.65 |               1.29 |
-     | Sin3 |            2.66 |               0.90 |
-     | Sin4 |            3.15 |               1.00 |
-     | Sin5 |            4.55 |               1.31 |
-     | Sin6 |           10.06 |               2.67 |
-     |------+-----------------+--------------------|
+     |----+-----------------+--------------------|
+     |    | mean error (mm) | standard deviation |
+     |----+-----------------+--------------------|
+     | f1 |            2.45 |               1.42 |
+     | f2 |            2.65 |               1.29 |
+     | f3 |            2.66 |               0.90 |
+     | f4 |            3.15 |               1.00 |
+     | f5 |            4.55 |               1.31 |
+     | f6 |           10.06 |               2.67 |
+     |----+-----------------+--------------------|
 
-*** Preservation of non-sine functions
+*** Plotting functions with abrupt changes
 
-    When plotting the two functions that contained abrupt changes in slope and curvature participants performed similarly to the sine waves. The results are summarized in the table [[tab:non-sine-results]]. Standard deviation is calculated against the averages of all users for the same curve as in the previous step. The results show that abrupt changes of curvature generate a similar error profile to smooth curvatures. The error increases with the rate of change is higher.
+    When plotting the two functions that contained abrupt changes in slope and curvature participants performed similarly to the ones made of sine waves. The results are summarized in the table [[tab:non-sine-results]]. Standard deviation is calculated against the averages of all users for the same curve as in the previous step. The results show that abrupt changes of curvature generate a similar error profile to smooth curvatures. The error increases when the rate of change of the target function is higher.
 
-     #+CAPTION: Average error for a non-sine functions
+     #+CAPTION: Average error for functions with abrupt changes
      #+NAME:   tab:non-sine-results
      #+ATTR_LATEX: :float
      #+ATTR_LATEX: :align |c|c|c|
      |------+-----------------+--------------------|
      |      | mean error (mm) | standard deviation |
      |------+-----------------+--------------------|
-     | Tri  |            4.77 |               1.53 |
-     | Flat |            2.29 |               0.82 |
+     | f7   |            4.77 |               1.53 |
+     | f8   |            2.29 |               0.82 |
      |------+-----------------+--------------------|
 
 *** Preservation of features
     
-    The plots in Figure [[fig:frequency-analysis]] illustrate in how far plots made through app{} preserved the original function. The plots show frequency histograms produced by means of Fourier Transformation. We see the original signal in green, as well as user-specific jitters—aka noise, in red. As the plots illustrate, jitters tends to revolve around frequencies higher than 0.5 cycles/cm.
+    The plots in Figure [[fig:frequency-analysis]] illustrate in how far plots made with app{} preserved the original function. The plots show frequency histograms produced by means of Fourier Transformation. We see coefficients the original signal in green, as well as user-specific jitters—aka noise, in red. As the plots illustrate, jitters tends to revolve around frequencies higher than 0.5 cycles/cm.
 
     #+CAPTION:    Frequency analysis
     #+LABEL:      fig:frequency-analysis
     #+ATTR_LaTeX: :width 132mm :float
     [[./images/studyresults/fft_2.png]]
 
-    Jitters in Sin2 and Sin3 has very little impact on the signal (the same as observed in Sin1 and Sin4). This gets more challenging with Sin5, which has its highest partial at a wavelength of around 0.23 cycles/cm. Still, signal and jitters are clearly distinct, which means that the original function still stands out clearly, so that awareness of one’s jitters may allow users to visually filter out the noise. It is observed that distance between jitters and the signal gets smaller with increasing signal frequency until they start to overlap as in Sin6, suggesting that an essential part of this signal has been shadowed by the noise and thus has become unrecognizable.
+    Jitters in f2 and f3 (labeled as Sin2 and Sin3) has very little impact on the signal (the same as observed in f1 and f4). This gets more challenging with f5 (labeled as Sin5), which has its highest partial at a wavelength of around 0.23 cycles/cm. Still, signal and jitters are clearly distinct, which means that the original function still stands out clearly, so that awareness of one’s jitters may allow users to visually filter out the noise. It is observed that distance between jitters and the signal gets smaller with increasing signal frequency until they start to overlap as in f6 (labeled as Sin6), suggesting that an essential part of this signal has been shadowed by the noise and thus has become unrecognizable.
 
     We conclude that \app{} is suitable for communicating signals of up to the frequency of 0.3 cycles/cm, but should not be used for frequencies higher than this. This limitation should be always kept in mind while designing applications for \app{}.
 
 *** Speed/Accuracy trade off
 
-    During the user study for the \app{} plotting speed was not controlled. Participants during the training we recommended to go faster or slower based on to achieve optimal control-loop performance. As participants picked their own pace when the actual trials has started, the results presented a wide range of speeds. This allowed to understand ideal completion times by comparing the results of each user.
+    During the user study for the \app{} plotting speed was not controlled. Participants during the training were recommended to go faster or slower to achieve optimal control-loop performance. As participants picked their own pace when the actual trials has started, the results presented a wide range of speeds. This allowed to understand ideal completion times by comparing the results of each user.
 
-    Participants of the study plotted 16 cm-wide functions in between 7.98 s and 29.5 s (M=16.17 s, SD=4.90 s). Figure [[fig:duration-accuracy]] demonstrates the resulting speed/accuracy trade off. Results showed that plots lasting shorter 11 seconds were worse then their longer counterparts. Also taking significantly more time then 11s didn't improve the results as trials above 11s had a steady average error of 4.07 mm.
+    Participants of the study plotted 16 cm-wide functions in between 7.98 s and 29.5 s (M=16.17 s, SD=4.90 s). Figure [[fig:duration-accuracy]] demonstrates the resulting speed/accuracy trade off. Results showed that plots lasting shorter 11 seconds were worse then their longer counterparts. Also taking significantly more time then 11s didn't improve the results as trials above 11s had a steady average error around 4 mm.
 
     #+CAPTION:    Plot duration vs. plot accuracy
     #+LABEL:      fig:duration-accuracy
