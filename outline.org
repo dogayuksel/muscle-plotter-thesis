@@ -30,6 +30,8 @@
 #+LATEX: \newacronym{usb}{USB}{Universal Serial Bus}
 #+LATEX: \newacronym{ems}{EMS}{Electrical Muscle Stimulation}
 #+LATEX: \newacronym{api}{API}{Application Programming Interface}
+#+LATEX: \newacronym{osc}{OSC}{Open Sound Control}
+#+LATEX: \newacronym{pid}{PID}{proportional-integral-derivative}
 :END:
 :INTRO:
 #+LATEX: \frontmatter{}
@@ -50,7 +52,7 @@ This thesis explores creating an interactive pen and paper application using Ele
 #+LATEX: \thispagestyle{empty}
 #+LATEX: \cleardoublepage{}
 #+LATEX: \begin{acknowledgments}
-This thesis wouldn't be possible without the vision of Patrick Baudish, and the creative drive of Pedro Lopes. I would also like thank to the rest of HPI HCI team for their eminent support. Last but not least, thanks to my family for always being by my side.
+This thesis wouldn't be possible without the vision of Patrick Baudisch, and the creative drive of Pedro Lopes. I would also like thank to the rest of HPI HCI team for their eminent support. Last but not least, thanks to my family for always being by my side.
 #+LATEX: \end{acknowledgments}
 
 #+LATEX: \renewcommand{\contentsname}{Table of Contents}
@@ -104,7 +106,7 @@ This thesis wouldn't be possible without the vision of Patrick Baudish, and the 
 
     Interactive systems based on a digital pen and paper have existed since the dawn of \acrshort{hci}. Researchers were eager to try to enhance already competent capabilities of pen and paper by intelligent systems and interaction techniques. Studies mentioned in this section replaces traditional papers with interactive screens, while maintaining the familiarity of the pen to accomplish their goals.
 
-    Based around the principles mentioned above, interaction techniques developed for pen-based systems are listed as follows. SketchPad is one of the first studies to investigate man-machine interactions that include drawing  \cite{sutherland_sketch}. Another example is `Teddy' which is a specilized and easy to use system that allows 3D modeling with 2D sketching \cite{igarashi_teddy}. CrossY tackles the problem of \acrshort{gui} interactions with with a pen \cite{Apitz_crossy}. A noval fluid interaction technique is introduced as an alternative to point and click interfaces. PapierCraft is another example where users can interact with the elements on paper using gestures such as pigtails, crop marks or underlines to accomplish actions such as copy & paste, linking, etc. \cite{liao_papiercraft}.
+    Based around the principles mentioned above, interaction techniques developed for pen-based systems are listed as follows. SketchPad is one of the first studies to investigate man-machine interactions that include drawing  \cite{sutherland_sketch}. Another example is `Teddy' which is a specialized and easy to use system that allows 3D modeling with 2D sketching \cite{igarashi_teddy}. CrossY tackles the problem of \acrshort{gui} interactions with with a pen \cite{Apitz_crossy}. A novel fluid interaction technique is introduced as an alternative to point and click interfaces. PapierCraft is another example where users can interact with the elements on paper using gestures such as pigtails, crop marks or underlines to accomplish actions such as copy & paste, linking, etc. \cite{liao_papiercraft}.
 
     Several other studies extend the use of pen and paper to domains such as mathematics. Flatland \cite{mynatt_flatland}, for example, is a pen-based interface for whiteboards that supports basic math and map drawing. Also, both MathPad \cite{laviola_mathpad} and Hands-on Math \cite{zeleznik_hands} are worth mentioning systems that provide deeper support for understanding of mathematics.
 
@@ -112,9 +114,9 @@ This thesis wouldn't be possible without the vision of Patrick Baudish, and the 
 
     Some researchers have taken tangible input further by using it not only for input but also for output. Notably the Actuated Workbench combined input and output for a tangible tabletop system by actuating the pucks using magnetic forces \cite{pangaro_actuated}. Another example of such a convergence comes from Gesture Output \cite{roudaut_gesture} in which touch gestures can be rendered on a mobile phone screen by actuating the user’s finger.
 
-    Most haptic systems with sufficient force to actuate users transmit forces from a motor to the user’s body via pulleys \cite{murayama_spidar} or exoskeletons \cite{tsetserukou_exointerfaces}. An exemplary device is the Phantom, a desktop sized robotic arm featuring a pen as an extention. Phantom or comparable systems have been used for pen-based menu interaction \cite{oakley_solving}, for rendering bar charts for visually impaired users \cite{wall_assessing}, and so forth.
+    Most haptic systems with sufficient force to actuate users transmit forces from a motor to the user’s body via pulleys \cite{murayama_spidar} or exoskeletons \cite{tsetserukou_exointerfaces}. An exemplary device is the Phantom, a desktop sized robotic arm featuring a pen as an extension. Phantom or comparable systems have been used for pen-based menu interaction \cite{oakley_solving}, for rendering bar charts for visually impaired users \cite{wall_assessing}, and so forth.
 
-    Also using Actuated Workbench’s principle of magnetic forces as guides, Depend is a sketching system that uses a custom ferromagnetic surface to actuate a ballpoint pen \cite{yamaoka_depend}. The system is unfortunately stationary but in turn provides 2D actuation across the surface. A re-iteration of this interface, Depend 2.0 \cite{yamaoka_pen}, mitigates the mobility issue by using asymmetric vibration patterns to generate a virtual traction force which the user must respond to and turn in that direction voluntarily. Traxion is another example of such a system, that uses a magnetic coil to communicate directional forces that require the users to react volunatarily \cite{rekimoto_traxion}.
+    Also using Actuated Workbench’s principle of magnetic forces as guides, Depend is a sketching system that uses a custom ferromagnetic surface to actuate a ballpoint pen \cite{yamaoka_depend}. The system is unfortunately stationary but in turn provides 2D actuation across the surface. A re-iteration of this interface, Depend 2.0 \cite{yamaoka_pen}, mitigates the mobility issue by using asymmetric vibration patterns to generate a virtual traction force which the user must respond to and turn in that direction voluntarily. Traxion is another example of such a system, that uses a magnetic coil to communicate directional forces that require the users to react voluntarily \cite{rekimoto_traxion}.
 
 *** Interactive \acrshort{ems} Systems
     \acrshort{ems} has been around for over half a century. It has been mainly used for medical applications. However over the last years \acrshort{hci} community has grown interest in the subject, due to the promising capabilities mentioned earlier. Following are several implementations related, worth mentioning.
@@ -123,7 +125,7 @@ This thesis wouldn't be possible without the vision of Patrick Baudish, and the 
 
     Recently, researchers in \acrshort{hci} started to build interactive systems based on \acrshort{ems}. The Possessed Hand \cite{tamaki_possessedhand}, for example, is a guidance device that helps users learn how to play a new instrument. Pedestrian Cruise Control informs the user’s leg muscles when to turn \cite{pfeiffer_cruise}. In contrast, \app{} actuates muscles directly, thereby eliminates the cognitive load involved by systems that merely inform users when to turn.
 
-    One motivation for the use of \acrshort{ems} in interactive system is that it allows replacing mechanical actuators, thereby resulting in much smaller, even mobile form factors. Muscle-propelled force feedback, for example, uses \acrshort{ems} to provide directional force-feedback (left & right) in mobile gaming \cite{lopes_musclepropell}. Pose-IO is an interactive wearable system that allows for an eyes-free interaction combining input and output on the same modelity \cite{lopes_proprioceptive}. Affordance++ extends on this concept by allowing objects to actuate the user’s hand in order to make it manipulate the object properly or communicate the state of the object \cite{lopes_affordance++}.
+    One motivation for the use of \acrshort{ems} in interactive system is that it allows replacing mechanical actuators, thereby resulting in much smaller, even mobile form factors. Muscle-propelled force feedback, for example, uses \acrshort{ems} to provide directional force-feedback (left & right) in mobile gaming \cite{lopes_musclepropell}. Pose-IO is an interactive wearable system that allows for an eyes-free interaction combining input and output on the same modality \cite{lopes_proprioceptive}. Affordance++ extends on this concept by allowing objects to actuate the user’s hand in order to make it manipulate the object properly or communicate the state of the object \cite{lopes_affordance++}.
 
 
 * Applications
@@ -143,7 +145,7 @@ This thesis wouldn't be possible without the vision of Patrick Baudish, and the 
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/windtunnel/IMG_9716.jpg]]
 
-   Once the keyword activates the domain, `windtunnel', user proceeds to define the boundaries of the simulation area. As displayed in the figure [[fig:windtunnel1]] user defines this two dimensional space with crop marks. At this stage \app{} stores windtunnel as an object with coordinates of the designated canvas. Input from Anoto Pen is further processed based on this context defined in the state. As the users sketch the car, points received from Anoto Pen are stored and continuously processed to construct the outlines of the shape which later is used to create streamlines.
+   Once the keyword activates the domain of wind tunnel application, user proceeds to define the boundaries of the simulation area. As displayed in the figure [[fig:windtunnel1]] user defines this two dimensional space with crop marks. At this stage \app{} stores wind tunnel as an object with coordinates of the designated canvas. Input from Anoto Pen is further processed based on this context defined in the state. As the users sketch the car, points received from Anoto Pen are stored and continuously processed to construct the outlines of the shape which later is used to create streamlines.
 
    After minimum input requirements for the wind tunnel object are satisfied, user can interact with the canvas to receive an output. By design \app{}'s wind tunnel defines left boundary to be the entry point of the wind particles for the simulation. To plot a streamline user puts the Anoto Pen on the left of the canvas and starts pulling the arm thus the pen tip perpendicular to the entry axis. During this motion, \app{} steers the wrist of the user to plot the trajectory of the simulated particle in the wind tunnel. After plotting several times starting from different locations on the vertical axis, user can see an overview of the sketch's aerodynamic behavior through the field of streamlines. Figure [[fig:windtunnel2]] shows user plotting streamlines.
 
@@ -152,7 +154,7 @@ This thesis wouldn't be possible without the vision of Patrick Baudish, and the 
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/windtunnel/IMG_9749.jpg]]
 
-   As wind tunnel object exists on a certain location of the paper, users can easily change the context by using an empty space on the paper. Moving to middle of the page and writing the keyword `windtunnel' and wind speed followed by the crop marks, user creates another windtunnel object with the associated canvas. User continues the interaction by making a new sketch for the second car form to be simulated. In proximity of the new canvas, starting from the entry point for the second simulation area, user plots the field for the windtunnel. Figure [[fig:windtunnel3]] shows the user plotting the second  windtunnel.
+   As wind tunnel object exists on a certain location of the paper, users can easily change the context by using an empty space on the paper. Moving to middle of the page and writing the keyword `windtunnel' and wind speed followed by the crop marks, user creates another wind tunnel object with the associated canvas. User continues the interaction by making a new sketch for the second car form to be simulated. In proximity of the new canvas, starting from the entry point for the second simulation area, user plots the field for the wind tunnel. Figure [[fig:windtunnel3]] shows the user plotting the second  wind tunnel.
 
    #+CAPTION: Plotting streamlines for the second car
    #+NAME: fig:windtunnel3
@@ -166,7 +168,7 @@ This thesis wouldn't be possible without the vision of Patrick Baudish, and the 
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/windtunnel/IMG_9768.jpg]]
 
-   To compare stored data sets, user moves to an empty space on the paper and starts a new object with the keyword `plot' followed by the variable name that refers to the data set stored earlier, in this case `sedan'. Plot keyword also requires an axis to be specified as target. Users define such areas with two perpendicular lines, which are classified by the back-end as axis objects. The region defined by the axis lines describe the canvas area for the plot object. Similar to a manner of plotting streamlines user plots for first car. User repeats the action with the same keyword `plot' followed by the second variable, `hatchback'. Plot keyword expects an axis, in this case user selects an existing axis on the paper. By plotting two data sets on the same axis, results can be visually compared in the respective spacial context. Figure [[fig:windtunnel-captured]] shows the user plotting the wind speed at the cross section defined for each windtunnel.
+   To compare stored data sets, user moves to an empty space on the paper and starts a new object with the keyword `plot' followed by the variable name that refers to the data set stored earlier, in this case `sedan'. Plot keyword also requires an axis to be specified as target. Users define such areas with two perpendicular lines, which are classified by the back-end as axis objects. The region defined by the axis lines describe the canvas area for the plot object. Similar to a manner of plotting streamlines user plots for first car. User repeats the action with the same keyword `plot' followed by the second variable, `hatchback'. Plot keyword expects an axis, in this case user selects an existing axis on the paper. By plotting two data sets on the same axis, results can be visually compared in the respective spacial context. Figure [[fig:windtunnel-captured]] shows the user plotting the wind speed at the cross section defined for each wind tunnel.
 
    #+CAPTION: Plotting selected data set
    #+NAME: fig:windtunnel-captured
@@ -252,7 +254,7 @@ This thesis wouldn't be possible without the vision of Patrick Baudish, and the 
    #+ATTR_LaTeX: :width 132mm :float
    [[./images/otherapps/IMG_9707.jpg]]
 
-   As mentioned earlier, this widget is symmetric as user draws a cross on brake channel to activate it. Figure [[fig:formsandmenus2]] shows the input sequence. This is a simple appication of the radio button.
+   As mentioned earlier, this widget is symmetric as user draws a cross on brake channel to activate it. Figure [[fig:formsandmenus2]] shows the input sequence. This is a simple application of the radio button.
 
 *** Fitting Trend Lines
  
@@ -294,7 +296,7 @@ This thesis wouldn't be possible without the vision of Patrick Baudish, and the 
 
     Input to the system is handled by the Anoto Pen & Paper that acts as a precise tracker \cite{anoto}. the Anoto Paper has a patented dot pattern that encodes the location data for each point. The accuracy of the location is quite high where each millimeter encodes up to 30 unique points. The camera placed inside the pen tip scans and returns the value of the coordinates as long as the pen is pushing on to the paper. The angle of the pen influences the quality of tracking. The users are advised to hold the pen at an upright angle. This is importing using \app{} as a steady stream of observed points allows control loop to function properly. It is also important to mention that there is constant delay as the pen captures and analyses this image. This delay also has a detrimental effect on the performance of the control loop. The effect of the delay will further be discussed later in the control loop section this chapter. In the current implementation of \app{}, there is a Windows server running the drives provided by the Anoto company, relaying data to the back-end server. The details of these drivers (from the vendor we’inspire) is confined by a non-disclosure agreement.
 
-    The communication from Anoto Windows Server and the python back-end is done via Open Sound Control (OSC). Each observation of the Anoto Pen is packaged and contains a location, nature of the observation (pen up, pen down and drag) and a time-stamp. Time stamp received is used for speed calculations. OSC packets are relayed to the python server through Ethernet. Measurements show that communication delay through Ethernet is insignificant compared to constant processing delay introduced by the pen hardware.
+    The communication from Anoto Windows Server and the python back-end is done via \acrfull{osc}. Each observation of the Anoto Pen is packaged and contains a location, nature of the observation (pen up, pen down and drag) and a time-stamp. Time stamp received is used for speed calculations. \acrshort{osc} packets are relayed to the python server through Ethernet. Measurements show that communication delay through Ethernet is insignificant compared to constant processing delay introduced by the pen hardware.
 
 ** System output
 
@@ -335,7 +337,7 @@ This thesis wouldn't be possible without the vision of Patrick Baudish, and the 
 
 **** Comfortable actuation current
 
-     The throughput of the motion created by \acrshort{ems} changes dramatically based on the anatomy of the user's arm. Several factors, such as muscle size, skin thickness and hair density causes these variations. For the first step of calibration \app{} implements a script that step by step sweeps up the intensity of the milliamps applied to each side of the arm (left and right). The experimenter observes the minimum current that starts the motion and a the maximum current that results in a significant motion but still is not painful. Duty cycles of the signals used in this step are kept at 200\micro{}S to allow finding a suitable dynamic range that can be can be used on the next step. Table [[tab:calibration-results-amps]] shows comfortable signal intensities for each participant, that were used as the starting point of the calibration.
+     The throughput of the motion created by \acrshort{ems} changes dramatically based on the anatomy of the user's arm. Several factors, such as muscle size, skin thickness and hair density causes these variations. For the first step of calibration \app{} implements a script that step by step sweeps up the intensity of the milliampere applied to each side of the arm (left and right). The experimenter observes the minimum current that starts the motion and a the maximum current that results in a significant motion but still is not painful. Duty cycles of the signals used in this step are kept at 200\micro{}S to allow finding a suitable dynamic range that can be can be used on the next step. Table [[tab:calibration-results-amps]] shows comfortable signal intensities for each participant, that were used as the starting point of the calibration.
 
      #+CAPTION: Signal intensities in milliampere for study users
      #+NAME:   tab:calibration-results-amps
@@ -438,7 +440,7 @@ This thesis wouldn't be possible without the vision of Patrick Baudish, and the 
 
 ***** Dynamic Adjustments
 
-      If the user is lagging behind the target, the signal intensity applied to muscle that that causes the delay is increased by 1 mA. The lag is constantly stored on each control cycle. When the cumulative lag in previous cycles is above 0.6mm, boost is applied. Moreover if the next cycle still lags above the 0.6mm threshold, the boost is increased 2 mA. Such an increase causes the arm to respond faster then the duty cycle changes using in the normal mode. This adjustment can be considered as the integral part of a classical PID controller.  
+      If the user is lagging behind the target, the signal intensity applied to muscle that that causes the delay is increased by 1 mA. The lag is constantly stored on each control cycle. When the cumulative lag in previous cycles is above 0.6mm, boost is applied. Moreover if the next cycle still lags above the 0.6mm threshold, the boost is increased 2 mA. Such an increase causes the arm to respond faster then the duty cycle changes using in the normal mode. This adjustment can be considered as the integral part of a classical \acrshort{pid} controller.  
 
 ***** Modes of Braking
 
@@ -446,7 +448,7 @@ This thesis wouldn't be possible without the vision of Patrick Baudish, and the 
  - is pointing towards the target
  - the user has been away from the target for a certain distance
  - and expected trajectory is is measured to have an intersection with the target
-brakes are activated. This mode can be considered as the derivation component of a traditional PID controller. Main aim is to reduce the oscillations occurring while the plotting takes place. Figure [[fig:crazy-fast]] shows the brake activation cycles with cyan circles on the top curve. Bottom curve showcases observed and target points as in the previous figure. Following sections will identify two modes of braking.
+brakes are activated. This mode can be considered as the derivation component of a traditional \acrshort{pid} controller. Main aim is to reduce the oscillations occurring while the plotting takes place. Figure [[fig:crazy-fast]] shows the brake activation cycles with cyan circles on the top curve. Bottom curve showcases observed and target points as in the previous figure. Following sections will identify two modes of braking.
 
      #+CAPTION:    Brakes applied during the plot 
      #+LABEL:      fig:crazy-fast
